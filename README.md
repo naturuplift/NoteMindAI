@@ -7,9 +7,11 @@
         <a href="" >
         <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=JavaScript&message=ES6&color=violet" /></a>
     <a href="" >
-        <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=Node.js&message=Server&color=green" /></a>
+        <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=Node.js&message=Server&color=yellow" /></a>
     <a href="" >
         <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=npm&message=packages&color=blue" /></a>
+    <a href="" >
+        <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=npm&message=openai&color=green" /></a>
 </p>
 <br/>
 
