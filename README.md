@@ -11,7 +11,7 @@
     <a href="" >
         <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=npm&message=packages&color=blue" /></a>
     <a href="" >
-        <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=npm&message=openai&color=green" /></a>
+        <img alt="JavaScript - " src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3&color=green" /></a>
 </p>
 <br/>
 
