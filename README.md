@@ -72,6 +72,11 @@ Ensure you have the following installed before proceeding:
 - Collaborate: Share notes with your peers and work on them together in real-time.
 - Summarize: Use the AI-powered summarization feature to condense long notes into digestible summaries.
 
+## State Flow Diagram
+
+For a visual representation of the sequence of actions involved in the [Collaborative Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
+
+
 ## Contributing
 Contributions to the SynthNotes project are welcome!
 - Fork the project.
@@ -81,9 +86,11 @@ Contributions to the SynthNotes project are welcome!
 - Open a pull request.
 
 ## License
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. See [LICENSE][MIT] for more information.
 
-Contact
-
-Happy Coding!
-
+[project-app]: <>
+[project-code]: <>
+[note-taking-app]: <>
+[project-setup]: <>
+[state-flow]: <>
+[MIT]: <>
