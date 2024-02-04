@@ -45,7 +45,7 @@ Ensure you have the following installed before proceeding:
 ### Installation
 1. **Clone the repository:**
 ```shell
-   git clone https://github.com/your-username/CollaborativeNoteTakingApp.git
+   git clone https://github.com/naturuplift/CollaborativeNoteTakingApp.git
    cd CollaborativeNoteTakingApp
 ```
 
