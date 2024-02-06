@@ -3,7 +3,7 @@
 <br/>
 <p align="center">
     <a href="https://www.openai.com/" >
-        <img alt="OpenAI's GPT-4 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-4&color=brightgreen" /></a>
+        <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
     <a href="https://handlebarsjs.com/" >
         <img alt="Handlebars.js - A minimal templating engine that allows you to use semantic templates with your server-side Node.js and Express.js applications." src="https://img.shields.io/static/v1.svg?label=Handlebars.js&message=templating engine&color=orange" /></a>
     <a href="https://sequelize.org/">
@@ -57,7 +57,7 @@ SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve 
 - **Database:** MySQL, Sequelize ORM
 - **Authentication:** express-session, cookies
 - **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
-- **Deployment:** Heroku
+- **Deployment:** Render
 
 ## Getting Started
 
