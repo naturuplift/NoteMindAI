@@ -1,0 +1,117 @@
+* {
+    font-family: "Poppins", "Ariel", sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+.header-landing-page {
+    background-image: -webkit-linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../img/neven-krcmarek-HWbxSLvmSww-unsplash.jpg);
+    background-image:linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../img/neven-krcmarek-HWbxSLvmSww-unsplash.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+#sign-in-title {
+    font-size: 50px;
+    color: greenyellow;
+}
+
+#sign-in-box {
+    position:absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform:translate(-50%,-50%);
+	        transform:translate(-50%,-50%);
+	text-align:center;
+}
+
+#username-box 
+#password-box {
+    color: grey;
+    background-color: antiquewhite;
+}
+
+#sign-in-button:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#sign-in-button {
+    background-color: antiquewhite;
+    color: grey;
+}
+
+#rest-button:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#rest-button {
+    background-color: antiquewhite;
+    color: grey;
+}
+
+#sign-up-button:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#sign-up-button {
+    background-color: antiquewhite;
+    color: grey;
+}
+
+.Sign-Up-header {
+    background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
+    background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.sign-up-box {
+    position:absolute;
+	top:50%;
+	left:45%;
+	-webkit-transform:translate(-50%,-50%);
+	        transform:translate(-50%,-50%);
+	text-align:center;
+}
+
+#sign-up-page-btn:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#sign-up-page-btn {
+    background-color: antiquewhite;
+    color: grey;
+}
+
+#submit-button:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#submit-button {
+    background-color: antiquewhite;
+    color: grey;
+}
+
+#sign-up-title {
+    font-size: 50px;
+    color: greenyellow;
+}
+
+#sign-para {
+    color: greenyellow;
+}
+
+.footer {
+    font-size: 15px;
+    color: antiquewhite;
+    text-align:center;
+}
