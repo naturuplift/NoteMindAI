@@ -3,7 +3,7 @@
 <br/>
 <p align="center">
     <a href="https://www.openai.com/" >
-        <img alt="OpenAI's GPT-4 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-4&color=brightgreen" /></a>
+        <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
     <a href="https://handlebarsjs.com/" >
         <img alt="Handlebars.js - A minimal templating engine that allows you to use semantic templates with your server-side Node.js and Express.js applications." src="https://img.shields.io/static/v1.svg?label=Handlebars.js&message=templating engine&color=orange" /></a>
     <a href="https://sequelize.org/">
@@ -31,7 +31,7 @@
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" >
         <img alt="JavaScript - ES6" src="https://img.shields.io/static/v1.svg?label=JavaScript&message=ES6&color=violet" /></a>
     <a href="https://github.com/">
-        <img alt="GitHub (for repository hosting and project management) - Provides hosting for software development and version control using Git" src="https://img.shields.io/static/v1.svg?label=GitHub&message=hosting&color=black" /></a>
+        <img alt="GitHub (for repository hosting and project management) - Provides hosting for software development and version control using Git" src="https://img.shields.io/static/v1.svg?label=GitHub&message=hosting&color=lightgrey" /></a>
     <a href="https://git-scm.com/">
         <img alt="Git (for version control) - A free and open-source distributed version control system" src="https://img.shields.io/static/v1.svg?label=Git&message=version control&color=black" /></a>
     <a href="https://unb.ca/cel/bootcamps/coding.html">
@@ -39,7 +39,7 @@
     <a href="https://opensource.org/license/mit/">
         <img alt="The MIT License" src="https://img.shields.io/static/v1.svg?label=License&message=MIT&color=lightgreen" /></a>
 </p>
-<br/>
+<br/>-
 
 ## Description
 SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
