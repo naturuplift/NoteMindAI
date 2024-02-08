@@ -17,13 +17,56 @@ CREATE TABLE users (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Create a 'categories' table
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    userId INT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+
 -- Create a 'notes' table
 CREATE TABLE notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     userId INT,
+    categoryId INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (userId) REFERENCES users(id)
+    FOREIGN KEY (userId) REFERENCES users(id),
+    FOREIGN KEY (categoryId) REFERENCES categories(id)
+);
+
+-- Create a 'shared_notes' table for collaborative editing
+CREATE TABLE shared_notes (
+    noteId INT,
+    userId INT,
+    permissionType ENUM('viewer', 'editor') NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (noteId) REFERENCES notes(id),
+    FOREIGN KEY (userId) REFERENCES users(id),
+    PRIMARY KEY (noteId, userId)
+);
+
+-- Create an 'actionable_items' table for tasks and reminders
+CREATE TABLE actionable_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    noteId INT,
+    description TEXT NOT NULL,
+    dueDate TIMESTAMP NULL,
+    status ENUM('pending', 'completed') DEFAULT 'pending',
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (noteId) REFERENCES notes(id)
+);
+
+-- Create a 'summaries' table for storing AI-generated summaries
+CREATE TABLE summaries (
+    noteId INT PRIMARY KEY,
+    summary TEXT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (noteId) REFERENCES notes(id)
 );
