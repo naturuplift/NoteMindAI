@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/CSS/styles.css">
 </head>
 
 <body>
@@ -21,23 +21,26 @@
 
     <div id="sign-in-box">
         <div id="sign-in-content">
-            <h1 id="sign-in-title">Please Sign in</h1>
-            <form action="" id="form-box">
-                <textarea name="Username" id="username-box" cols="20" rows="1">Username</textarea><br>
-                <textarea name="Password" id="password-box" cols="20" rows="1">Password</textarea><br><br>
+            <h1 id="sign-in-title" aria-label="Please Sign In">Please Sign in</h1>
+            <form id="form-landing-page">
+                <input name="Username" placeholder="Username" id="username-box" cols="20" rows="1" aria-label="Username"></input><br>
+                <input name="Password" placeholder="Password"  id="password-box" cols="20" rows="1" aria-label="Password"></input><br><br>
             </form>
             <div id="buttons">
-                <button type="submit" id="sign-in-button">Sign-In</button>
-                <button type="reset" id="rest-button">Clear Form</button>
-                <button type="button" id="sign-up-button" cols="20" rows="1">Sign-Up</button>
+                <button type="submit" id="sign-in-button" aria-label="Sign-in button">Sign-In</button>
+                <button type="reset" id="rest-button" aria-label="Clear Form button">Clear Form</button>
+                <button type="button" id="sign-up-button" cols="20" rows="1" aria-label="Sign-up button">Sign-Up</button>
             </div>
         </div>
     </div>
 
-    <footer id="footer">
-        <h6>&copy;2024 Karen Bourgeois, Arnoldo Sepulveda, Ikechukwu Mbanugo | Photo by <a href="https://unsplash.com/@nevenkrcmarek?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Neven Krcmarek</a> on <a href="https://unsplash.com/photos/person-about-to-write-on-white-printer-paperr-HWbxSLvmSww?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    <footer class="footer">
+        <h6 aria-label="footer">&copy;2024 Karen Bourgeois, Arnoldo Sepulveda, Ikechukwu Mbanugo | Photo by <a href="https://unsplash.com/@nevenkrcmarek?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Neven Krcmarek</a> on <a href="https://unsplash.com/photos/person-about-to-write-on-white-printer-paperr-HWbxSLvmSww?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> | Photo by <a href="https://unsplash.com/@kellysikkema?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kelly Sikkema</a> on <a href="https://unsplash.com/photos/white-printer-paper-beside-pens-Oz_J_FXKvIs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> | Photo by <a href="https://unsplash.com/@stilclassis?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Marissa Grootes</a> on <a href="https://unsplash.com/photos/silver-laptop-computer-near-notebook-ck0i9Dnjtj0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> | Photo by <a href="https://unsplash.com/@stilclassis?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Marissa Grootes</a> on <a href="https://unsplash.com/photos/white-paper-near-clips-YwPNWDNZHkg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
         </h6>
     </footer>
+
+    <script src="./assets/JS/script.js"></script>
     
 </body>
 
