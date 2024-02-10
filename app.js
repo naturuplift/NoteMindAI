@@ -1,65 +1,55 @@
 // Include packages needed for this application
 const express = require('express');
-const db = require('./src/models');
-// const User = require('./src/models/user');
-// const Note = require('./src/models/note');
-const sequelize = require('./src/config/connection');
+// Imports the routing files from ./routes directory
+const routes = require('./routes');
+// import sequelize connection
+const sequelize = require('./config/connection');
+
+// initializes a new instance of the Express application
+const app = express();
+// set port the server will listen to
+const PORT = process.env.PORT || 3000;
+
+// express app to recognize incoming requests as JSON objects
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// express app to use the routes defined
+app.use(routes);
+
+
+// Add code here
+
+
+
+
+
+// sync sequelize models to the database
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => {
+      console.log(`App listening on port ${PORT}!`);
+  });
+});
+
+
+
 
 // includes openaiService.js file
 const openaiService = require('./src/services/openaiService');
 
-// Define express web app framework
-const app = express();
-app.use(express.json());
-// Define port for Node.js Server
-const PORT = process.env.PORT || 3000;
+// Call OpenAI summarizeText function in openaiService.js file
+async function summarizeNoteController(req, res) {
+  try {
+    // Assuming note content comes in the request body
+    const noteContent = req.body.noteContent;
+    // Call summarizeText function from openaiService
+    const summary = await openaiService.summarizeText(noteContent);
+    // return summary response to content
+    res.json({ summary });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 
-
-
-// sequelize.authenticate()
-//   .then(() => {
-//     console.log('Connection has been established successfully.');
-//   })
-//   .catch(err => {
-//     console.error('Unable to connect to the database:', err);
-//   });
-
-// db.sequelize.sync({ force: false }) // Using 'force: true' will drop and recreate tables
-//     .then(() => {
-//         console.log('Database & tables created!');
-//     })
-//     .catch(error => {
-//         console.error('Unable to connect to the database:', error);
-// });
-
-// const sequelize = require('./src/db');
-
-// sequelize.authenticate()
-//     .then(() => {
-//         console.log('Connection has been established successfully.');
-//     })
-//     .catch(err => {
-//         console.error('Unable to connect to the database:', err);
-//     });
-
-// TODO uncomment when working on AI feature: Call OpenAI summarizeText function in openaiService.js file
-// async function summarizeNoteController(req, res) {
-//   try {
-//     // Assuming note content comes in the request body
-//     const noteContent = req.body.noteContent;
-//     // Call summarizeText function from openaiService
-//     const summary = await openaiService.summarizeText(noteContent);
-//     // return summary response to content
-//     res.json({ summary });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// }
+}
 
 // Define an endpoint '/summarize' that uses summarizeNoteController
 // app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
-
-// Node.js Server listening port
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});

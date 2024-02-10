@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-const db = require('./'); // imports all models and db connection
+const db = require('.'); // imports all models and db connection
 const bcrypt = require('bcryptjs');
 
 User.beforeCreate(async (user, options) => {
