@@ -1,29 +1,25 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize AudioFile model by extending Sequelize's Model class
-class AudioFile extends Model {}
+// Initialize Summary model by extending Sequelize's Model class
+class Summaries extends Model {}
 
-// Set up fields and rules for AudioFile model
-AudioFile.init(
+// Set up fields and rules for Summaries model
+Summaries.init(
   {
     // Define columns
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     noteId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      primaryKey: true,
       references: {
         model: 'notes',
         key: 'id',
       },
     },
-    audioPath: {
-      type: DataTypes.STRING(255),
+    summary: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     createdAt: {
@@ -37,9 +33,9 @@ AudioFile.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'audioFile',
+    modelName: 'summaries',
   }
 );
 
-// AudioFile exported making it available for use in the app
-module.exports = AudioFile;
+// Summary exported making it available for use in the app
+module.exports = Summaries;

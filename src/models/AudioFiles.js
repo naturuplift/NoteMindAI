@@ -1,11 +1,13 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize Category model by extending Sequelize's Model class
-class Category extends Model {}
+// Initialize AudioFile model by extending Sequelize's Model class
+class AudioFiles extends Model {}
 
-// Set up fields and rules for Category model
-Category.init(
+// Set up fields and rules for AudioFile model
+AudioFiles.init(
   {
     // Define columns
     id: {
@@ -14,28 +16,22 @@ Category.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    userId: {
+    noteId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
-        model: 'users',
+        model: 'notes',
         key: 'id',
       },
+    },
+    audioPath: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-      onUpdate: DataTypes.NOW,
     },
   },
   {
@@ -43,9 +39,9 @@ Category.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'category',
+    modelName: 'audio_files',
   }
 );
 
-// Category exported making it available for use in the app
-module.exports = Category;
+// AudioFile exported making it available for use in the app
+module.exports = AudioFiles;

@@ -1,11 +1,13 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize Transcription model by extending Sequelize's Model class
-class Transcription extends Model {}
+// Initialize Notes model by extending Sequelize's Model class
+class Notes extends Model {}
 
-// Set up fields and rules for Transcription model
-Transcription.init(
+// Set up fields and rules for Notes model
+Notes.init(
   {
     // Define columns
     id: {
@@ -14,21 +16,28 @@ Transcription.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    audioId: {
-      type: DataTypes.INTEGER,
+    title: {
+      type: DataTypes.STRING(255),
       allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
       references: {
-        model: 'audio_files',
+        model: 'users',
         key: 'id',
       },
     },
-    text: {
-      type: DataTypes.TEXT('long'),
-      allowNull: false,
-    },
-    transcriptionQuality: {
-      type: DataTypes.DECIMAL(5, 2),
+    categoryId: {
+      type: DataTypes.INTEGER,
       allowNull: true,
+      references: {
+        model: 'categories',
+        key: 'id',
+      },
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -47,9 +56,9 @@ Transcription.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'transcription',
+    modelName: 'notes',
   }
 );
 
-// Transcription exported making it available for use in the app
-module.exports = Transcription;
+// Notes exported making it available for use in the app
+module.exports = Notes;

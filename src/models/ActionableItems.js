@@ -1,11 +1,13 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize Note model by extending Sequelize's Model class
-class Note extends Model {}
+// Initialize ActionableItems model by extending Sequelize's Model class
+class ActionableItems extends Model {}
 
-// Set up fields and rules for Note model
-Note.init(
+// Set up fields and rules for ActionableItems model
+ActionableItems.init(
   {
     // Define columns
     id: {
@@ -14,28 +16,25 @@ Note.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
+    noteId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'notes',
+        key: 'id',
+      },
     },
-    content: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-    },
-    categoryId: {
-      type: DataTypes.INTEGER,
+    dueDate: {
+      type: DataTypes.DATE,
       allowNull: true,
-      references: {
-        model: 'categories',
-        key: 'id',
-      },
+    },
+    status: {
+      type: DataTypes.ENUM('pending', 'completed'),
+      defaultValue: 'pending',
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -54,9 +53,9 @@ Note.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'note',
+    modelName: 'actionable_items',
   }
 );
 
-// Note exported making it available for use in the app
-module.exports = Note;
+// ActionableItem exported making it available for use in the app
+module.exports = ActionableItems;

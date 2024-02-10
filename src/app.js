@@ -16,12 +16,18 @@ app.use(express.urlencoded({ extended: true }));
 // express app to use the routes defined
 app.use(routes);
 
-
-// Add code here
-
-
+// TODO: Temporary Route Test - comment when done
+// app.get('/test', (req, res) => res.send('Test route is working'));
 
 
+// To verify if Sequelize is successfully connecting to your database
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // sync sequelize models to the database
 sequelize.sync({ force: false }).then(() => {
@@ -31,24 +37,24 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 
+// console.log("********************  Hit ./app.js   ********************");
 
 
-// includes openaiService.js file
-const openaiService = require('./src/services/openaiService');
+// includes openAIService.js file
+const openAIService = require('./services/openAIService');
 
-// Call OpenAI summarizeText function in openaiService.js file
+// Call OpenAI summarizeText function in openAIService.js file
 async function summarizeNoteController(req, res) {
   try {
     // Assuming note content comes in the request body
     const noteContent = req.body.noteContent;
     // Call summarizeText function from openaiService
-    const summary = await openaiService.summarizeText(noteContent);
+    const summary = await openAIService.summarizeText(noteContent);
     // return summary response to content
     res.json({ summary });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-
 }
 
 // Define an endpoint '/summarize' that uses summarizeNoteController

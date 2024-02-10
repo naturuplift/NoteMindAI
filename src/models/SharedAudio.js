@@ -1,5 +1,7 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
 // Initialize SharedAudio model by extending Sequelize's Model class
 class SharedAudio extends Model {}
@@ -39,7 +41,7 @@ SharedAudio.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'sharedAudio',
+    modelName: 'shared_audio',
   }
 );
 

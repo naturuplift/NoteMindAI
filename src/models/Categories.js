@@ -1,11 +1,13 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize ActionableItem model by extending Sequelize's Model class
-class ActionableItem extends Model {}
+// Initialize Categories model by extending Sequelize's Model class
+class Categories extends Model {}
 
-// Set up fields and rules for ActionableItem model
-ActionableItem.init(
+// Set up fields and rules for Categories model
+Categories.init(
   {
     // Define columns
     id: {
@@ -14,25 +16,17 @@ ActionableItem.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    noteId: {
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    userId: {
       type: DataTypes.INTEGER,
+      allowNull: true,
       references: {
-        model: 'notes',
+        model: 'users',
         key: 'id',
       },
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    dueDate: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    status: {
-      type: DataTypes.ENUM('pending', 'completed'),
-      defaultValue: 'pending',
-      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -51,9 +45,9 @@ ActionableItem.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'actionableItem',
+    modelName: 'categories',
   }
 );
 
-// ActionableItem exported making it available for use in the app
-module.exports = ActionableItem;
+// Categories exported making it available for use in the app
+module.exports = Categories;

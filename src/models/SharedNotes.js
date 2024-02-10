@@ -1,11 +1,13 @@
 // import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
+// import database connection from config
+const sequelize = require('../config/connection');
 
-// Initialize SharedNote model by extending Sequelize's Model class
-class SharedNote extends Model {}
+// Initialize SharedNotes model by extending Sequelize's Model class
+class SharedNotes extends Model {}
 
-// Set up fields and rules for SharedNote model
-SharedNote.init(
+// Set up fields and rules for SharedNotes model
+SharedNotes.init(
   {
     // Define columns
     noteId: {
@@ -39,9 +41,9 @@ SharedNote.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'sharedNote',
+    modelName: 'shared_notes',
   }
 );
 
-// SharedNote exported making it available for use in the app
-module.exports = SharedNote;
+// SharedNotes exported making it available for use in the app
+module.exports = SharedNotes;
