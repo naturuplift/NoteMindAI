@@ -61,7 +61,7 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 - **Database:** MySQL, Sequelize ORM
 - **Authentication:** express-session, cookies
 - **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
-- **Deployment:** Heroku
+- **Deployment:** Render
 
 ## Getting Started
 
