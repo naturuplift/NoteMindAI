@@ -1,84 +1,115 @@
-'use strict';
+// Import models
+const User = require('./User');
+const Category = require('./Category');
+const Note = require('./Note');
+const SharedNote = require('./SharedNote');
+const ActionableItem = require('./ActionableItem');
+const Summary = require('./Summary');
+const AudioFile = require('./AudioFile');
+const SharedAudio = require('./SharedAudio');
+const Transcription = require('./Transcription');
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
-const db = {};
+// Define model associations
 
-const db = require('./'); // imports all models and db connection
-
-db.User.hasMany(db.Note, { foreignKey: 'userId' });
-db.Note.belongsTo(db.User, { foreignKey: 'userId' });
-
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+// Users have many Categories
+User.hasMany(Category, {
+  foreignKey: 'userId',
 });
 
-db.sequelize = sequelize;
-module.exports = db;
+// Categories belong to Users
+Category.belongsTo(User, {
+  foreignKey: 'userId',
+});
 
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {}
-  
-  User.init({
-      // Model attributes
-      id: {
-          type: DataTypes.INTEGER,
-          autoIncrement: true,
-          primaryKey: true
-      },
-      username: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true
-      },
-      email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-          validate: {
-              isEmail: true
-          }
-      },
-      password: {
-          type: DataTypes.STRING,
-          allowNull: false
-      }
-  }, {
-      // Model options
-      sequelize,
-      modelName: 'User',
-      tableName: 'users',
-      timestamps: true
-  });
+// Users have many Notes
+User.hasMany(Note, {
+  foreignKey: 'userId',
+});
 
-  return User;
+// Notes belong to Users
+Note.belongsTo(User, {
+  foreignKey: 'userId',
+});
+
+// Categories have many Notes
+Category.hasMany(Note, {
+  foreignKey: 'categoryId',
+});
+
+// Notes belong to Categories
+Note.belongsTo(Category, {
+  foreignKey: 'categoryId',
+});
+
+// Notes have many SharedNotes
+Note.hasMany(SharedNote, {
+  foreignKey: 'noteId',
+});
+
+// Users have many SharedNotes
+User.hasMany(SharedNote, {
+  foreignKey: 'userId',
+});
+
+// Notes have one Summary
+Note.hasOne(Summary, {
+  foreignKey: 'noteId',
+});
+
+// Summaries belong to Notes
+Summary.belongsTo(Note, {
+  foreignKey: 'noteId',
+});
+
+// Notes have many ActionableItems
+Note.hasMany(ActionableItem, {
+  foreignKey: 'noteId',
+});
+
+// ActionableItems belong to Notes
+ActionableItem.belongsTo(Note, {
+  foreignKey: 'noteId',
+});
+
+// Notes have many AudioFiles
+Note.hasMany(AudioFile, {
+  foreignKey: 'noteId',
+});
+
+// AudioFiles belong to Notes
+AudioFile.belongsTo(Note, {
+  foreignKey: 'noteId',
+});
+
+// AudioFiles have many SharedAudio
+AudioFile.hasMany(SharedAudio, {
+  foreignKey: 'audioId',
+});
+
+// Users have many SharedAudio
+User.hasMany(SharedAudio, {
+  foreignKey: 'userId',
+});
+
+// AudioFiles have one Transcription
+AudioFile.hasOne(Transcription, {
+  foreignKey: 'audioId',
+});
+
+// Transcriptions belong to AudioFiles
+Transcription.belongsTo(AudioFile, {
+  foreignKey: 'audioId',
+});
+
+// Export the models and their associations
+module.exports = {
+  User,
+  Category,
+  Note,
+  SharedNote,
+  ActionableItem,
+  Summary,
+  AudioFile,
+  SharedAudio,
+  Transcription,
 };
