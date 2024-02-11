@@ -13,7 +13,7 @@ router.use((req, res) => {
 });
 
 // TODO: comment when done troubleshooting
-console.log("********************  Hit ./routes/index.js   ********************");
+// console.log("********************  Hit ./routes/index.js   ********************");
 
 // Export the router to make it available for use
 module.exports = router;

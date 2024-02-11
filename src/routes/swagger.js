@@ -1,6 +1,9 @@
 // Note: Need to install swagger-ui-express and swagger-jsdoc:
 // npm install swagger-ui-express swagger-jsdoc
 
+// Import the Router function from the express package
+// const router = require('express').Router();
+
 // swagger-jsdoc that defines the basic structure of API documentation
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -52,7 +55,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 // TODO: comment when done troubleshooting
-console.log("********************  Hit ./routes/swagger.js   ********************");
+// console.log("********************  Hit ./routes/swagger.js   ********************");
 
 // Export a function to use the Express app
 module.exports = (app) => {

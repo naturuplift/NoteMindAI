@@ -11,6 +11,8 @@ const summaryRoutes = require('./summaries-routes');
 const audioFileRoutes = require('./audio-files-routes');
 const sharedAudioRoutes = require('./shared-audio-routes');
 const transcriptionRoutes = require('./transcriptions-routes');
+const loginRoutes = require('./login-routes');
+const signupRoutes = require('./signup-routes');
 // const swaggerDocsRoutes  = require('../swagger');
 
 // Register routes to be served under own paths
@@ -19,14 +21,15 @@ router.use('/categories', categoryRoutes);
 router.use('/notes', noteRoutes);
 router.use('/sharednotes', sharedNoteRoutes);
 router.use('/actionableitems', actionableItemsRoutes);
-router.use('/summary', summaryRoutes);
-router.use('/audiofile', audioFileRoutes);
+router.use('/summaries', summaryRoutes);
+router.use('/audiofiles', audioFileRoutes);
 router.use('/sharedaudio', sharedAudioRoutes);
-router.use('/transcription', transcriptionRoutes);
-
+router.use('/transcriptions', transcriptionRoutes);
+router.use('/login', loginRoutes);
+router.use('/signup', signupRoutes);
 
 // TODO: comment when done troubleshooting
-console.log("********************  Hit ./routes/api/index.js   ********************");
+// console.log("********************  Hit ./routes/api/index.js   ********************");
 
 // Export the configured router to be used by the main application
 module.exports = router;

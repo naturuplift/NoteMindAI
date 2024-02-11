@@ -4,10 +4,9 @@ const express = require('express');
 const routes = require('./routes');
 // import sequelize connection
 const sequelize = require('./config/connection');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocs = require('./routes/swagger.js');
 // includes openAIService.js file
 const openAIService = require('./services/openAIService');
+const morgan = require('morgan');
 
 // initializes a new instance of the Express application
 const app = express();
@@ -19,38 +18,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // express app to use the routes defined
 app.use(routes);
+// app.use('/api', apiRoutes);
+
+app.use(morgan('dev')); // Log every request to the console
 
 // TODO: Temporary Route Test - comment when done
 // app.get('/test', (req, res) => res.send('Test route is working'));
 
-// Import Swagger configuration
-const setupSwagger = require('./routes/swagger.js');
-// Use the setupSwagger function and pass the Express app instance
-setupSwagger(app);
-
-
-// To verify if Sequelize is successfully connecting to your database
-sequelize.authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-// Serve Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-// sync sequelize models to the database
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-      console.log(`App listening on port ${PORT}!`);
-  });
-});
+// TODO: comment when done troubleshooting
+// console.log("********************  Hit ./app.js   ********************");
 
 
 
-
+// TODO: Import and setup Swagger documentation
+const setupSwagger = require('./routes/swagger');
+// setupSwagger(app);// Initialize Swagger
 
 
 // Call OpenAI summarizeText function in openAIService.js file
@@ -69,3 +51,22 @@ async function summarizeNoteController(req, res) {
 
 // Define an endpoint '/summarize' that uses summarizeNoteController
 // app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
+
+// middleware function mwLogger
+const mwLogger = (req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+};
+module.exports = mwLogger;
+
+
+// To verify if Sequelize is successfully connecting to your database
+sequelize.authenticate()
+  .then(() => console.log('Database connected successfully.'))
+  .catch(err => console.error('Unable to connect to the database:', err));
+
+sequelize.sync({ force: false }) // Consider using 'force: true' only in development
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+  })
+  .catch(err => console.error('Sequelize sync error:', err));
