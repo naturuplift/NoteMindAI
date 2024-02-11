@@ -2,6 +2,15 @@
 -- First run squema.sql to create DB and tables
 -- by running in terminal: node ./seeds/index.js
 
+-- Drop the existing database if it exists
+DROP DATABASE IF EXISTS note_taking_app_db;
+
+-- Create a new database
+CREATE DATABASE note_taking_app_db;
+
+-- Use the newly created database
+USE note_taking_app_db;
+
 -- Insert Users
 INSERT INTO users (id, username, email, password) VALUES
 (1, 'user1', 'user1@example.com', 'hashed_password1'),

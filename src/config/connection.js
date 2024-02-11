@@ -16,8 +16,6 @@ const sequelize = process.env.JAWSDB_URL
   },
 });
 
-console.log("********************  Hit ./config/connection.js   ********************");
-
 // configured Sequelize instance exported
 // making it available for use in app
 module.exports = sequelize;

@@ -4,6 +4,10 @@ const express = require('express');
 const routes = require('./routes');
 // import sequelize connection
 const sequelize = require('./config/connection');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./routes/swagger.js');
+// includes openAIService.js file
+const openAIService = require('./services/openAIService');
 
 // initializes a new instance of the Express application
 const app = express();
@@ -19,6 +23,11 @@ app.use(routes);
 // TODO: Temporary Route Test - comment when done
 // app.get('/test', (req, res) => res.send('Test route is working'));
 
+// Import Swagger configuration
+const setupSwagger = require('./routes/swagger.js');
+// Use the setupSwagger function and pass the Express app instance
+setupSwagger(app);
+
 
 // To verify if Sequelize is successfully connecting to your database
 sequelize.authenticate()
@@ -29,6 +38,9 @@ sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
+// Serve Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // sync sequelize models to the database
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
@@ -37,11 +49,9 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 
-// console.log("********************  Hit ./app.js   ********************");
 
 
-// includes openAIService.js file
-const openAIService = require('./services/openAIService');
+
 
 // Call OpenAI summarizeText function in openAIService.js file
 async function summarizeNoteController(req, res) {

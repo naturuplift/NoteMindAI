@@ -69,7 +69,7 @@ Users.init(
 );
 
 // TODO: comment when done troubleshooting
-console.log("********************  Hit ./models/Users.js   ********************");
+// console.log("********************  Hit ./models/Users.js   ********************");
 
 // User exported making it available for use in the app
 module.exports = Users;
