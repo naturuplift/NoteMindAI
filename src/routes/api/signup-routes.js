@@ -1,17 +1,12 @@
-const express = require('express');
+// Include packages needed for this application
+const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 // Import Users model from the models directory
 const { Users } = require('../../models');
 require('dotenv').config();
 
-const router = express.Router();
-
-// const router = require('express').Router();
-
-
-
 // Signup route
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -23,7 +18,7 @@ router.post('/signup', async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new user
-    const newUser = await User.create({
+    const newUser = await Users.create({
       username,
       email,
       password: hashedPassword,

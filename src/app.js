@@ -7,9 +7,11 @@ const sequelize = require('./config/connection');
 // includes openAIService.js file
 const openAIService = require('./services/openAIService');
 const morgan = require('morgan');
+const setupSwagger = require('./routes/api/swagger');
 
 // initializes a new instance of the Express application
 const app = express();
+const path = require('path');
 // set port the server will listen to
 const PORT = process.env.PORT || 3000;
 
@@ -21,18 +23,6 @@ app.use(routes);
 // app.use('/api', apiRoutes);
 
 app.use(morgan('dev')); // Log every request to the console
-
-// TODO: Temporary Route Test - comment when done
-// app.get('/test', (req, res) => res.send('Test route is working'));
-
-// TODO: comment when done troubleshooting
-// console.log("********************  Hit ./app.js   ********************");
-
-
-
-// TODO: Import and setup Swagger documentation
-const setupSwagger = require('./routes/swagger');
-// setupSwagger(app);// Initialize Swagger
 
 
 // Call OpenAI summarizeText function in openAIService.js file
@@ -59,6 +49,8 @@ const mwLogger = (req, res, next) => {
 };
 module.exports = mwLogger;
 
+// setup Swagger documentation
+setupSwagger(app);// Initialize Swagger
 
 // To verify if Sequelize is successfully connecting to your database
 sequelize.authenticate()
