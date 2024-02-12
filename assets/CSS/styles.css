@@ -118,6 +118,16 @@ body {
     text-align:center;
 }
 
+.header-dashboard {
+   margin: 35px;
+   
+    
+}
+
+.header-title {
+    color: blue;
+}
+
 /* Media Query */
 
 @media (max-width: 900px) {
