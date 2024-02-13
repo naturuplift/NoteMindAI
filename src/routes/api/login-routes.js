@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       // Use environment variable for JWT secret
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-      res.json({ token });
+      res.render('dashboard', { token });
       // This will print token JWT_SECRET that user will have in .env 
       // console.log("JWT_SECRET:", process.env.JWT_SECRET);
     } else {
