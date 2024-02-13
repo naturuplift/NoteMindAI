@@ -1,75 +1,64 @@
+// import important parts of sequelize library
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection'); // Correct the path
+// import database connection from config
+const sequelize = require('../config/connection');
 
-class Note extends Model {}
+// Initialize Notes model by extending Sequelize's Model class
+class Notes extends Model {}
 
-Note.init({
-    // Model attributes
+// Set up fields and rules for Notes model
+Notes.init(
+  {
+    // Define columns
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     title: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING(255),
+      allowNull: false,
     },
     content: {
-        type: DataTypes.TEXT,
-        allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'users', // 'users' refers to table name
-            key: 'id', // 'id' refers to column name in users table
-        }
-    }
-}, {
-    // Model options
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'categories',
+        key: 'id',
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+      onUpdate: DataTypes.NOW,
+    },
+  },
+  {
     sequelize,
-    modelName: 'Note',
-    tableName: 'notes',
-    timestamps: true
-});
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'notes',
+  }
+);
 
-module.exports = (sequelize, DataTypes) => {
-    class Note extends Model {}
-  
-    Note.init({
-        // Model attributes
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        content: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'users', // 'users' refers to table name
-                key: 'id', // 'id' refers to column name in users table
-            }
-        }
-    }, {
-        // Model options
-        sequelize,
-        modelName: 'Note',
-        tableName: 'notes',
-        timestamps: true
-    });
-  
-    return Note;
-  };
-  
-
-// module.exports = Note;
+// Notes exported making it available for use in the app
+module.exports = Notes;

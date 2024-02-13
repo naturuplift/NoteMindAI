@@ -1,17 +1,36 @@
 // Import Router from express to handle route definitions
 const router = require('express').Router();
 
-// Import routes for categories, products, and tags
-const categoryRoutes = require('./category-routes');
-const productRoutes = require('./product-routes');
-const tagRoutes = require('./tag-routes');
+// Import routes for models
+const userRoutes = require('./users-routes');
+const categoryRoutes = require('./categories-routes');
+const noteRoutes = require('./notes-routes');
+const sharedNoteRoutes = require('./shared-notes-routes');
+const actionableItemsRoutes = require('./actionable-items-routes');
+const summaryRoutes = require('./summaries-routes');
+const audioFileRoutes = require('./audio-files-routes');
+const sharedAudioRoutes = require('./shared-audio-routes');
+const transcriptionRoutes = require('./transcriptions-routes');
+const loginRoutes = require('./login-routes');
+const signupRoutes = require('./signup-routes');
+const swaggerDocsRoutes  = require('./swagger');
 
-// Register category routes to be served under '/categories' path
+// Register routes to be served under own paths
+router.use('/users', userRoutes);
 router.use('/categories', categoryRoutes);
-// Register product routes to be served under '/products' path
-router.use('/products', productRoutes);
-// Register tag routes to be served under '/tags' path
-router.use('/tags', tagRoutes);
+router.use('/notes', noteRoutes);
+router.use('/sharednotes', sharedNoteRoutes);
+router.use('/actionableitems', actionableItemsRoutes);
+router.use('/summaries', summaryRoutes);
+router.use('/audiofiles', audioFileRoutes);
+router.use('/sharedaudio', sharedAudioRoutes);
+router.use('/transcriptions', transcriptionRoutes);
+router.use('/login', loginRoutes);
+router.use('/signup', signupRoutes);
+router.use('/docs', swaggerDocsRoutes);
+
+// TODO: comment when done troubleshooting
+// console.log("********************  Hit ./routes/api/index.js   ********************");
 
 // Export the configured router to be used by the main application
 module.exports = router;

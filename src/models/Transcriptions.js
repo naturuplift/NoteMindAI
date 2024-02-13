@@ -3,11 +3,11 @@ const { Model, DataTypes } = require('sequelize');
 // import database connection from config
 const sequelize = require('../config/connection');
 
-// Initialize ActionableItems model by extending Sequelize's Model class
-class ActionableItems extends Model {}
+// Initialize Transcription model by extending Sequelize's Model class
+class Transcriptions extends Model {}
 
-// Set up fields and rules for ActionableItems model
-ActionableItems.init(
+// Set up fields and rules for Transcription model
+Transcriptions.init(
   {
     // Define columns
     id: {
@@ -16,25 +16,21 @@ ActionableItems.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    noteId: {
+    audioId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
-        model: 'notes',
+        model: 'audio_files',
         key: 'id',
       },
     },
-    description: {
-      type: DataTypes.TEXT,
+    text: {
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
-    dueDate: {
-      type: DataTypes.DATE,
+    transcriptionQuality: {
+      type: DataTypes.DECIMAL(5, 2),
       allowNull: true,
-    },
-    status: {
-      type: DataTypes.ENUM('pending', 'completed'),
-      defaultValue: 'pending',
-      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -53,9 +49,9 @@ ActionableItems.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'actionable_items',
+    modelName: 'transcriptions',
   }
 );
 
-// ActionableItem exported making it available for use in the app
-module.exports = ActionableItems;
+// Transcription exported making it available for use in the app
+module.exports = Transcriptions;

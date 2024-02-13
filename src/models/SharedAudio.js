@@ -3,23 +3,31 @@ const { Model, DataTypes } = require('sequelize');
 // import database connection from config
 const sequelize = require('../config/connection');
 
-// Initialize Summary model by extending Sequelize's Model class
-class Summaries extends Model {}
+// Initialize SharedAudio model by extending Sequelize's Model class
+class SharedAudio extends Model {}
 
-// Set up fields and rules for Summaries model
-Summaries.init(
+// Set up fields and rules for SharedAudio model
+SharedAudio.init(
   {
     // Define columns
-    noteId: {
+    audioId: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       references: {
-        model: 'notes',
+        model: 'audio_files',
         key: 'id',
       },
+      primaryKey: true,
     },
-    summary: {
-      type: DataTypes.TEXT,
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      primaryKey: true,
+    },
+    permissionType: {
+      type: DataTypes.ENUM('viewer', 'listener'),
       allowNull: false,
     },
     createdAt: {
@@ -33,9 +41,9 @@ Summaries.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'summaries',
+    modelName: 'shared_audio',
   }
 );
 
-// Summary exported making it available for use in the app
-module.exports = Summaries;
+// SharedAudio exported making it available for use in the app
+module.exports = SharedAudio;

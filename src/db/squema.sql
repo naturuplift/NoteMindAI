@@ -70,3 +70,31 @@ CREATE TABLE summaries (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (noteId) REFERENCES notes(id)
 );
+
+CREATE TABLE audio_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    noteId INT NOT NULL,
+    audioPath VARCHAR(255) NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (noteId) REFERENCES notes(id)
+);
+
+CREATE TABLE shared_audio (
+    audioId INT,
+    userId INT,
+    permissionType ENUM('viewer', 'listener') NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (audioId) REFERENCES audio_files(id),
+    FOREIGN KEY (userId) REFERENCES users(id),
+    PRIMARY KEY (audioId, userId)
+);
+
+CREATE TABLE transcriptions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    audioId INT,
+    text LONGTEXT NOT NULL,
+    transcriptionQuality DECIMAL(5, 2) NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (audioId) REFERENCES audio_files(id)
+);

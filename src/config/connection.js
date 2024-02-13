@@ -1,7 +1,8 @@
 // Include packages needed for this application
-const Sequelize = require('sequelize');
 //  to load environment variables from a .env file
 require('dotenv').config();
+// const { Sequelize } = require('sequelize');
+const Sequelize = require('sequelize');
 
 // connection setup supports both local and JawsDB
 // (a MySQL add-on for Heroku) connections
