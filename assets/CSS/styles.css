@@ -123,27 +123,42 @@ body {
 }
 
 .notes-box {
-  
+    position:absolute;
+	top:50%;
+	left:45%;
+	-webkit-transform:translate(-50%,-50%);
+	        transform:translate(-50%,-50%);
+	text-align:center;
 }
 
 .header-dashboard {
-   margin-bottom: 0;
+    margin-bottom: 0;
+    background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/laika-notebooks-pONH9yZ-wXg-unsplash.jpg);
+    background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/laika-notebooks-pONH9yZ-wXg-unsplash.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
 
 .Dashboard-title {
-    margin-bottom: 0;
-    
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    text-align:center;
 }
 
 #save-notes-box {
     background-color: rgba(211,211,211, 0.2);
     height: auto;
+    left: 15%;
 }
 
 #Preview-box {
     border: 2px solid antiquewhite;
     background-color: rgba(211,211,211, 0.2);
     height: auto;
+    width: 300px;
+    left: 15%;
 }
 
 .saved-title {
@@ -160,6 +175,7 @@ body {
 
 .Dashboard-footer {
     font-size: 15px;
+    text-align: center;
 }
 
 #save-notes-box {
@@ -260,11 +276,74 @@ body {
         text-align:center;
     }
 
-    @media (min-width: 480px) {
+    @media (min-width: 780px) {
+        .Dashboard-body {
+            color: antiquewhite;
+        }
+        
         .notes-box {
+            display:flex;
+            text-align:center;
+        }
+        
+        .header-dashboard {
+            margin-bottom: 0;
+            background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/aaron-burden-AXqMy8MSSdk-unsplash.jpg);
+            background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/aaron-burden-AXqMy8MSSdk-unsplash.jpg);
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .Dashboard-title {
+            text-align:center;
+        }
+        
+        #save-notes-box {
             display: flex;
+            justify-content: flex-start;
+            background-color: rgba(211,211,211, 0.2);
+            height: auto;
             
         }
+        
+        #Preview-box {
+            border: 2px solid antiquewhite;
+            background-color: rgba(211,211,211, 0.2);
+            height: auto;
+            width: 300px;
+             
+        }
+        
+        .saved-title {
+            text-decoration: underline;
+            text-align:center;
+            font-size: 25px;
+        }
+        
+        .preview-title {
+            text-decoration: underline;
+            text-align:center;
+            font-size: 25px;
+        }
+        
+        .Dashboard-footer {
+            font-size: 15px;
+            text-align: center;
+        }
+        
+        #save-notes-box {
+            border: 2px solid antiquewhite;
+            background-color: rgba(211,211,211, 0.2);
+            margin-bottom: 15px;
+        }
+        
+        #Preview-box {
+            border: 2px solid antiquewhite;
+            background-color: rgba(211,211,211, 0.2);
+        }
+
+
     }
 
     
