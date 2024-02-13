@@ -67,7 +67,6 @@ body {
 }
 
 .Sign-Up-header {
-    background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
     background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
     height: 100vh;
     background-size: cover;

@@ -13,7 +13,7 @@ var button3 = document.getElementById('sign-in-button');
 
 button1.addEventListener('click', function() {
     inputElements.value = '';
-    window.location.href = '../assets/pages/sign-up.html';
+    window.location.href = 'sign-up.html';
     
 });
 
@@ -51,14 +51,4 @@ clearBtn.addEventListener('click', function () {
         };
     });
 
-// saveBtn.addEventListener('click', () => {
-//     const saveNote = (note) =>
-//     fetch('/api/notes', {
-//         method: 'POST',
-//         headers: {
-//         'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(note)
-//     });
-// })
 
