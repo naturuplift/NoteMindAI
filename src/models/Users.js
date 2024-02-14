@@ -49,18 +49,18 @@ Users.init(
   },
   {
     sequelize, // include bcrypt in the User model for password hashing
-    hooks: {
-      beforeCreate: async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt round
-        user.password = hashedPassword;
-      },
-      beforeUpdate: async (user) => {
-        if (user.changed('password')) {
-          const hashedPassword = await bcrypt.hash(user.password, 10);
-          user.password = hashedPassword;
-        }
-      },
-    },
+    // hooks: {
+    //   beforeCreate: async (user) => {
+    //     const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt round
+    //     user.password = hashedPassword;
+    //   },
+    //   beforeUpdate: async (user) => {
+    //     if (user.changed('password')) {
+    //       const hashedPassword = await bcrypt.hash(user.password, 10);
+    //       user.password = hashedPassword;
+    //     }
+    //   },
+    // },
     timestamps: true,
     freezeTableName: true,
     underscored: true,
