@@ -1,5 +1,7 @@
 //Landing Page
 
+const { default: Quill } = require("quill");
+
 // The sign-up button on the landing page
 var button1 = document.getElementById('sign-up-button');
 
@@ -52,3 +54,19 @@ clearBtn.addEventListener('click', function () {
     });
 
 
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+        document.getElementById('save-button').addEventListener(click, function() {
+            var editorContent = quill.root.innerHTML;
+            console.log('saving text',editorContent);
+        });
+        document.getElementById('delete-button').addEventListener(click, function() {
+           
+            console.log('deleting text',editorContent);
+        });
+    });
