@@ -1,25 +1,25 @@
-# Collaborative Note-Taking App
+# NoteMind AI App
 
 <br/>
 <p align="center">
     <a href="https://www.openai.com/" >
         <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
-    <a href="https://handlebarsjs.com/" >
-        <img alt="Handlebars.js - A minimal templating engine that allows you to use semantic templates with your server-side Node.js and Express.js applications." src="https://img.shields.io/static/v1.svg?label=Handlebars.js&message=templating engine&color=orange" /></a>
+    <a href="https://ejs.co/" >
+        <img alt="Embedded JavaScript templates - EJS is a simple templating language that lets you generate HTML markup with plain JavaScript" src="https://img.shields.io/static/v1.svg?label=EJS&message=templating engine&color=orange" /></a>
     <a href="https://sequelize.org/">
         <img alt="Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more" src="https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet" /></a>
     <a href="https://www.mysql.com/">
         <img alt="MySQL - An open-source relational database management system" src="https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen" /></a>
-    <a href="https://www.heroku.com/">
-        <img alt="Heroku (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Heroku&message=deployment&color=red" /></a>
+    <a href="https://render.com/">
+        <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=Cloud Deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
         <img alt="express-session - A session middleware for Express.js, used for handling user sessions" src="https://img.shields.io/static/v1.svg?label=express-session&message=middleware&color=green" /></a>
     <a href="https://socket.io/">
-        <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a>
+<!--         <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a> -->
     <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">
         <img alt="MVC Architecture - A software design pattern for developing web applications. MVC is an acronym for Model, View, and Controller. The pattern isolates the application logic from the user interface, allowing for efficient code organization and separation of concerns" src="https://img.shields.io/static/v1.svg?label=MVC Architecture&message=design pattern&color=lightcyan" /></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" >
-        <img alt="AJAX (Asynchronous JavaScript and XML) - A set of web development techniques that allows a web page to communicate with a server without reloading the page, enhancing the user experience by making it smoother and more interactive" src="https://img.shields.io/static/v1.svg?label=AJAX&message=web dev techniques&color=yellow" /></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" >
+        <img alt="Fetch - The Fetch API provides an interface for fetching resources (including across the network)." src="https://img.shields.io/static/v1.svg?label=Fetch API&message=fetch resources&color=yellow" /></a>
     <a href="https://quilljs.com/">
         <img alt="Quill - A powerful, rich text editor built for compatibility and extensibility" src="https://img.shields.io/static/v1.svg?label=Quill&message=text editor&color=darkgreen" /></a>
     <a href="https://nodejs.org/" >
@@ -42,22 +42,25 @@
 <br/>-
 
 ## Description
-SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
+NoteMind AI is an innovative, AI-powered Note-Taking App crafted to elevate individual creativity and productivity. By leveraging advanced AI functionalities like intelligent summarization, writing assistance, and voice transcription, NoteMind AI sets itself apart as the premier choice for writers, researchers, students, and professionals seeking to enhance their note-taking and idea generation processes. While it also facilitates collaboration, its core strength lies in its AI capabilities that act as an additional "brain" for users, offering personalized suggestions and insights. NoteMind AI is the ideal companion for those aiming to streamline their workflow, organize their thoughts more effectively, and unlock their creative potential.
 
 Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda
 
 ## Features
-- **User Authentication:** Secure signup, login, and profile management.
-- **Note Management:** Create, edit, delete, and categorize notes with rich text formatting.
-- **Collaborative Editing:** Share and collaborate on notes in real-time with other users.
-- **AI-Powered Summarization:** Get concise, accurate summaries of lengthy notes.
-- **Actionable Item Extraction:** Automatically convert action points in notes into tasks or reminders.
-- **Contextual Recommendations:** Receive suggestions for related notes and external references based on the content.
-- **Search and Filter:** Easily find notes with robust search and filter capabilities.
+-    **User Authentication:** Secure signup, login, and profile management to ensure your notes are private and protected.
+-    **Note Management:** Effortlessly create, edit, delete, and categorize notes with rich text formatting to capture your thoughts and ideas clearly.
+-    **AI-Powered Assistance:**
+-        **Summarization:** Generate summaries of notes for quick reviews.
+-        **Writing Assistance:** Get intelligent suggestions to continue your flow of thought or overcome writer's block.
+-        **Voice Transcription:** Use text-to-voice features for hands-free note-listening.
+-        **Actionable Item Extraction:** Transform action points within notes into tasks or reminders with ease.
+-        **Contextual Recommendations:** Receive AI-driven suggestions for related notes and external references, enhancing your research and study.
+-    **Note Sharing:** Easily share notes with colleagues or friends by providing a link that grants them access to read or edit, enhancing flexibility in collaboration without real-time constraints.
+-    **Search and Filter:** Powerful search and filtering options to quickly locate the notes you need.
 
 ## Technologies Used
 - **Backend:** Node.js, Express.js
-- **Frontend:** Handlebars.js, AJAX for smooth interactions
+- **Frontend:** EJS, Fetch for smooth interactions
 - **Database:** MySQL, Sequelize ORM
 - **Authentication:** express-session, cookies
 - **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
@@ -74,7 +77,7 @@ Ensure you have the following installed before proceeding:
 1. **Clone the repository:**
 ```shell
    git clone https://github.com/naturuplift/CollaborativeNoteTakingApp.git
-   cd CollaborativeNoteTakingApp
+   cd NoteMindAI
 ```
 
 2. **Install dependencies:**
