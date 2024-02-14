@@ -7,7 +7,7 @@ const { Notes } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const noteData = await Notes.findAll();
-    res.status(200).json(noteData);
+    res.render('notes', { notes: noteData });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({ message: 'No note found with this id!' });
       return;
     }
-    res.status(200).json(noteData);
+    res.render('note', { notes: noteData });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const noteData = await Notes.create(req.body);
-    res.status(200).json(noteData);
+    res.render('notes', { notes: noteData });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -49,7 +49,7 @@ router.put('/:id', async (req, res) => {
       res.status(404).json({ message: 'No note found with this id!' });
       return;
     }
-    res.status(200).json({ message: 'Note updated successfully!' });
+    res.render('notes', { notes: noteData });
   } catch (err) {
     res.status(500).json(err);
   }

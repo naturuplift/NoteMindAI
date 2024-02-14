@@ -2,16 +2,17 @@
 const express = require('express');
 // Imports the routing files from ./routes directory
 const routes = require('./routes');
+const bodyParser = require('body-parser');
+const path = require('path');
 // import sequelize connection
 const sequelize = require('./config/connection');
 // includes openAIService.js file
 const openAIService = require('./services/openAIService');
 const morgan = require('morgan');
-const setupSwagger = require('./routes/api/swagger');
 
 // initializes a new instance of the Express application
 const app = express();
-const path = require('path');
+
 // set port the server will listen to
 const PORT = process.env.PORT || 3000;
 
@@ -24,6 +25,18 @@ app.use(routes);
 
 app.use(morgan('dev')); // Log every request to the console
 
+//Setting view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+//editor
+app.use('/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
+
+const notes =[];
+
+app.get('/notes/new', (req, res) => {
+  res.render('newNote');
+});
 
 // Call OpenAI summarizeText function in openAIService.js file
 async function summarizeNoteController(req, res) {
@@ -47,10 +60,10 @@ const mwLogger = (req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 };
-module.exports = mwLogger;
+app.use(mwLogger);
 
 // setup Swagger documentation
-setupSwagger(app);// Initialize Swagger
+
 
 // To verify if Sequelize is successfully connecting to your database
 sequelize.authenticate()

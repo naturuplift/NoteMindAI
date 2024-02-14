@@ -13,7 +13,7 @@ const sharedAudioRoutes = require('./shared-audio-routes');
 const transcriptionRoutes = require('./transcriptions-routes');
 const loginRoutes = require('./login-routes');
 const signupRoutes = require('./signup-routes');
-const swaggerDocsRoutes  = require('./swagger');
+
 
 // Register routes to be served under own paths
 router.use('/users', userRoutes);
@@ -27,7 +27,7 @@ router.use('/sharedaudio', sharedAudioRoutes);
 router.use('/transcriptions', transcriptionRoutes);
 router.use('/login', loginRoutes);
 router.use('/signup', signupRoutes);
-router.use('/docs', swaggerDocsRoutes);
+
 
 // TODO: comment when done troubleshooting
 // console.log("********************  Hit ./routes/api/index.js   ********************");
