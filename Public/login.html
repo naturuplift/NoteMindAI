@@ -7,26 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta author="Karen Bourgeois, Arnaldo Sepulveda, Ikechukwu Mbanugo">
     <meta keywords="notetaking, note-taking, HTML, CSS, JavaScript, OpenAI, Node.js, Handlebars, UNB Bootcamp, GitHub, Git Bash, npm, Sequalize, MySQL, express, Quill, VSCode, MVC, Express.js, AJAX, Render, Heroku, Socket.io, Postman, Insomnia">
-    <title>Note-Taking Signup</title>
+    <title>Note-Taking Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../assets/CSS/styles.css">
 </head>
 
 <body>
     
-    <header class="Sign-Up-header"></header>
+    <header class="Login-header"></header>
 
-    <div class="sign-up-box">
-        <h1 id="sign-up-title" aria-label="Sign-Up Form">Sign-up Form</h1>
-        <p id="sign-para" aria-label="Fill in your information, please">Fill in your information, please</p>
-        <form id="sign-up-form">
+    <div class="login-box">
+        <h1 id="login-title" aria-label="Login Form">Login Form</h1>
+        <p id="login-para" aria-label="Enter your credentials, please">Enter your credentials, please</p>
+        <form id="login-form">
             <input name="Username" id="username" cols="30" rows="1" placeholder="Username" aria-label="Username"></input>
-            <input name="Email" id="email" cols="30" rows="1" placeholder="Email" aria-label="Email"></input><br>
-            <input name="Password" id="password" cols="30" rows="1" placeholder="Password" aria-label="Password"></input><br><br>
-            <button id="sign-up-page-btn" aria-label="Clear Form Button">Clear Form</button>
-            <button id="submit-button" aria-label="Submit button">Submit</button>
+            <input name="Password" id="password" type="password" cols="30" rows="1" placeholder="Password" aria-label="Password"></input><br><br>
+            <button id="clear-form-btn" aria-label="Clear Form Button">Clear Form</button>
+            <button id="login-button" aria-label="Login button">Login</button>
         </form>
     </div>
 
@@ -36,7 +35,7 @@
         </h6>
     </footer>
 
-    <script src="../JS/script.js"></script>
+    <script src="../assets/JS/script.js"></script>
 
 </body>
 
