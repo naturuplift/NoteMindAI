@@ -5,14 +5,8 @@ const { SharedAudio, AudioFiles, Users } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
-
 // GET route to retrieve all shared audio
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.findAll({
@@ -24,7 +18,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single shared audio by its ID
+// *************************************************
 router.get('/:id', async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.findByPk(req.params.id, {
@@ -40,7 +37,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // POST route to create a new shared audio relationship
+// *************************************************
 router.post('/', async (req, res) => {
     try {
       const sharedAudioData = await SharedAudio.create({
@@ -54,7 +54,10 @@ router.post('/', async (req, res) => {
     }
   });
   
+
+  // *************************************************
   // PUT route to update shared audio's permission by ID
+  // *************************************************
   router.put('/:id', async (req, res) => {
     try {
       const sharedAudioData = await SharedAudio.update(req.body, {
@@ -70,7 +73,10 @@ router.post('/', async (req, res) => {
     }
   });
   
+
+  // *************************************************
   // DELETE route to remove a shared audio relationship by ID
+  // *************************************************
   router.delete('/:id', async (req, res) => {
     try {
       const sharedAudioData = await SharedAudio.destroy({

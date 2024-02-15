@@ -5,23 +5,8 @@ const { Categories } = require('../../models');
 
 
 // *************************************************
-// 
+// route to retrieve all categories
 // *************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// GET route to retrieve all categories
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Categories.findAll();
@@ -31,7 +16,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single category by its ID
+// *************************************************
 router.get('/:id', async (req, res) => {
   try {
     const categoryData = await Categories.findByPk(req.params.id);
@@ -45,7 +33,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // POST route to create a new category
+// *************************************************
 router.post('/', async (req, res) => {
   try {
     const categoryData = await Categories.create(req.body);
@@ -55,7 +46,10 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // PUT route to update a category's details by ID
+// *************************************************
 router.put('/:id', async (req, res) => {
   try {
     const categoryData = await Categories.update(req.body, {
@@ -73,7 +67,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // DELETE route to remove a category by ID
+// *************************************************
 router.delete('/:id', async (req, res) => {
   try {
     const categoryData = await Categories.destroy({
@@ -90,5 +87,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

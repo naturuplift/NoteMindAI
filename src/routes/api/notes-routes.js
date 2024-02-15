@@ -5,15 +5,8 @@ const { Notes } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
-
-
 // GET route to retrieve all Notes
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const noteData = await Notes.findAll();
@@ -23,7 +16,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single note by its ID
+// *************************************************
 router.get('/:id', async (req, res) => {
   try {
     const noteData = await Notes.findByPk(req.params.id);
@@ -37,8 +33,13 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // POST route to create a new note
+// *************************************************
 router.post('/', async (req, res) => {
+
+  console.log("Incoming Request: ", req.body)  // this should capture the INCOPMING data from the FRONT END fetch request
   try {
     const noteData = await Notes.create(req.body);
     res.render('notes', { notes: noteData });
@@ -47,7 +48,10 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // PUT route to update a note's details by ID
+// *************************************************
 router.put('/:id', async (req, res) => {
   try {
     const noteData = await Notes.update(req.body, {
@@ -65,7 +69,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// *************************************************
 // DELETE route to remove a note by ID
+// *************************************************
 router.delete('/:id', async (req, res) => {
   try {
     const noteData = await Notes.destroy({
@@ -82,5 +88,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

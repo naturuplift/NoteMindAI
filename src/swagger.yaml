@@ -6,107 +6,894 @@ info:
 servers:
   - url: http://localhost:3000/api/v1
     description: Development server
+tags:
+  - name: Users
+    description: Operations related to users
+  - name: Categories
+    description: Operations related to categories
+  - name: Notes
+    description: Operations related to notes
+  - name: SharedNotes
+    description: Operations related to shared notes
+  - name: ActionableItems
+    description: Operations related to actionable items
+  - name: Summaries
+    description: Operations related to summaries
+  - name: AudioFiles
+    description: Operations related to audio files
+  - name: SharedAudio
+    description: Operations related to shared audio
+  - name: Transcriptions
+    description: Operations related to transcriptions
 paths:
-  /signup:
+  /users:
+    /signup:
+      post:
+        summary: User signup
+        description: Registers a new user and returns user information.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                  - email
+                  - password
+                properties:
+                  username:
+                    type: string
+                    example: user6
+                  email:
+                    type: string
+                    format: email
+                    example: user6@example.com
+                  password:
+                    type: string
+                    format: password
+                    example: password6
+        responses:
+          '201':
+            description: User created successfully.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: User created successfully
+                    userId:
+                      type: integer
+                      example: 1
+          '400':
+            description: User already exists with this email.
+          '500':
+            description: Internal server error during signup.
+
+    /login:
+      post:
+        summary: User login
+        description: Authenticates a user and returns a JWT token.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - email
+                  - password
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    example: user1@example.com
+                  password:
+                    type: string
+                    format: password
+                    example: password123
+        responses:
+          '200':
+            description: Successfully authenticated.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          '401':
+            description: Invalid email or password.
+          '500':
+            description: Server error during login.
+
+    /logout:
+      post:
+        summary: User logout
+        description: Logs out a user and invalidates the current token.
+        responses:
+          '200':
+            description: Logout successful.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Logout successful. Tokens issued before now are invalidated.
+          '500':
+            description: Server error during logout.
+
+  /categories:
+    get:
+      summary: Retrieve all categories
+      description: Fetches a list of all categories.
+      responses:
+        '200':
+          description: A list of categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '500':
+          description: Internal server error.
     post:
-      summary: User signup
-      description: Registers a new user and returns user information.
+      summary: Create a new category
+      description: Adds a new category to the database.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - username
-                - email
-                - password
-              properties:
-                username:
-                  type: string
-                  example: user6
-                email:
-                  type: string
-                  format: email
-                  example: user6@example.com
-                password:
-                  type: string
-                  format: password
-                  example: password6
+              $ref: '#/components/schemas/Category'
       responses:
-        '201':
-          description: User created successfully.
+        '200':
+          description: Category created successfully.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: User created successfully
-                  userId:
-                    type: integer
-                    example: 1
+                $ref: '#/components/schemas/Category'
         '400':
-          description: User already exists with this email.
+          description: Bad request.
         '500':
-          description: Internal server error during signup.
+          description: Internal server error.
 
-  /login:
-    post:
-      summary: User login
-      description: Authenticates a user and returns a JWT token.
+  /categories/{id}:
+    get:
+      summary: Get a single category by ID
+      description: Fetches a category by its ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The category ID.
+      responses:
+        '200':
+          description: A single category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: No category found with this ID.
+        '500':
+          description: Internal server error.
+    put:
+      summary: Update a category by ID
+      description: Updates the details of an existing category.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The category ID.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - email
-                - password
-              properties:
-                email:
-                  type: string
-                  format: email
-                  example: user1@example.com
-                password:
-                  type: string
-                  format: password
-                  example: password123
+              $ref: '#/components/schemas/Category'
       responses:
         '200':
-          description: Successfully authenticated.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-        '401':
-          description: Invalid email or password.
+          description: Category updated successfully.
+        '404':
+          description: No category found with this ID.
         '500':
-          description: Server error during login.
+          description: Internal server error.
+    delete:
+      summary: Delete a category by ID
+      description: Removes a category from the database.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The category ID.
+      responses:
+        '200':
+          description: Category deleted successfully.
+        '404':
+          description: No category found with this ID.
+        '500':
+          description: Internal server error.
 
-  /logout:
-    post:
-      summary: User logout
-      description: Logs out a user and invalidates the current token.
+  /notes:
+    get:
+      summary: Retrieve all notes
+      description: Fetches a list of all notes.
       responses:
         '200':
-          description: Logout successful.
+          description: A list of notes.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Logout successful. Tokens issued before now are invalidated.
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
         '500':
-          description: Server error during logout.
+          description: Internal server error.
+    post:
+      summary: Create a new note
+      description: Adds a new note to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '200':
+          description: Note created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+
+  /notes/{id}:
+    get:
+      summary: Get a single note by ID
+      description: Fetches a note by its ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The note ID.
+      responses:
+        '200':
+          description: A single note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '404':
+          description: No note found with this ID.
+        '500':
+          description: Internal server error.
+    put:
+      summary: Update a note by ID
+      description: Updates the details of an existing note.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The note ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '200':
+          description: Note updated successfully.
+        '404':
+          description: No note found with this ID.
+        '500':
+          description: Internal server error.
+    delete:
+      summary: Delete a note by ID
+      description: Removes a note from the database.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The note ID.
+      responses:
+        '200':
+          description: Note deleted successfully.
+        '404':
+          description: No note found with this ID.
+        '500':
+          description: Internal server error.
+
+  /sharedNotes:
+    get:
+      summary: Retrieve all shared notes
+      description: Fetches a list of all shared notes, optionally including related Note and User models.
+      responses:
+        '200':
+          description: A list of shared notes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedNote'
+        '500':
+          description: Internal server error.
+    post:
+      summary: Create a new shared note relationship
+      description: Adds a new shared note relationship to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedNote'
+      responses:
+        '200':
+          description: Shared note relationship created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedNote'
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+
+  /sharedNotes/{id}:
+    get:
+      summary: Get a single shared note by ID
+      description: Fetches a shared note by its unique ID (or by a combination of noteId and userId).
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The shared note ID.
+      responses:
+        '200':
+          description: A single shared note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedNote'
+        '404':
+          description: No shared note found with this ID.
+        '500':
+          description: Internal server error.
+    put:
+      summary: Update shared note permissions
+      description: Updates the permissions of an existing shared note relationship.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The shared note ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedNote'
+      responses:
+        '200':
+          description: Shared note updated successfully.
+        '404':
+          description: No shared note found with this ID.
+        '500':
+          description: Internal server error.
+    delete:
+      summary: Delete a shared note relationship by ID
+      description: Removes a shared note relationship from the database by its unique ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The shared note ID.
+      responses:
+        '200':
+          description: Shared note relationship deleted successfully.
+        '404':
+          description: No shared note found with this ID.
+        '500':
+          description: Internal server error.
+
+  /actionableItems:
+    get:
+      summary: Retrieve all actionable items
+      tags: [ActionableItems]
+      responses:
+        '200':
+          description: A list of actionable items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ActionableItem'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new actionable item
+      tags: [ActionableItems]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionableItem'
+      responses:
+        '200':
+          description: Actionable item created successfully.
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /actionableItems/{id}:
+    get:
+      summary: Find a single actionable item by ID
+      tags: [ActionableItems]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the actionable item to retrieve
+      responses:
+        '200':
+          description: Actionable item details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionableItem'
+        '404':
+          description: Actionable item not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update an actionable item's details by ID
+      tags: [ActionableItems]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the actionable item to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActionableItem'
+      responses:
+        '200':
+          description: Actionable item updated successfully.
+        '404':
+          description: Actionable item not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Remove an actionable item by ID
+      tags: [ActionableItems]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the actionable item to delete
+      responses:
+        '200':
+          description: Actionable item deleted successfully.
+        '404':
+          description: Actionable item not found
+        '500':
+          description: Internal server error
+
+  /summaries:
+    get:
+      summary: Retrieve all summaries
+      tags: [Summaries]
+      responses:
+        '200':
+          description: A list of summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Summary'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new summary
+      tags: [Summaries]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Summary'
+      responses:
+        '200':
+          description: Summary created successfully.
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /summaries/{noteId}:
+    get:
+      summary: Find a single summary by noteId
+      tags: [Summaries]
+      parameters:
+        - in: path
+          name: noteId
+          required: true
+          schema:
+            type: integer
+          description: ID of the note to retrieve its summary
+      responses:
+        '200':
+          description: Summary details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Summary'
+        '404':
+          description: Summary not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update an existing summary by noteId
+      tags: [Summaries]
+      parameters:
+        - in: path
+          name: noteId
+          required: true
+          schema:
+            type: integer
+          description: ID of the note to update its summary
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Summary'
+      responses:
+        '200':
+          description: Summary updated successfully.
+        '404':
+          description: Summary not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Remove a summary by noteId
+      tags: [Summaries]
+      parameters:
+        - in: path
+          name: noteId
+          required: true
+          schema:
+            type: integer
+          description: ID of the note to delete its summary
+      responses:
+        '200':
+          description: Summary deleted successfully.
+        '404':
+          description: Summary not found
+        '500':
+          description: Internal server error
+
+  /audioFiles:
+    get:
+      summary: Retrieve all audio files
+      tags: [AudioFiles]
+      responses:
+        '200':
+          description: A list of audio files.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioFile'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new audio file
+      tags: [AudioFiles]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioFile'
+      responses:
+        '200':
+          description: Audio file created successfully.
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /audioFiles/{id}:
+    get:
+      summary: Find a single audio file by ID
+      tags: [AudioFiles]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the audio file to retrieve
+      responses:
+        '200':
+          description: Audio file details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioFile'
+        '404':
+          description: Audio file not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update an existing audio file by ID
+      tags: [AudioFiles]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the audio file to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioFile'
+      responses:
+        '200':
+          description: Audio file updated successfully.
+        '404':
+          description: Audio file not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Remove an audio file by ID
+      tags: [AudioFiles]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the audio file to delete
+      responses:
+        '200':
+          description: Audio file deleted successfully.
+        '404':
+          description: Audio file not found
+        '500':
+          description: Internal server error
+
+  /sharedAudio:
+    get:
+      summary: Retrieve all shared audio relationships
+      tags: [SharedAudio]
+      responses:
+        '200':
+          description: A list of shared audio relationships.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedAudio'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new shared audio relationship
+      tags: [SharedAudio]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedAudio'
+      responses:
+        '200':
+          description: Shared audio relationship created successfully.
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /sharedAudio/{id}:
+    get:
+      summary: Find a single shared audio relationship by ID
+      tags: [SharedAudio]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the shared audio relationship to retrieve
+      responses:
+        '200':
+          description: Shared audio relationship details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedAudio'
+        '404':
+          description: Shared audio relationship not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update an existing shared audio relationship by ID
+      tags: [SharedAudio]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the shared audio relationship to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedAudio'
+      responses:
+        '200':
+          description: Shared audio relationship updated successfully.
+        '404':
+          description: Shared audio relationship not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Remove a shared audio relationship by ID
+      tags: [SharedAudio]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the shared audio relationship to delete
+      responses:
+        '200':
+          description: Shared audio relationship deleted successfully.
+        '404':
+          description: Shared audio relationship not found
+        '500':
+          description: Internal server error
+
+  /transcriptions:
+    get:
+      summary: Retrieve all transcriptions
+      tags: [Transcriptions]
+      responses:
+        '200':
+          description: A list of transcriptions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transcription'
+        '500':
+          description: Internal server error
+    post:
+      summary: Create a new transcription
+      tags: [Transcriptions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transcription'
+      responses:
+        '200':
+          description: Transcription created successfully.
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+  /transcriptions/{id}:
+    get:
+      summary: Find a single transcription by ID
+      tags: [Transcriptions]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the transcription to retrieve
+      responses:
+        '200':
+          description: Transcription details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transcription'
+        '404':
+          description: Transcription not found
+        '500':
+          description: Internal server error
+    put:
+      summary: Update an existing transcription by ID
+      tags: [Transcriptions]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the transcription to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transcription'
+      responses:
+        '200':
+          description: Transcription updated successfully.
+        '404':
+          description: Transcription not found
+        '500':
+          description: Internal server error
+    delete:
+      summary: Remove a transcription by ID
+      tags: [Transcriptions]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID of the transcription to delete
+      responses:
+        '200':
+          description: Transcription deleted successfully.
+        '404':
+          description: Transcription not found
+        '500':
+          description: Internal server error
 
 components:
   schemas:
@@ -127,3 +914,149 @@ components:
           type: string
           format: password
           example: strongPassword123
+    Category:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+          description: The category ID.
+        name:
+          type: string
+          description: The name of the category.
+      example:
+        id: 1
+        name: "Personal"
+    Note:
+      type: object
+      required:
+        - title
+        - content
+      properties:
+        id:
+          type: integer
+          description: The note ID.
+        title:
+          type: string
+          description: The title of the note.
+        content:
+          type: string
+          description: The content of the note.
+      example:
+        id: 1
+        title: "Meeting Notes"
+        content: "Here are the notes from our last meeting..."
+    SharedNote:
+      type: object
+      required:
+        - noteId
+        - userId
+        - permissionType
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the shared note relationship.
+        noteId:
+          type: integer
+          description: The ID of the note being shared.
+        userId:
+          type: integer
+          description: The ID of the user with whom the note is shared.
+        permissionType:
+          type: string
+          enum: [viewer, editor]
+          description: The type of permission granted to the shared user.
+      example:
+        id: 1
+        noteId: 10
+        userId: 5
+        permissionType: editor
+    ActionableItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the actionable item
+        description:
+          type: string
+          description: The description of the actionable item
+        dueDate:
+          type: string
+          format: date-time
+          description: The due date for the actionable item
+        status:
+          type: string
+          enum: [pending, completed]
+          description: The status of the actionable item
+      required:
+        - description
+        - status
+    Summary:
+      type: object
+      properties:
+        noteId:
+          type: integer
+          description: The ID of the note associated with this summary
+        summary:
+          type: string
+          description: The text of the summary
+      required:
+        - noteId
+        - summary
+    AudioFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the audio file
+        noteId:
+          type: integer
+          description: The ID of the note associated with this audio file
+        audioPath:
+          type: string
+          description: Path to the audio file
+      required:
+        - noteId
+        - audioPath
+    SharedAudio:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the shared audio relationship
+        audioId:
+          type: integer
+          description: The ID of the related audio file
+        userId:
+          type: integer
+          description: The ID of the user who has access
+        permissionType:
+          type: string
+          enum: [viewer, listener]
+          description: Type of permission granted to the user
+      required:
+        - audioId
+        - userId
+        - permissionType
+    Transcription:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the transcription
+        audioId:
+          type: integer
+          description: The ID of the related audio file
+        text:
+          type: string
+          description: The transcribed text
+        transcriptionQuality:
+          type: number
+          format: float
+          description: The quality score of the transcription
+      required:
+        - audioId
+        - text
+
+

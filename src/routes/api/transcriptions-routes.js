@@ -5,14 +5,8 @@ const { Transcriptions } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
-
 // GET route to retrieve all transcriptions
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.findAll();
@@ -22,7 +16,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single transcription by its ID
+// *************************************************
 router.get('/:id', async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.findByPk(req.params.id);
@@ -36,7 +33,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // POST route to create a new transcription
+// *************************************************
 router.post('/', async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.create(req.body);
@@ -46,7 +46,10 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // PUT route to update a transcription's details by ID
+// *************************************************
 router.put('/:id', async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.update(req.body, {
@@ -62,7 +65,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // DELETE route to remove a transcription by ID
+// *************************************************
 router.delete('/:id', async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.destroy({
@@ -77,5 +83,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

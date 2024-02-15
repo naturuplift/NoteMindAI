@@ -5,13 +5,8 @@ const { SharedNotes } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
 // GET route to retrieve all shared notes
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.findAll({
@@ -23,7 +18,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single shared note by its ID (or by noteId and userId combination)
+// *************************************************
 router.get('/:id', async (req, res) => {
     try {
       const sharedNoteData = await SharedNotes.findByPk(req.params.id);
@@ -37,7 +35,10 @@ router.get('/:id', async (req, res) => {
     }
   });  
 
+
+  // *************************************************
 // POST route to create a new shared note relationship
+// *************************************************
 router.post('/', async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.create(req.body);
@@ -47,7 +48,10 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // PUT route to update a shared note's permissions
+// *************************************************
 router.put('/:id', async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.update(req.body, {
@@ -65,7 +69,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // DELETE route to remove a shared note relationship by ID
+// *************************************************
 router.delete('/:id', async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.destroy({
@@ -82,5 +89,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

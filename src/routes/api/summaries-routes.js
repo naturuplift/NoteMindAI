@@ -5,13 +5,8 @@ const { Summaries, Notes } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
 // GET route to retrieve all summaries
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const summaryData = await Summaries.findAll({
@@ -23,7 +18,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single summary by its noteId
+// *************************************************
 router.get('/:noteId', async (req, res) => {
   try {
     const summaryData = await Summaries.findByPk(req.params.noteId, {
@@ -39,12 +37,24 @@ router.get('/:noteId', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // POST route to create a new summary
+// *************************************************
 router.post('/', async (req, res) => {
     try {
+      // make your OPEN API call before sending to the DB 
+      const summaryText = await req.body.summary
+
+      // TEST for success 
+      if(!summaryText) {
+        throw error;
+      }
+
       const summaryData = await Summaries.create({
         noteId: req.body.noteId,
         summary: req.body.summary,
+
       });
       res.status(200).json(summaryData);
     } catch (err) {
@@ -52,7 +62,10 @@ router.post('/', async (req, res) => {
     }
   });
   
+
+  // *************************************************
   // PUT route to update an existing summary by noteId
+  // *************************************************
   router.put('/:noteId', async (req, res) => {
     try {
       const summaryData = await Summaries.update(req.body, {
@@ -68,7 +81,10 @@ router.post('/', async (req, res) => {
     }
   });
   
+
+  // *************************************************
   // DELETE route to remove a summary by noteId
+  // *************************************************
   router.delete('/:noteId', async (req, res) => {
     try {
       const summaryData = await Summaries.destroy({
@@ -84,4 +100,5 @@ router.post('/', async (req, res) => {
     }
   });  
 
+  
 module.exports = router;

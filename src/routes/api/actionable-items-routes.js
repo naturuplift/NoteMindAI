@@ -5,15 +5,8 @@ const { ActionableItems } = require('../../models');
 
 
 // *************************************************
-// 
-// *************************************************
-
-
-
-
-
-
 // GET route to retrieve all actionable items
+// *************************************************
 router.get('/', async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.findAll();
@@ -23,7 +16,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // GET route to find a single actionable item by its ID
+// *************************************************
 router.get('/:id', async (req, res) => {
     try {
       const actionableItemData = await ActionableItems.findByPk(req.params.id);
@@ -37,7 +33,10 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+
+// *************************************************
 // POST route to create a new actionable item
+// *************************************************
 router.post('/', async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.create(req.body);
@@ -47,7 +46,10 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // PUT route to update an actionable item's details by ID
+// *************************************************
 router.put('/:id', async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.update(req.body, {
@@ -63,7 +65,10 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+// *************************************************
 // DELETE route to remove an actionable item by ID
+// *************************************************
 router.delete('/:id', async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.destroy({
@@ -78,5 +83,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

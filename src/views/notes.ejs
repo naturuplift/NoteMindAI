@@ -21,3 +21,39 @@
   <% } %>
 </body>
 </html>
+
+<script>
+  // basic fetch method to GET single ITEM from DB
+  fetch('/notes/:id', {
+    method: 'GET'
+  })
+
+  // this might be the data we collect from the END USER (form input)
+  let newNote = {
+    title: "test",
+    content: "something goes here",
+    userId: 5,
+    categoryId: 2
+  }
+
+  fetch('/api/v1/note', {
+    method: 'POST',
+    body: JSON.stringify(newNote)
+  }).then(data => {
+    console.log("Data from server: ", data)  // this is SUCCESSFUL data from the SERVER that went through the Database 
+    // this might be the database created new data object
+    // let newlyCreatedNote = {
+    //   id: ,
+    //   title, 
+    //   conntent, 
+    //   createdAt,
+    //   UpdatedAt
+    // }
+
+    // now we have data --> put it in the DOM 
+  }).catch(error => {
+    console.log("Error: ", error)
+  })
+
+
+</script>
