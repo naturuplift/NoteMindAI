@@ -1,0 +1,20 @@
+* {
+    font-family: 'Poppins', 'Arial', sans-serif;
+}
+
+.save-note:hover,
+.new-note:hover,
+.clear-btn:hover,
+.dashboard-btn:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+body {
+    margin: 15px 15px 0 15px;
+}
+
+#log-out:hover {
+    background-color: greenyellow;
+    color: blue;
+}

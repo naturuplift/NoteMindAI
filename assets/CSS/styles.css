@@ -46,6 +46,11 @@ body {
     color: grey;
 }
 
+#log-out:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
 #rest-button:hover {
     background-color: greenyellow;
     color: blue;
@@ -67,7 +72,6 @@ body {
 }
 
 .Sign-Up-header {
-    background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
     background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/kelly-sikkema-Oz_J_FXKvIs-unsplash.jpg);
     height: 100vh;
     background-size: cover;
@@ -84,6 +88,11 @@ body {
 }
 
 #sign-up-page-btn:hover {
+    background-color: greenyellow;
+    color: blue;
+}
+
+#new-note:hover {
     background-color: greenyellow;
     color: blue;
 }
@@ -124,8 +133,8 @@ body {
 
 .notes-box {
     position:absolute;
-	top:50%;
-	left:45%;
+	top:30%;
+    left: 35%;
 	-webkit-transform:translate(-50%,-50%);
 	        transform:translate(-50%,-50%);
 	text-align:center;
@@ -143,22 +152,16 @@ body {
 .Dashboard-title {
     position: absolute;
     top: 10%;
-    left: 8%;
+    left: 10%;
     text-align:center;
+    font-size: 40px;
 }
 
 #save-notes-box {
     background-color: rgba(211,211,211, 0.2);
     height: auto;
-    left: 15%;
-}
-
-#Preview-box {
-    border: 2px solid antiquewhite;
-    background-color: rgba(211,211,211, 0.2);
-    height: auto;
-    width: 300px;
-    left: 15%;
+    width: 200px;
+    justify-content: center;
 }
 
 .saved-title {
@@ -184,10 +187,9 @@ body {
     margin-bottom: 15px;
 }
 
-#Preview-box {
-    border: 2px solid antiquewhite;
-    background-color: rgba(211,211,211, 0.2);
-}
+/*Editor*/
+
+
 
 /* Media Query */
 
@@ -276,7 +278,7 @@ body {
         text-align:center;
     }
 
-    @media (min-width: 780px) {
+    @media (min-width: 480px) {
         .Dashboard-body {
             color: antiquewhite;
         }
