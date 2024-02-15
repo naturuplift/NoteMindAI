@@ -13,3 +13,8 @@
 body {
     margin: 15px 15px 0 15px;
 }
+
+#log-out:hover {
+    background-color: greenyellow;
+    color: blue;
+}
