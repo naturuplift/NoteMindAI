@@ -3,6 +3,24 @@ const router = require('express').Router();
 // Import Categories model from the models directory
 const { Categories } = require('../../models');
 
+
+// *************************************************
+// 
+// *************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // GET route to retrieve all categories
 router.get('/', async (req, res) => {
   try {

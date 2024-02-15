@@ -1,7 +1,7 @@
 // Import Router from express to handle route definitions
 const router = require('express').Router();
 
-// Import routes for models
+// Import all routes for models
 const userRoutes = require('./users-routes');
 const categoryRoutes = require('./categories-routes');
 const noteRoutes = require('./notes-routes');
@@ -11,10 +11,10 @@ const summaryRoutes = require('./summaries-routes');
 const audioFileRoutes = require('./audio-files-routes');
 const sharedAudioRoutes = require('./shared-audio-routes');
 const transcriptionRoutes = require('./transcriptions-routes');
-const loginRoutes = require('./login-routes');
-const signupRoutes = require('./signup-routes');
+// const loginRoutes = require('./login-routes');
+// const signupRoutes = require('./signup-routes');
 
-
+//router middleware
 // Register routes to be served under own paths
 router.use('/users', userRoutes);
 router.use('/categories', categoryRoutes);
@@ -25,8 +25,8 @@ router.use('/summaries', summaryRoutes);
 router.use('/audiofiles', audioFileRoutes);
 router.use('/sharedaudio', sharedAudioRoutes);
 router.use('/transcriptions', transcriptionRoutes);
-router.use('/login', loginRoutes);
-router.use('/signup', signupRoutes);
+// router.use('/login', loginRoutes);
+// router.use('/signup', signupRoutes);
 
 
 // TODO: comment when done troubleshooting

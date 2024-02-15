@@ -14,7 +14,7 @@ require("dotenv").config();
 
 // directly use OpenAI from the openai package and initializing it with the API key.
 const openai = new OpenAIApi({
-    apiKey: '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',
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 // function to summary text using OpenAI API functionality

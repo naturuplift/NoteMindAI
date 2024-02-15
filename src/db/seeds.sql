@@ -12,8 +12,8 @@ CREATE DATABASE note_taking_app_db;
 USE note_taking_app_db;
 
 -- Insert Users
-INSERT INTO users (id, username, email, password) VALUES
-(1, 'user1', 'user1@example.com', 'hashed_password1'),
+INSERT INTO users (id, username, email, password ) VALUES
+(1, 'admin', 'admin@example.com', 'hashed_password1'),
 (2, 'user2', 'user2@example.com', 'hashed_password2');
 -- Note: Make sure to replace 'hashed_password1' and 'hashed_password2'
 -- with actual hashed passwords if application expects hashed values

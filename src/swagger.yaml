@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: NoteMindAI App API
+  version: "1.0.0"
+  description: API for an AI-powered note-taking application.
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development server
+paths:
+  /signup:
+    post:
+      summary: User signup
+      description: Registers a new user and returns user information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  example: user6
+                email:
+                  type: string
+                  format: email
+                  example: user6@example.com
+                password:
+                  type: string
+                  format: password
+                  example: password6
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User created successfully
+                  userId:
+                    type: integer
+                    example: 1
+        '400':
+          description: User already exists with this email.
+        '500':
+          description: Internal server error during signup.
+
+  /login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user1@example.com
+                password:
+                  type: string
+                  format: password
+                  example: password123
+      responses:
+        '200':
+          description: Successfully authenticated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          description: Invalid email or password.
+        '500':
+          description: Server error during login.
+
+  /logout:
+    post:
+      summary: User logout
+      description: Logs out a user and invalidates the current token.
+      responses:
+        '200':
+          description: Logout successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Logout successful. Tokens issued before now are invalidated.
+        '500':
+          description: Server error during logout.
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: johnDoe
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        password:
+          type: string
+          format: password
+          example: strongPassword123

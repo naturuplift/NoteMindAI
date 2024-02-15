@@ -1,30 +1,53 @@
 // Include packages needed for this application
 const express = require('express');
-// Imports the routing files from ./routes directory
-const routes = require('./routes');
-const bodyParser = require('body-parser');
-const path = require('path');
-// import sequelize connection
-const sequelize = require('./config/connection');
-// includes openAIService.js file
-const openAIService = require('./services/openAIService');
-const morgan = require('morgan');
+require('dotenv').config();
 
 // initializes a new instance of the Express application
 const app = express();
+const morgan = require('morgan');
+const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload");
 
-// set port the server will listen to
-const PORT = process.env.PORT || 3000;
+//for swagger documentation
+const swaggerUi = require('swagger-ui-express');
+const fs = require("fs")
+const YAML = require('yaml')
+const file  = fs.readFileSync('./swagger.yaml', 'utf8')
+const swaggerDocument = YAML.parse(file)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// express app to recognize incoming requests as JSON objects
+// regular middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// const bodyParser = require('body-parser');
+
+//cookies and file middleware
+app.use(cookieParser());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
+
+//temp check
+app.set("view engine", "ejs");
+
+// morgan middleware
+app.use(morgan('tiny'));
+
+// Imports the routing files from ./routes directory
+const routes = require('./routes');
 // express app to use the routes defined
 app.use(routes);
-// app.use('/api', apiRoutes);
 
-app.use(morgan('dev')); // Log every request to the console
+//to handle production error
+// app.use(productionError);
 
+
+
+const path = require('path');
 //Setting view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +60,10 @@ const notes =[];
 app.get('/notes/new', (req, res) => {
   res.render('newNote');
 });
+
+
+// includes openAIService.js file
+const openAIService = require('./services/openAIService');
 
 // Call OpenAI summarizeText function in openAIService.js file
 async function summarizeNoteController(req, res) {
@@ -55,23 +82,13 @@ async function summarizeNoteController(req, res) {
 // Define an endpoint '/summarize' that uses summarizeNoteController
 // app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
 
+
 // middleware function mwLogger
-const mwLogger = (req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-};
-app.use(mwLogger);
+// const mwLogger = (req, res, next) => {
+//   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+//   next();
+// };
+// app.use(mwLogger);
 
-// setup Swagger documentation
-
-
-// To verify if Sequelize is successfully connecting to your database
-sequelize.authenticate()
-  .then(() => console.log('Database connected successfully.'))
-  .catch(err => console.error('Unable to connect to the database:', err));
-
-sequelize.sync({ force: false }) // Consider using 'force: true' only in development
-  .then(() => {
-    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-  })
-  .catch(err => console.error('Sequelize sync error:', err));
+// export app js
+module.exports = app;

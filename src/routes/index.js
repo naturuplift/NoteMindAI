@@ -5,7 +5,7 @@ const router = require('express').Router();
 const apiRoutes = require('./api');
 
 // Middleware to use API routes
-router.use('/api', apiRoutes);
+router.use('/api/v1', apiRoutes);
 
 // Catch-all route for any requests not handled by the defined routes
 router.use((req, res) => {

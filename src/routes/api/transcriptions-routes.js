@@ -3,6 +3,15 @@ const router = require('express').Router();
 // Import Transcriptions model from the models directory
 const { Transcriptions } = require('../../models');
 
+
+// *************************************************
+// 
+// *************************************************
+
+
+
+
+
 // GET route to retrieve all transcriptions
 router.get('/', async (req, res) => {
   try {

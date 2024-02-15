@@ -3,6 +3,14 @@ const router = require('express').Router();
 // Import SharedNotes model from the models directory
 const { SharedNotes } = require('../../models');
 
+
+// *************************************************
+// 
+// *************************************************
+
+
+
+
 // GET route to retrieve all shared notes
 router.get('/', async (req, res) => {
   try {

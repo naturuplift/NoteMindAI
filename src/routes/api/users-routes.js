@@ -2,195 +2,84 @@
 const router = require('express').Router();
 // Import Users model from the models directory
 const { Users } = require('../../models');
+const bcrypt = require('bcryptjs');
+const sendEmail = require('../../utils/sendEmail');
 
-/**
- * @swagger
- * /api/users:
- *   get:
- *     summary: Retrieves all users
- *     description: Retrieve a list of all users from the database.
- *     responses:
- *       200:
- *         description: A list of users.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/User'
- *       500:
- *         description: Internal server error
- */
-// GET route to retrieve all users
-router.get('/', async (req, res) => {
-  // console.log("Hit request to http://localhost:3000/api/users"); // TODO: comment
-  try {
-    const userData = await Users.findAll();
-    // Send back the category data with status code 200 (OK)
-    res.status(200).json(userData);
-  } catch (err) {
-    // If an error occurs, send back the error with status code 500 (Internal Server Error)
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
 
-/**
- * @swagger
- * /api/users/{id}:
- *   get:
- *     summary: Retrieve a single user by ID
- *     description: Retrieve a single user by their unique identifier from the database.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: The user's ID.
- *     responses:
- *       200:
- *         description: A single user object.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/User'
- *       404:
- *         description: No user found with this ID.
- *       500:
- *         description: Internal server error
- */
-// GET route to find a single user by ID
-router.get('/:id', async (req, res) => {
+// *************************************************
+// Signup Route
+// *************************************************
+router.post('/signup', async (req, res) => {
+  // Destructure fields from req.body
+  const { username, email, password } = req.body;
+
   try {
-    const userData = await Users.findByPk(req.params.id);
-    if (!userData) {
-      res.status(404).json({ message: 'No user found with this id!' });
-      return;
+    // Check if the user already exists
+    const existingUser = await Users.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).send('User already exists with this email.');
     }
-    res.status(200).json(userData);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-/**
- * @swagger
- * /api/users:
- *   post:
- *     summary: Create a new user
- *     description: Creates a new user with the provided data.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/User'
- *     responses:
- *       200:
- *         description: New user created.
- *       400:
- *         description: Bad request.
- *       500:
- *         description: Internal server error
- */
-// POST route to create a new user
-router.post('/', async (req, res) => {
-  try {
-    const userData = await Users.create(req.body);
-    res.status(200).json(userData);
-  } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
-  }
-});
-
-/**
- * @swagger
- * /api/users/{id}:
- *   put:
- *     summary: Update a user's details
- *     description: Update a user's details by their ID.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: The user's ID.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/User'
- *     responses:
- *       200:
- *         description: User updated successfully.
- *       404:
- *         description: No user found with this ID.
- *       500:
- *         description: Internal server error
- */
-// PUT route to update a user's details by ID
-router.put('/:id', async (req, res) => {
-  try {
-    const userData = await Users.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
+  
+    // Create a new user
+    const newUser = await Users.create({
+      username,
+      email,
+      password
     });
-    if (!userData[0]) {
-      res.status(404).json({ message: 'No user found with this id!' });
-      return;
-    }
-    res.status(200).json({ message: 'User updated successfully!' });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+
+    // return the new user's data, no password
+    res.status(201).json({ message: "User created successfully", userId: newUser.id });
+  } catch (error) {
+    console.error('Error during user signup:', error);
+    res.status(500).send('Internal server error during signup.');
   }
 });
 
-/**
- * @swagger
- * /api/users/{id}:
- *   delete:
- *     summary: Delete a user by ID
- *     description: Deletes a user by their unique identifier from the database.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: The user's ID.
- *     responses:
- *       200:
- *         description: User deleted successfully.
- *       404:
- *         description: No user found with this ID.
- *       500:
- *         description: Internal server error
- */
-// DELETE route to remove a user by ID
-router.delete('/:id', async (req, res) => {
+
+// *************************************************
+// Login Route
+// *************************************************
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const userData = await Users.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!userData) {
-      res.status(404).json({ message: 'No user found with this id!' });
-      return;
+    const user = await Users.findOne({ where: { email } });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Use environment variable for JWT secret
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+      res.json({token});
+      // res.render('dashboard', { token });
+      // This will print token JWT_SECRET that user will have in .env 
+      // console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    } else {
+      res.status(401).send('Invalid email or password');
     }
-    res.status(200).json({ message: 'User deleted successfully!' });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).send('Server error during login');
   }
 });
+
+
+// *************************************************
+// Logout Route
+// *************************************************
+router.post('/logout', async (req, res) => {
+  try {
+    // Assume req.userId contains the user's ID, extracted from the JWT in a previous middleware
+    const userId = req.userId;
+
+    // Update the lastLogoutAt field to the current timestamp for the user
+    await Users.update({ lastLogoutAt: new Date() }, { where: { id: userId } });
+
+    res.status(200).json({ message: 'Logout successful. Tokens issued before now are invalidated.' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).send('Server error during logout');
+  }
+});
+
 
 // Export the router to make these routes available
 module.exports = router;

@@ -4,6 +4,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 // include bcrypt package
 const bcrypt = require('bcryptjs');
+// const jwt = require('jsonwebtoken');
 
 // Initialize User model by extending Sequelize's Model class
 class Users extends Model {}
@@ -34,6 +35,9 @@ Users.init(
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      validate: {
+        len: [6, 255], // Password must be at least 6 characters long
+      },
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -49,18 +53,18 @@ Users.init(
   },
   {
     sequelize, // include bcrypt in the User model for password hashing
-    // hooks: {
-    //   beforeCreate: async (user) => {
-    //     const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt round
-    //     user.password = hashedPassword;
-    //   },
-    //   beforeUpdate: async (user) => {
-    //     if (user.changed('password')) {
-    //       const hashedPassword = await bcrypt.hash(user.password, 10);
-    //       user.password = hashedPassword;
-    //     }
-    //   },
-    // },
+    hooks: {
+      beforeCreate: async (user) => {
+        const hashedPassword = await bcrypt.hash(user.password, 10); // 10 is the salt round
+        user.password = hashedPassword;
+      },
+      beforeUpdate: async (user) => {
+        if (user.changed('password')) {
+          const hashedPassword = await bcrypt.hash(user.password, 10);
+          user.password = hashedPassword;
+        }
+      },
+    },
     timestamps: true,
     freezeTableName: true,
     underscored: true,

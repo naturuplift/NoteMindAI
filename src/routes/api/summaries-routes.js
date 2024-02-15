@@ -3,6 +3,14 @@ const router = require('express').Router();
 // Import Summaries, Notes model from the models directory
 const { Summaries, Notes } = require('../../models');
 
+
+// *************************************************
+// 
+// *************************************************
+
+
+
+
 // GET route to retrieve all summaries
 router.get('/', async (req, res) => {
   try {
