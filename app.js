@@ -10,33 +10,25 @@ const sequelize = require('./config/connection');
 const openAIService = require('./services/openAIService');
 const morgan = require('morgan');
 
-// initializes a new instance of the Express application
-const app = express();
-
 // set port the server will listen to
 const PORT = process.env.PORT || 3000;
 
-// express app to recognize incoming requests as JSON objects
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-// express app to use the routes defined
-app.use(routes);
-// app.use('/api', apiRoutes);
-
-app.use(morgan('dev')); // Log every request to the console
+// initializes a new instance of the Express application
+const app = express();
 
 //Setting view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(morgan('dev')); // Log every request to the console
+
+// express app to recognize incoming requests as JSON objects
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 //editor
 app.use('/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
-
-const notes =[];
-
-app.get('/notes/new', (req, res) => {
-  res.render('newNote');
-});
 
 // Call OpenAI summarizeText function in openAIService.js file
 async function summarizeNoteController(req, res) {
@@ -53,7 +45,7 @@ async function summarizeNoteController(req, res) {
 }
 
 // Define an endpoint '/summarize' that uses summarizeNoteController
-// app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
+app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
 
 // middleware function mwLogger
 const mwLogger = (req, res, next) => {
@@ -62,13 +54,10 @@ const mwLogger = (req, res, next) => {
 };
 app.use(mwLogger);
 
+// express app to use the routes defined
+app.use(routes);
+
 // setup Swagger documentation
-
-
-// To verify if Sequelize is successfully connecting to your database
-sequelize.authenticate()
-  .then(() => console.log('Database connected successfully.'))
-  .catch(err => console.error('Unable to connect to the database:', err));
 
 sequelize.sync({ force: false }) // Consider using 'force: true' only in development
   .then(() => {

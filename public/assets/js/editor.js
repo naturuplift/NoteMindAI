@@ -12,13 +12,6 @@ var inputElements = document.getElementById('form-landing-page');
 //The submit button on the landing page
 var button3 = document.getElementById('sign-in-button');
 
-
-button1.addEventListener('click', function() {
-    inputElements.value = '';
-    window.location.href = '../assets/pages/sign-up.html';
-    
-});
-
 // Loop through the input elements and clear each one
 button2.addEventListener('click', function() {
 for (var i = 0; i < inputElements.length; i++) {
