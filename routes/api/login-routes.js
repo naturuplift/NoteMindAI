@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
       // console.log("******************* password the same login-routes.js *******************")
       // Use environment variable for JWT secret
-      // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
       // res.render('dashboard');//, { token });
       res.json({ success: true, redirectUrl: '/dashboard' });
