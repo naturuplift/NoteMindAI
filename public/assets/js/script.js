@@ -1,9 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Handle click on the sign-up button
+    // Handle click on logout button
+    const logoutButton = document.getElementById('log-out');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            // Remove token from sessionStorage
+            sessionStorage.removeItem('token');
+
+            // Redirect to home page
+            window.location.href = '/';
+        });
+    }
+
+    // Handle click on sign-up button
     const signUpButton = document.getElementById('sign-up-button');
     if (signUpButton) {
-        // navigate to the sign-up page
+        // navigate to sign-up page
         signUpButton.addEventListener('click', function() {
             window.location.href = '/signup';
         });
@@ -13,14 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = document.getElementById('sign-in-button');
     if (signInButton) {
         signInButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); // Prevent default form submission
 
+            // use stored token 
+            const token = sessionStorage.getItem('token');
+
+            // Handle sign-in
             const formData = JSON.stringify({
                 email: document.getElementById('username-box').value,
                 password: document.getElementById('password-box').value,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
             });
 
-            // Handle sign-in button click event
+            // Send POST request to server using Fetch API
             fetch('/api/login', {
                 method: 'POST',
                 headers: {
@@ -31,6 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+
+                    // Save token in sessionStorage
+                    sessionStorage.setItem('token', data.token);
+
+                    // Redirect to dashboard
                     window.location.href = data.redirectUrl;
                 } else {
                     // Handle unsuccessful login
@@ -39,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // or show an error message to the user
+                // or show an error message to user
             });
         });
     }
@@ -57,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 password: document.getElementById('password-box').value,
             });
 
-            // Send a POST request to the server using Fetch API
+            // Send POST request to server using Fetch API
             fetch('/api/signup', {
                 method: 'POST',
                 headers: {
@@ -78,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // or show an error message to the user
+                // or show an error message to user
             });
         });
     }
