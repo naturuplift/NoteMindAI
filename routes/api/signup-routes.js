@@ -8,12 +8,11 @@ require('dotenv').config();
 // Signup route
 router.post('/', async (req, res) => {
   const { username, email, password } = req.body;
-
   console.log("******************* outside signup-routes.js *******************")
   console.log(username, email, password)
-  
   try {
     // Check if the user already exists
+    console.log("******************* inside signup-routes.js *******************")
     const existingUser = await Users.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).send('User already exists with this email.');
@@ -29,7 +28,8 @@ router.post('/', async (req, res) => {
 
     // TODO: could send a verification email using Nodemailer
 
-    res.render('index');
+    // res.render('index');
+    res.status(201).json({ message: "User created successfully" });
     // return the new user's data, no password
     // res.status(201).json({ message: "User created successfully", userId: newUser.id });
 
