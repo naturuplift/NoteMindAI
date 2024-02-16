@@ -45,7 +45,7 @@ async function summarizeNoteController(req, res) {
 }
 
 // Define an endpoint '/summarize' that uses summarizeNoteController
-app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
+// app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
 
 // middleware function mwLogger
 const mwLogger = (req, res, next) => {
