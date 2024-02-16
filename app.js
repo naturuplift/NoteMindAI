@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
-const fileUpload = require("express-fileupload");
+// const fileUpload = require("express-fileupload");
 
 //for swagger documentation
 const swaggerUi = require('swagger-ui-express');
@@ -23,13 +23,13 @@ app.use(express.urlencoded({ extended: true }));
 // const bodyParser = require('body-parser');
 
 //cookies and file middleware
-app.use(cookieParser());
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "/tmp/",
-  })
-);
+// app.use(cookieParser());
+// app.use(
+//   fileUpload({
+//     useTempFiles: true,
+//     tempFileDir: "/tmp/",
+//   })
+// );
 
 //temp check
 app.set("view engine", "ejs");
@@ -51,6 +51,13 @@ const path = require('path');
 //Setting view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(morgan('dev')); // Log every request to the console
+
+// express app to recognize incoming requests as JSON objects
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //editor
 app.use('/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
@@ -80,7 +87,7 @@ async function summarizeNoteController(req, res) {
 }
 
 // Define an endpoint '/summarize' that uses summarizeNoteController
-// app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
+app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
 
 
 // middleware function mwLogger

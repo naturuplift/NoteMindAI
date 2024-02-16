@@ -1,4 +1,7 @@
 * {
+    background-color: bisque;
+    font-family: 'Poppins', 'Arial', sans-serif;
+    color: grey;
     font-family: 'Poppins', 'Arial', sans-serif;
 }
 
@@ -12,4 +15,9 @@
 
 body {
     margin: 15px 15px 0 15px;
+}
+
+#log-out:hover {
+    background-color: greenyellow;
+    color: blue;
 }

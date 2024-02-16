@@ -1,17 +1,12 @@
 {
   "name": "note-mind-ai",
   "version": "1.0.0",
-  "description": "",
+  "description": "<br/>\r <p align=\"center\">\r     <a href=\"https://www.openai.com/\" >\r         <img alt=\"OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text\" src=\"https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen\" /></a>\r     <a href=\"https://handlebarsjs.com/\" >\r         <img alt=\"Handlebars.js - A minimal templating engine that allows you to use semantic templates with your server-side Node.js and Express.js applications.\" src=\"https://img.shields.io/static/v1.svg?label=Handlebars.js&message=templating engine&color=orange\" /></a>\r     <a href=\"https://sequelize.org/\">\r         <img alt=\"Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more\" src=\"https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet\" /></a>\r     <a href=\"https://www.mysql.com/\">\r         <img alt=\"MySQL - An open-source relational database management system\" src=\"https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen\" /></a>\r     <a href=\"https://www.heroku.com/\">\r         <img alt=\"Heroku (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud\" src=\"https://img.shields.io/static/v1.svg?label=Heroku&message=deployment&color=red\" /></a>\r     <a href=\"https://www.npmjs.com/package/express-session\">\r         <img alt=\"express-session - A session middleware for Express.js, used for handling user sessions\" src=\"https://img.shields.io/static/v1.svg?label=express-session&message=middleware&color=green\" /></a>\r     <a href=\"https://socket.io/\">\r         <img alt=\"Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers\" src=\"https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow\" /></a>\r     <a href=\"https://developer.mozilla.org/en-US/docs/Glossary/MVC\">\r         <img alt=\"MVC Architecture - A software design pattern for developing web applications. MVC is an acronym for Model, View, and Controller. The pattern isolates the application logic from the user interface, allowing for efficient code organization and separation of concerns\" src=\"https://img.shields.io/static/v1.svg?label=MVC Architecture&message=design pattern&color=lightcyan\" /></a>\r     <a href=\"https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX\" >\r         <img alt=\"AJAX (Asynchronous JavaScript and XML) - A set of web development techniques that allows a web page to communicate with a server without reloading the page, enhancing the user experience by making it smoother and more interactive\" src=\"https://img.shields.io/static/v1.svg?label=AJAX&message=web dev techniques&color=yellow\" /></a>\r     <a href=\"https://quilljs.com/\">\r         <img alt=\"Quill - A powerful, rich text editor built for compatibility and extensibility\" src=\"https://img.shields.io/static/v1.svg?label=Quill&message=text editor&color=green\" /></a>\r     <a href=\"https://nodejs.org/\" >\r         <img alt=\"Node.js - A JavaScript runtime built on Chrome's V8 JavaScript engine, used for building fast and scalable network applications\" src=\"https://img.shields.io/static/v1.svg?label=Node.js&message=JavaScript runtime&color=yellow\" /></a>\r     <a href=\"https://expressjs.com/\" >\r         <img alt=\"Express.js - A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications\" src=\"https://img.shields.io/static/v1.svg?label=Express.js&message=web app framework&color=blue\" /></a>\r     <!-- <a href=\"https://www.npmjs.com/\" >\r         <img alt=\"Node Package Manager\" src=\"https://img.shields.io/static/v1.svg?label=npm&message=packages&color=lightblue\" /></a> -->\r     <a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript\" >\r         <img alt=\"JavaScript - ES6\" src=\"https://img.shields.io/static/v1.svg?label=JavaScript&message=ES6&color=violet\" /></a>\r     <a href=\"https://github.com/\">\r         <img alt=\"GitHub (for repository hosting and project management) - Provides hosting for software development and version control using Git\" src=\"https://img.shields.io/static/v1.svg?label=GitHub&message=hosting&color=black\" /></a>\r     <a href=\"https://git-scm.com/\">\r         <img alt=\"Git (for version control) - A free and open-source distributed version control system\" src=\"https://img.shields.io/static/v1.svg?label=Git&message=version control&color=black\" /></a>\r     <a href=\"https://unb.ca/cel/bootcamps/coding.html\">\r         <img alt=\"University of New Brunswick\" src=\"https://img.shields.io/static/v1.svg?label=UNB&message=Bootcamp&color=red\" /></a>\r </p>\r <br/>",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "start": "nodemon app.js",
     "devStart": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/naturuplift/NoteWise.git"
   },
   "keywords": [],
   "author": "",
@@ -19,22 +14,34 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
-    "dotenv": "^16.4.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "fs": "^0.0.1-security",
+    "inquirer": "^8.2.6",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.1",
+    "nodemailer": "^6.9.9",
     "openai": "^4.26.0",
-    "quill": "^1.3.7",
     "readline-sync": "^1.4.10",
     "sequelize": "^6.36.0",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naturuplift/CollaborativeNoteTakingApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/naturuplift/CollaborativeNoteTakingApp/issues"
+  },
+  "homepage": "https://github.com/naturuplift/CollaborativeNoteTakingApp#readme"
 }
