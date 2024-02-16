@@ -20,12 +20,12 @@
     <div class="sign-up-box">
         <h1 id="sign-up-title" aria-label="Sign-Up Form">Sign-up Form</h1>
         <p id="sign-para" aria-label="Fill in your information, please">Fill in your information, please</p>
-        <form id="sign-up-form">
-            <input name="Username" id="username" cols="30" rows="1" placeholder="Username" aria-label="Username"></input>
-            <input name="Email" id="email" cols="30" rows="1" placeholder="Email" aria-label="Email"></input><br>
-            <input name="Password" id="password" cols="30" rows="1" placeholder="Password" aria-label="Password"></input><br><br>
-            <button id="sign-up-page-btn" aria-label="Clear Form Button">Clear Form</button>
-            <button id="submit-button" aria-label="Submit button">Submit</button>
+        <form id="sign-up-form" method="POST" action="/api/signup">
+            <input name="username" id="username-box" cols="30" rows="1" placeholder="Username" aria-label="Username"></input>
+            <input name="email" id="email-box" cols="30" rows="1" placeholder="Email" aria-label="Email"></input><br>
+            <input name="password" id="password-box" cols="30" rows="1" placeholder="Password" aria-label="Password"></input><br><br>
+            <button type="button" id="sign-up-page-btn" aria-label="Clear Form Button">Clear Form</button>
+            <button type="submit" id="submit-button" aria-label="Submit button">Submit</button>
         </form>
     </div>
 
@@ -34,8 +34,8 @@
   
         </h6>
     </footer>
-    <script src="/assets/js/script.js"></script>
 
+    <script src="/assets/js/script.js"></script>
 
 </body>
 

@@ -2,7 +2,7 @@
 const express = require('express');
 // Imports the routing files from ./routes directory
 const routes = require('./routes');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const path = require('path');
 // import sequelize connection
 const sequelize = require('./config/connection');
@@ -16,16 +16,19 @@ const PORT = process.env.PORT || 3000;
 // initializes a new instance of the Express application
 const app = express();
 
-//Setting view engine
+//Setting view engine to EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-app.use(morgan('dev')); // Log every request to the console
 
 // express app to recognize incoming requests as JSON objects
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Route to serve the landing page
+app.get('/', (req, res) => {
+  res.render('index');
+});
 
 //editor
 app.use('/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
@@ -47,6 +50,8 @@ async function summarizeNoteController(req, res) {
 // Define an endpoint '/summarize' that uses summarizeNoteController
 // app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
 
+
+app.use(morgan('tiny')); // Log every request to the console
 // middleware function mwLogger
 const mwLogger = (req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
@@ -56,8 +61,6 @@ app.use(mwLogger);
 
 // express app to use the routes defined
 app.use(routes);
-
-// setup Swagger documentation
 
 sequelize.sync({ force: false }) // Consider using 'force: true' only in development
   .then(() => {

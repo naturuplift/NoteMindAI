@@ -9,6 +9,9 @@ require('dotenv').config();
 router.post('/', async (req, res) => {
   const { username, email, password } = req.body;
 
+  console.log("******************* outside signup-routes.js *******************")
+  console.log(username, email, password)
+  
   try {
     // Check if the user already exists
     const existingUser = await Users.findOne({ where: { email } });
@@ -16,18 +19,20 @@ router.post('/', async (req, res) => {
       return res.status(400).send('User already exists with this email.');
     }
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new user
     const newUser = await Users.create({
       username,
       email,
-      password: hashedPassword,
+      password,//: hashedPassword,
     });
 
     // TODO: could send a verification email using Nodemailer
 
+    res.render('index');
     // return the new user's data, no password
-    res.status(201).json({ message: "User created successfully", userId: newUser.id });
+    // res.status(201).json({ message: "User created successfully", userId: newUser.id });
+
   } catch (error) {
     console.error('Error during user signup:', error);
     res.status(500).send('Internal server error during signup.');
