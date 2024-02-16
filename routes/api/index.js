@@ -14,6 +14,8 @@ const transcriptionRoutes = require('./transcriptions-routes');
 const loginRoutes = require('./login-routes');
 const signupRoutes = require('./signup-routes');
 
+// TODO: comment when done troubleshooting
+// console.log("********************  Hit ./routes/api/index.js   ********************");
 
 // Register routes to be served under own paths
 router.use('/users', userRoutes);
@@ -27,10 +29,6 @@ router.use('/sharedaudio', sharedAudioRoutes);
 router.use('/transcriptions', transcriptionRoutes);
 router.use('/login', loginRoutes);
 router.use('/signup', signupRoutes);
-
-
-// TODO: comment when done troubleshooting
-// console.log("********************  Hit ./routes/api/index.js   ********************");
 
 // Export the configured router to be used by the main application
 module.exports = router;

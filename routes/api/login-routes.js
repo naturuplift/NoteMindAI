@@ -13,9 +13,13 @@ router.post('/', async (req, res) => {
     const user = await Users.findOne({ where: { email } });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+
+      // console.log("******************* password the same login-routes.js *******************")
       // Use environment variable for JWT secret
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
-      res.render('dashboard', { token });
+      // const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+      // res.render('dashboard');//, { token });
+      res.json({ success: true, redirectUrl: '/dashboard' });
       // This will print token JWT_SECRET that user will have in .env 
       // console.log("JWT_SECRET:", process.env.JWT_SECRET);
     } else {

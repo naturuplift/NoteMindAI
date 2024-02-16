@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   res.render('login');
 });
-router.get('/signup', (req, res) => {
+router.use('/signup', (req, res) => {
   res.render('sign-up');
 });
 router.get('/dashboard', (req, res) => {
@@ -24,7 +24,6 @@ router.get('/dashboard', (req, res) => {
 router.get('/notes/new', (req, res) => {
   res.render('newNote');
 });
-
 
 // Catch-all route for any requests not handled by the defined routes
 router.use((req, res) => {
