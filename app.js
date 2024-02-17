@@ -62,9 +62,10 @@ app.use(routes);
 sequelize.authenticate()
   .then(() => console.log('Database connected successfully.'))
   .catch(err => console.error('Unable to connect to the database:', err));
-
 sequelize.sync({ force: false }) // Consider using 'force: true' only in development
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch(err => console.error('Sequelize sync error:', err));
+
+
