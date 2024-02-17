@@ -1,20 +1,32 @@
 // Include packages needed for this application
 const express = require('express');
+const session = require('express-session');
 // Imports the routing files from ./routes directory
 const routes = require('./routes');
 // const bodyParser = require('body-parser');
 const path = require('path');
 // import sequelize connection
 const sequelize = require('./config/connection');
-// includes openAIService.js file
-const openAIService = require('./services/openAIService');
 const morgan = require('morgan');
+require('dotenv').config();
 
 // set port the server will listen to
 const PORT = process.env.PORT || 3000;
 
 // initializes a new instance of the Express application
 const app = express();
+
+// Session middleware setup
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: 'auto',
+    httpOnly: true,
+    maxAge: 3600000 // Example: expires in 1 hour
+  }
+}));
 
 //Setting view engine to EJS
 app.set('view engine', 'ejs');
@@ -33,25 +45,9 @@ app.get('/', (req, res) => {
 //editor
 app.use('/quill', express.static(path.join(__dirname, 'node_modules/quill/dist')));
 
-// Call OpenAI summarizeText function in openAIService.js file
-async function summarizeNoteController(req, res) {
-  try {
-    // Assuming note content comes in the request body
-    const noteContent = req.body.noteContent;
-    // Call summarizeText function from openaiService
-    const summary = await openAIService.summarizeText(noteContent);
-    // return summary response to content
-    res.json({ summary });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
-
-// Define an endpoint '/summarize' that uses summarizeNoteController
-// app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
-
 
 app.use(morgan('tiny')); // Log every request to the console
+
 // middleware function mwLogger
 const mwLogger = (req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
@@ -61,6 +57,11 @@ app.use(mwLogger);
 
 // express app to use the routes defined
 app.use(routes);
+
+// To verify if Sequelize is successfully connecting to your database
+sequelize.authenticate()
+  .then(() => console.log('Database connected successfully.'))
+  .catch(err => console.error('Unable to connect to the database:', err));
 
 sequelize.sync({ force: false }) // Consider using 'force: true' only in development
   .then(() => {

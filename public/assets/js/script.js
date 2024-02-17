@@ -4,11 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('log-out');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            // Remove token from sessionStorage
-            sessionStorage.removeItem('token');
-
-            // Redirect to home page
-            window.location.href = '/';
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include the token in the request if needed for server-side validation
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                // Remove token from sessionStorage
+                sessionStorage.removeItem('token');
+                // Redirect to home page
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('Logout Error:', error);
+            });
         });
     }
 
@@ -34,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = JSON.stringify({
                 email: document.getElementById('username-box').value,
                 password: document.getElementById('password-box').value,
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
+                // headers: {
+                //     'Authorization': `Bearer ${token}`
+                // },
             });
 
             // Send POST request to server using Fetch API

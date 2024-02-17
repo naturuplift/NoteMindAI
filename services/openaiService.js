@@ -11,6 +11,29 @@ require("dotenv").config();
 // Use OpenAI Create Completion:
 // https://platform.openai.com/docs/api-reference/completions/create
 
+// includes openAIService.js file
+const openAIService = require('./services/openAIService');
+
+
+// Call OpenAI summarizeText function in openAIService.js file
+async function summarizeNoteController(req, res) {
+    try {
+      // Assuming note content comes in the request body
+      const noteContent = req.body.noteContent;
+      // Call summarizeText function from openaiService
+      const summary = await openAIService.summarizeText(noteContent);
+      // return summary response to content
+      res.json({ summary });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  
+  // Define an endpoint '/summarize' that uses summarizeNoteController
+  app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
+
+
+
 
 // directly use OpenAI from the openai package and initializing it with the API key.
 const openai = new OpenAIApi({
