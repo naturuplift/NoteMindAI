@@ -2,19 +2,25 @@
 const router = require('express').Router();
 // Import Notes model from the models directory
 const { Notes } = require('../../models');
+// Import Authentication Middleware
+const authenticateToken = require('../../middleware/authMiddleware');
+
 
 // GET route to retrieve all Notes
-router.get('/', async (req, res) => {
+router.get('/notes', authenticateToken, async (req, res) => {
   try {
-    const noteData = await Notes.findAll();
-    res.render('notes', { notes: noteData });
+    const noteData = await Notes.findAll({
+      order: [['createdAt', 'DESC']]
+    });
+    res.json(noteData); // Send JSON data
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+
 // GET route to find a single note by its ID
-router.get('/:id', async (req, res) => {
+router.get('/notes/:id', authenticateToken, async (req, res) => {
   try {
     const noteData = await Notes.findByPk(req.params.id);
     if (!noteData) {
@@ -27,18 +33,23 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 // POST route to create a new note
-router.post('/', async (req, res) => {
+router.post('/notes', authenticateToken, async (req, res) => {
   try {
-    const noteData = await Notes.create(req.body);
-    res.render('notes', { notes: noteData });
+    const noteData = await Notes.create({
+      title: req.body.title, // Ensure your model supports these fields
+      content: req.body.content
+    });
+    res.json(noteData); // Return the created note as JSON
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
+
 // PUT route to update a note's details by ID
-router.put('/:id', async (req, res) => {
+router.put('/notes/:id', authenticateToken, async (req, res) => {
   try {
     const noteData = await Notes.update(req.body, {
       where: {
@@ -55,8 +66,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
 // DELETE route to remove a note by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/notes/:id', authenticateToken, async (req, res) => {
   try {
     const noteData = await Notes.destroy({
       where: {
@@ -73,4 +85,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export the router to make these routes available
 module.exports = router;
