@@ -4,6 +4,7 @@ const router = require('express').Router();
 const { ActionableItems } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
 // GET route to retrieve all actionable items

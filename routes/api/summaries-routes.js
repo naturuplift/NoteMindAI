@@ -4,6 +4,7 @@ const router = require('express').Router();
 const { Summaries, Notes } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
 // GET route to retrieve all summaries

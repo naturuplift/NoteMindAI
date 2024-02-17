@@ -4,10 +4,11 @@ const router = require('express').Router();
 const { SharedNotes } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
 // GET route to retrieve all shared notes
-router.get('/sharednotes', async (req, res) => {
+router.get('/sharednotes', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.findAll({
       // Optionally, include related models here, like the Note and User models
@@ -19,7 +20,7 @@ router.get('/sharednotes', async (req, res) => {
 });
 
 // GET route to find a single shared note by its ID (or by noteId and userId combination)
-router.get('/sharednotes/:id', async (req, res) => {
+router.get('/sharednotes/:id', authenticateToken, async (req, res) => {
     try {
       const sharedNoteData = await SharedNotes.findByPk(req.params.id);
       if (!sharedNoteData) {
@@ -34,7 +35,7 @@ router.get('/sharednotes/:id', async (req, res) => {
 
 
 // POST route to create a new shared note relationship
-router.post('/sharednotes', async (req, res) => {
+router.post('/sharednotes', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.create(req.body);
     res.status(200).json(sharedNoteData);
@@ -45,7 +46,7 @@ router.post('/sharednotes', async (req, res) => {
 
 
 // PUT route to update a shared note's permissions
-router.put('/sharednotes/:id', async (req, res) => {
+router.put('/sharednotes/:id', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.update(req.body, {
       where: {
@@ -64,7 +65,7 @@ router.put('/sharednotes/:id', async (req, res) => {
 
 
 // DELETE route to remove a shared note relationship by ID
-router.delete('/sharednotes/:id', async (req, res) => {
+router.delete('/sharednotes/:id', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.destroy({
       where: {
