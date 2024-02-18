@@ -1,5 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(){ 
+            const searchQuery = searchInput.value.trim().toLowerCase();
+            fetchAndDisplayNotesWithSearch(searchQuery);
+            console.log
+        });
+
+    }
+    function fetchAndDisplayNotesWithSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        fetchAndDisplayNotesWithSearch(searchQuery);
+    }
+
+    //Event listener for filter dropdown
+    const filterDropdown = document.getElementById('filter-dropdown');
+    if (filterDropdown) {
+        filterDropdown.addEventListener('change', function(){
+            const filterOption = filterDropdown.value;
+            fetchAndDisplayNotesWithFilter(filterOption);
+    });
+}
+
     // Check token at start if user is logged in
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -12,11 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch and display notes when page loads
     fetchAndDisplayNotes();
 
+    // delete note using a button with ID 'delete-note-titles'
+    // then call function deleteNote(NoteId)
+
     // Add event listener for "New Note" button
     const newNoteButton = document.getElementById('new-note');
     if (newNoteButton) {
         newNoteButton.addEventListener('click', function() {
-            
+
             // Check again for token before creating a new note
             if (!sessionStorage.getItem('token')) {
                 alert('Your session has expired. Please log in again.');
@@ -52,7 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle request to load notes to dashboard
     function fetchAndDisplayNotes() {
-        // Send POST request to server using Fetch API
+
+        // Send GET request to server using Fetch API
         fetch('/api/notes', {
             method: 'GET',
             headers: {
@@ -70,20 +97,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Display up to six note titles
             notes.slice(0, 6).forEach(note => {
+                const noteContainer = document.createElement('div');
+                noteContainer.className = 'note-container';
+            
                 const titleElement = document.createElement('div');
                 titleElement.className = 'note-title';
                 titleElement.textContent = note.title;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-note-button';
+                deleteButton.onclick = () => deleteNote(note.id);
+
+                noteContainer.appendChild(titleElement);
+                noteContainer.appendChild(deleteButton);
                 
                 // Hover effect to display note content
                 titleElement.addEventListener('mouseenter', () => {
                     contentContainer.innerHTML = `<h3>${note.title}</h3><p>${note.content}</p>`;
                 });
 
+                // add tittle element to check if selected
                 titlesContainer.appendChild(titleElement);
+
+                // change to editor page when click on a note
+                titleElement.addEventListener('click', () => {
+                    // Navigate to editor page with note ID in query string
+                    window.location.href = `/editor?noteId=${note.id}`;
+                });
+
             });
         })
         .catch(error => console.error('Error fetching notes:', error));
     }
+
+function fetchAndDisplayNoteswithSearch(searchQuery = '') {
+const url = `/api/notes?search=${encodeURIComponent(searchQuery)}`;
+fetchAndDisplayNotes(url);
+if (searchQuery.trim() === '') {
+    return;
+}
+}
+
+function fetchAndDisplayNotesWithFilter(filterOption = '') {
+    const url = '/api/notes?filter=${filterOption}';
+    fetchAndDisplayNotes(url);
+
+}
 
     // function to handle expired token response
     function handleResponse(response) {
@@ -97,6 +157,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return Promise.reject('Session expired');
         }
         return response.json();
+    }
+
+    // function to handle note deletion
+    function deleteNote(noteId) {
+        if (!confirm("Are you sure you want to delete this note?")) {
+            return; // Stop if user cancels action
+        }
+    
+        // Send DELETE request to server using Fetch API
+        fetch(`/api/notes/${noteId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(handleResponse)
+        .then(() => {
+            alert('Note deleted successfully.');
+            // Refresh the notes displayed
+            fetchAndDisplayNotes();
+        })
+        .catch(error => console.error('Error deleting note:', error));
     }
 
 });

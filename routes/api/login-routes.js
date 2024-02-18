@@ -26,10 +26,11 @@ router.post('/login', async (req, res) => {
 
       // Include the token in the response
       res.json({ success: true, token: token, redirectUrl: '/dashboard' });
-      // res.json({ success: true, redirectUrl: '/dashboard' });
+      console.log(token) // print token to use in Postman calls
       
       // This will print token JWT_SECRET that user will have in .env 
       // console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
     } else {
       res.status(401).send('Invalid email or password');
     }

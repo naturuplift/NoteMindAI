@@ -4,10 +4,11 @@ const router = require('express').Router();
 const { SharedAudio, AudioFiles, Users } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
 // GET route to retrieve all shared audio
-router.get('/sharedaudio', async (req, res) => {
+router.get('/sharedaudio', authenticateToken, async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.findAll({
       include: [AudioFiles, Users] // Assuming you want to include related audio and user info
@@ -20,7 +21,7 @@ router.get('/sharedaudio', async (req, res) => {
 
 
 // GET route to find a single shared audio by its ID
-router.get('/sharedaudio/:id', async (req, res) => {
+router.get('/sharedaudio/:id', authenticateToken, async (req, res) => {
 try {
   const sharedAudioData = await SharedAudio.findByPk(req.params.id, {
     include: [AudioFiles, Users] // Include audio and user info
@@ -37,7 +38,7 @@ try {
 
 
 // POST route to create a new shared audio relationship
-router.post('/sharedaudio', async (req, res) => {
+router.post('/sharedaudio', authenticateToken, async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.create({
       audioId: req.body.audioId,
@@ -52,7 +53,7 @@ router.post('/sharedaudio', async (req, res) => {
 
 
 // PUT route to update shared audio's permission by ID
-router.put('/sharedaudio/:id', async (req, res) => {
+router.put('/sharedaudio/:id', authenticateToken, async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.update(req.body, {
       where: { id: req.params.id },
@@ -69,7 +70,7 @@ router.put('/sharedaudio/:id', async (req, res) => {
 
 
 // DELETE route to remove a shared audio relationship by ID
-router.delete('/sharedaudio/:id', async (req, res) => {
+router.delete('/sharedaudio/:id', authenticateToken, async (req, res) => {
   try {
     const sharedAudioData = await SharedAudio.destroy({
       where: { id: req.params.id },
