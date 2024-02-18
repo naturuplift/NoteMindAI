@@ -38,16 +38,41 @@ router.get('/notes', authenticateToken, async (req, res) => {
 
 // GET route to find a single note by its ID
 router.get('/notes/:id', authenticateToken, async (req, res) => {
-  try {
-    const noteData = await Notes.findByPk(req.params.id);
-    if (!noteData) {
-      res.status(404).json({ message: 'No note found with this id!' });
-      return;
-    }
-    res.render('note', { notes: noteData });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  // Extract note ID from URL parameters
+  const { id } = req.params;
+
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) {
+          // Forbidden if token is invalid
+          return res.sendStatus(403);
+      }
+
+      // Extract user ID from token
+      const user_Id = decoded.userId;
+
+      try {
+          // Fetch notes where user_id matches logged-in user's ID
+          const noteData = await Notes.findOne({
+              where: {
+                  id,
+                  user_Id
+              }
+          });
+
+          if (!noteData) {
+              // If no note found
+              return res.status(404).json({ message: 'No note found with this id' });
+          }
+
+          // return note data
+          res.json(noteData);
+      } catch (err) {
+          res.status(500).json(err);
+      }
+  });
 });
 
 

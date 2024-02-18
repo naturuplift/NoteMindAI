@@ -95,6 +95,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 titlesContainer.appendChild(titleElement);
+
+                // change to editor page when click on a note
+                titleElement.addEventListener('click', () => {
+                    // Navigate to editor page with note ID in query string
+                    window.location.href = `/editor?noteId=${note.id}`;
+                });
+
             });
         })
         .catch(error => console.error('Error fetching notes:', error));
