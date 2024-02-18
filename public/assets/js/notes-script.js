@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch and display notes when page loads
     fetchAndDisplayNotes();
 
+    // delete note using a button with ID 'delete-note-titles'
+    // then call function deleteNote(NoteId)
+
     // Add event listener for "New Note" button
     const newNoteButton = document.getElementById('new-note');
     if (newNoteButton) {
@@ -52,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle request to load notes to dashboard
     function fetchAndDisplayNotes() {
-        // Send POST request to server using Fetch API
+
+        // Send GET request to server using Fetch API
         fetch('/api/notes', {
             method: 'GET',
             headers: {
@@ -70,9 +74,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Display up to six note titles
             notes.slice(0, 6).forEach(note => {
+                const noteContainer = document.createElement('div');
+                noteContainer.className = 'note-container';
+            
                 const titleElement = document.createElement('div');
                 titleElement.className = 'note-title';
                 titleElement.textContent = note.title;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-note-button';
+                deleteButton.onclick = () => deleteNote(note.id);
+
+                noteContainer.appendChild(titleElement);
+                noteContainer.appendChild(deleteButton);
                 
                 // Hover effect to display note content
                 titleElement.addEventListener('mouseenter', () => {
@@ -97,6 +112,29 @@ document.addEventListener('DOMContentLoaded', function() {
             return Promise.reject('Session expired');
         }
         return response.json();
+    }
+
+    // function to handle note deletion
+    function deleteNote(noteId) {
+        if (!confirm("Are you sure you want to delete this note?")) {
+            return; // Stop if user cancels action
+        }
+    
+        // Send DELETE request to server using Fetch API
+        fetch(`/api/notes/${noteId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(handleResponse)
+        .then(() => {
+            alert('Note deleted successfully.');
+            // Refresh the notes displayed
+            fetchAndDisplayNotes();
+        })
+        .catch(error => console.error('Error deleting note:', error));
     }
 
 });
