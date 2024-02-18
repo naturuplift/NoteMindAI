@@ -4,10 +4,11 @@ const router = require('express').Router();
 const { Transcriptions } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
 // GET route to retrieve all transcriptions
-router.get('/transcriptions', async (req, res) => {
+router.get('/transcriptions', authenticateToken, async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.findAll();
     res.status(200).json(transcriptionData);
@@ -18,7 +19,7 @@ router.get('/transcriptions', async (req, res) => {
 
 
 // GET route to find a single transcription by its ID
-router.get('/transcriptions/:id', async (req, res) => {
+router.get('/transcriptions/:id', authenticateToken, async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.findByPk(req.params.id);
     if (!transcriptionData) {
@@ -33,7 +34,7 @@ router.get('/transcriptions/:id', async (req, res) => {
 
 
 // POST route to create a new transcription
-router.post('/transcriptions/', async (req, res) => {
+router.post('/transcriptions/', authenticateToken, async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.create(req.body);
     res.status(200).json(transcriptionData);
@@ -44,7 +45,7 @@ router.post('/transcriptions/', async (req, res) => {
 
 
 // PUT route to update a transcription's details by ID
-router.put('/transcriptions/:id', async (req, res) => {
+router.put('/transcriptions/:id', authenticateToken, async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.update(req.body, {
       where: { id: req.params.id },
@@ -61,7 +62,7 @@ router.put('/transcriptions/:id', async (req, res) => {
 
 
 // DELETE route to remove a transcription by ID
-router.delete('/transcriptions/:id', async (req, res) => {
+router.delete('/transcriptions/:id', authenticateToken, async (req, res) => {
   try {
     const transcriptionData = await Transcriptions.destroy({
       where: { id: req.params.id },

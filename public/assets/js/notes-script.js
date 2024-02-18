@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const newNoteButton = document.getElementById('new-note');
     if (newNoteButton) {
         newNoteButton.addEventListener('click', function() {
-            
+
             // Check again for token before creating a new note
             if (!sessionStorage.getItem('token')) {
                 alert('Your session has expired. Please log in again.');

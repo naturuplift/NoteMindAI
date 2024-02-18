@@ -4,9 +4,11 @@ const router = require('express').Router();
 const { AudioFiles } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
+
 
 // GET route to retrieve all audio files
-router.get('/audiofiles', async (req, res) => {
+router.get('/audiofiles', authenticateToken, async (req, res) => {
   try {
     const audioFileData = await AudioFiles.findAll();
     res.status(200).json(audioFileData);
@@ -17,7 +19,7 @@ router.get('/audiofiles', async (req, res) => {
 
 
 // GET route to find a single audio file by its ID
-router.get('/audiofiles/:id', async (req, res) => {
+router.get('/audiofiles/:id', authenticateToken, async (req, res) => {
   try {
     const audioFileData = await AudioFiles.findByPk(req.params.id);
     if (!audioFileData) {
@@ -32,7 +34,7 @@ router.get('/audiofiles/:id', async (req, res) => {
 
 
 // POST route to create a new audio file
-router.post('/audiofiles', async (req, res) => {
+router.post('/audiofiles', authenticateToken, async (req, res) => {
   try {
     const audioFileData = await AudioFiles.create(req.body);
     res.status(200).json(audioFileData);
@@ -43,7 +45,7 @@ router.post('/audiofiles', async (req, res) => {
 
 
 // PUT route to update an audio file's details by ID
-router.put('/audiofiles/:id', async (req, res) => {
+router.put('/audiofiles/:id', authenticateToken, async (req, res) => {
   try {
     const audioFileData = await AudioFiles.update(req.body, {
       where: { id: req.params.id },
@@ -60,7 +62,7 @@ router.put('/audiofiles/:id', async (req, res) => {
 
 
 // DELETE route to remove an audio file by ID
-router.delete('/audiofiles/:id', async (req, res) => {
+router.delete('/audiofiles/:id', authenticateToken, async (req, res) => {
   try {
     const audioFileData = await AudioFiles.destroy({
       where: { id: req.params.id },

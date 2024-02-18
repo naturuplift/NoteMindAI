@@ -4,18 +4,35 @@ const router = require('express').Router();
 const { Notes } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
 
 
-// GET route to retrieve all Notes
+// GET route to retrieve all Notes for logged-in user
 router.get('/notes', authenticateToken, async (req, res) => {
-  try {
-    const noteData = await Notes.findAll({
-      order: [['createdAt', 'DESC']]
-    });
-    res.json(noteData); // Send JSON data
-  } catch (err) {
-    res.status(500).json(err);
-  }
+
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) {
+        // Forbidden if token is invalid
+        return res.sendStatus(403);
+      }
+      // Extract user ID from token
+      const user_Id = decoded.userId;
+      try {
+          // Fetch notes where user_id matches logged-in user's ID
+          const noteData = await Notes.findAll({
+              where: {
+                  userId: user_Id // Filter by user ID
+              },
+              order: [['createdAt', 'DESC']]
+          });
+          res.json(noteData);
+      } catch (err) {
+          res.status(500).json(err);
+      }
+  });
 });
 
 
@@ -36,10 +53,27 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
 // POST route to create a new note
 router.post('/notes', authenticateToken, async (req, res) => {
+
+  // Extract user_id from JWT token
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  let userId;
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+          return res.sendStatus(403); // Return forbidden if token is invalid
+      }
+      userId = decoded.userId; // Assuming your JWT token stores user ID as 'userId'
+  });
+
   try {
     const noteData = await Notes.create({
-      title: req.body.title, // Ensure your model supports these fields
-      content: req.body.content
+      title: req.body.title,
+      content: req.body.content,
+      // set userId extracted from token
+      userId: userId,
+      // Default category ID
+      categoryId: 1
     });
     res.json(noteData); // Return the created note as JSON
   } catch (err) {
