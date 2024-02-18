@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta author="Karen Bourgeois, Arnoldo Sepulveda, Ikechukwu Mbanugo">
+    <meta author="Karen Bourgeois, Arnaldo Sepulveda, Ikechukwu Mbanugo">
     <meta keywords="notetaking, note-taking, HTML, CSS, JavaScript, OpenAI, Node.js, Handlebars, UNB Bootcamp, GitHub, Git Bash, npm, Sequalize, MySQL, express, Quill, VSCode, MVC, Express.js, AJAX, Render, Heroku, Socket.io, Postman, Insomnia">
     <title>Note-Taking Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,21 +32,29 @@
     </div>
 
     
-
+    
     <div class="notes-box">
         
         
         <div id="save-notes-box">
             <h2 class="saved-title">Saved Notes</h2>
+
+            
+            <div class="notes-layout">
+                <div id="note-titles" class="note-titles"></div>
+                <div id="note-content" class="note-content"></div>
+            </div>
+
         </div>
     </div>
     <footer class="Dashboard-footer">
-        <h6>&copy;2024 Karen Bourgeois, Arnoldo Sepulveda, Ikechukwu Mbanugo | Photo by <a href="https://unsplash.com/@laikanotebooks?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Laika Notebooks</a> on <a href="https://unsplash.com/photos/yellow-and-gray-softbound-book-near-brown-clip-board-pONH9yZ-wXg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> | Photo by <a href="https://unsplash.com/@aaronburden?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Aaron Burden</a> on <a href="https://unsplash.com/photos/write-ideas-book-on-brown-wooden-board-AXqMy8MSSdk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        <h6>&copy;2024 Karen Bourgeois, Arnaldo Sepulveda, Ikechukwu Mbanugo | Photo by <a href="https://unsplash.com/@laikanotebooks?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Laika Notebooks</a> on <a href="https://unsplash.com/photos/yellow-and-gray-softbound-book-near-brown-clip-board-pONH9yZ-wXg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> | Photo by <a href="https://unsplash.com/@aaronburden?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Aaron Burden</a> on <a href="https://unsplash.com/photos/write-ideas-book-on-brown-wooden-board-AXqMy8MSSdk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
         </h6>
     </footer>
 
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/notes-script.js"></script>
 
 </body>
 

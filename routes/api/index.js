@@ -12,25 +12,22 @@ const audioFileRoutes = require('./audio-files-routes');
 const sharedAudioRoutes = require('./shared-audio-routes');
 const transcriptionRoutes = require('./transcriptions-routes');
 const loginRoutes = require('./login-routes');
+const logoutRoutes = require('./logout-routes');
 const signupRoutes = require('./signup-routes');
 
-
 // Register routes to be served under own paths
-router.use('/users', userRoutes);
-router.use('/categories', categoryRoutes);
-router.use('/notes', noteRoutes);
-router.use('/sharednotes', sharedNoteRoutes);
-router.use('/actionableitems', actionableItemsRoutes);
-router.use('/summaries', summaryRoutes);
-router.use('/audiofiles', audioFileRoutes);
-router.use('/sharedaudio', sharedAudioRoutes);
-router.use('/transcriptions', transcriptionRoutes);
-router.use('/login', loginRoutes);
-router.use('/signup', signupRoutes);
-
-
-// TODO: comment when done troubleshooting
-// console.log("********************  Hit ./routes/api/index.js   ********************");
+router.use('/', userRoutes);
+router.use('/', categoryRoutes);
+router.use('/', noteRoutes);
+router.use('/', sharedNoteRoutes);
+router.use('/', actionableItemsRoutes);
+router.use('/', summaryRoutes);
+router.use('/', audioFileRoutes);
+router.use('/', sharedAudioRoutes);
+router.use('/', transcriptionRoutes);
+router.use('/', loginRoutes);
+router.use('/', logoutRoutes);
+router.use('/', signupRoutes);
 
 // Export the configured router to be used by the main application
 module.exports = router;

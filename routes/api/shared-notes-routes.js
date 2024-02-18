@@ -2,9 +2,13 @@
 const router = require('express').Router();
 // Import SharedNotes model from the models directory
 const { SharedNotes } = require('../../models');
+// Import Authentication Middleware
+const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
+
 
 // GET route to retrieve all shared notes
-router.get('/', async (req, res) => {
+router.get('/sharednotes', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.findAll({
       // Optionally, include related models here, like the Note and User models
@@ -16,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET route to find a single shared note by its ID (or by noteId and userId combination)
-router.get('/:id', async (req, res) => {
+router.get('/sharednotes/:id', authenticateToken, async (req, res) => {
     try {
       const sharedNoteData = await SharedNotes.findByPk(req.params.id);
       if (!sharedNoteData) {
@@ -29,8 +33,9 @@ router.get('/:id', async (req, res) => {
     }
   });  
 
+
 // POST route to create a new shared note relationship
-router.post('/', async (req, res) => {
+router.post('/sharednotes', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.create(req.body);
     res.status(200).json(sharedNoteData);
@@ -39,8 +44,9 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 // PUT route to update a shared note's permissions
-router.put('/:id', async (req, res) => {
+router.put('/sharednotes/:id', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.update(req.body, {
       where: {
@@ -57,8 +63,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
 // DELETE route to remove a shared note relationship by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/sharednotes/:id', authenticateToken, async (req, res) => {
   try {
     const sharedNoteData = await SharedNotes.destroy({
       where: {
@@ -75,4 +82,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export the router to make these routes available
 module.exports = router;

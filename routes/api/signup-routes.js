@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const { Users } = require('../../models');
 require('dotenv').config();
 
-// Signup route
-router.post('/', async (req, res) => {
+// Sign-up route
+router.post('/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -15,23 +15,26 @@ router.post('/', async (req, res) => {
     if (existingUser) {
       return res.status(400).send('User already exists with this email.');
     }
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+  
     // Create a new user
     const newUser = await Users.create({
       username,
       email,
-      password: hashedPassword,
+      password,
     });
 
     // TODO: could send a verification email using Nodemailer
 
+    // res.render('index');
+    res.status(201).json({ message: "User created successfully" });
     // return the new user's data, no password
-    res.status(201).json({ message: "User created successfully", userId: newUser.id });
+    // res.status(201).json({ message: "User created successfully", userId: newUser.id });
+
   } catch (error) {
     console.error('Error during user signup:', error);
     res.status(500).send('Internal server error during signup.');
   }
 });
 
+// Export the router to make these routes available
 module.exports = router;

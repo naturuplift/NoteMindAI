@@ -2,9 +2,13 @@
 const router = require('express').Router();
 // Import Categories model from the models directory
 const { Categories } = require('../../models');
+// Import Authentication Middleware
+const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
+
 
 // GET route to retrieve all categories
-router.get('/', async (req, res) => {
+router.get('/categories', authenticateToken, async (req, res) => {
   try {
     const categoryData = await Categories.findAll();
     res.status(200).json(categoryData);
@@ -13,8 +17,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // GET route to find a single category by its ID
-router.get('/:id', async (req, res) => {
+router.get('/categories/:id', authenticateToken, async (req, res) => {
   try {
     const categoryData = await Categories.findByPk(req.params.id);
     if (!categoryData) {
@@ -27,8 +32,9 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
 // POST route to create a new category
-router.post('/', async (req, res) => {
+router.post('/categories', authenticateToken, async (req, res) => {
   try {
     const categoryData = await Categories.create(req.body);
     res.status(200).json(categoryData);
@@ -37,8 +43,9 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 // PUT route to update a category's details by ID
-router.put('/:id', async (req, res) => {
+router.put('/categories/:id', authenticateToken, async (req, res) => {
   try {
     const categoryData = await Categories.update(req.body, {
       where: {
@@ -55,8 +62,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
 // DELETE route to remove a category by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/categories/:id', authenticateToken, async (req, res) => {
   try {
     const categoryData = await Categories.destroy({
       where: {
@@ -73,4 +81,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export the router to make these routes available
 module.exports = router;

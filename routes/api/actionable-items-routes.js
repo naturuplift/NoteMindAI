@@ -2,9 +2,13 @@
 const router = require('express').Router();
 // Import ActionableItems model from the models directory
 const { ActionableItems } = require('../../models');
+// Import Authentication Middleware
+const authenticateToken = require('../../middleware/authMiddleware');
+const jwt = require('jsonwebtoken');
+
 
 // GET route to retrieve all actionable items
-router.get('/', async (req, res) => {
+router.get('/actionableitems', authenticateToken, async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.findAll();
     res.status(200).json(actionableItemData);
@@ -13,8 +17,9 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // GET route to find a single actionable item by its ID
-router.get('/:id', async (req, res) => {
+router.get('/actionableitems/:id', authenticateToken, async (req, res) => {
     try {
       const actionableItemData = await ActionableItems.findByPk(req.params.id);
       if (!actionableItemData) {
@@ -27,8 +32,9 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+
 // POST route to create a new actionable item
-router.post('/', async (req, res) => {
+router.post('/actionableitems', authenticateToken, async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.create(req.body);
     res.status(200).json(actionableItemData);
@@ -37,8 +43,9 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 // PUT route to update an actionable item's details by ID
-router.put('/:id', async (req, res) => {
+router.put('/actionableitems/:id', authenticateToken, async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.update(req.body, {
       where: { id: req.params.id },
@@ -53,8 +60,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
 // DELETE route to remove an actionable item by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/actionableitems/:id', authenticateToken, async (req, res) => {
   try {
     const actionableItemData = await ActionableItems.destroy({
       where: { id: req.params.id },
@@ -69,4 +77,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Export the router to make these routes available
 module.exports = router;
