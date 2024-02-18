@@ -133,11 +133,13 @@ body {
 
 .notes-box {
     position:absolute;
-	top:30%;
-    left: 35%;
+	top:50%;
+	left:45%;
 	-webkit-transform:translate(-50%,-50%);
 	        transform:translate(-50%,-50%);
 	text-align:center;
+    display: flex;
+    gap: 5rem;
 }
 
 .header-dashboard {
@@ -160,14 +162,20 @@ body {
 #save-notes-box {
     background-color: rgba(211,211,211, 0.2);
     height: auto;
-    width: 200px;
-    justify-content: center;
+    width: 500px;
+    
 }
 
 .saved-title {
     text-decoration: underline;
     text-align:center;
     font-size: 25px;
+}
+
+#preview-box {
+    background-color: rgba(211,211,211, 0.2);
+    height: auto;
+    width: 500px;
 }
 
 .preview-title {
@@ -179,12 +187,6 @@ body {
 .Dashboard-footer {
     font-size: 15px;
     text-align: center;
-}
-
-#save-notes-box {
-    border: 2px solid antiquewhite;
-    background-color: rgba(211,211,211, 0.2);
-    margin-bottom: 15px;
 }
 
 /*Editor*/
