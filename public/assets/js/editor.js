@@ -1,79 +1,74 @@
-//Landing Page
+document.addEventListener('DOMContentLoaded', function() {
 
-//const { default: Quill } = require("quill");
+    // Check token at start if user is logged in
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+        // No token found, redirect to login page
+        window.location.href = '/';
+        // Stop executing script
+        return;
+    }
 
-// The sign-up button on the landing page
-var button1 = document.getElementById('sign-up-button');
+    // Handle click on logout button
+    const logoutButton = document.getElementById('log-out');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            fetch('/api/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include the token in the request if needed for server-side validation
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                // Remove token from sessionStorage
+                sessionStorage.removeItem('token');
+                // Redirect to home page
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('Logout Error:', error);
+            });
+        });
+    }
 
-//The clear button on the landing page
-var button2 = document.getElementById('rest-button')
-var inputElements = document.getElementById('form-landing-page');
+    const urlParams = new URLSearchParams(window.location.search);
+    const noteId = urlParams.get('noteId');
 
-//The submit button on the landing page
-var button3 = document.getElementById('sign-in-button');
+    if (noteId) {
+        fetch(`/api/notes/${noteId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(handleResponse)
+        .then(note => {
+            // Assuming the note's content is in `note.content`
+            quill.setContents(quill.clipboard.convert(note.content));
+        })
+        .catch(error => {
+            console.error('Error fetching note:', error);
+            alert('Failed to load note.');
+        });
+    }
 
+    // function to handle expired token response
+    function handleResponse(response) {
+        if (!response.ok && response.status === 401) {
+            // Token expired or unauthorized
+            alert('Session expired. Please login again.');
+            // Clear the expired token
+            sessionStorage.removeItem('token');
+            // Redirect to login page
+            window.location.href = '/';
+            return Promise.reject('Session expired');
+        }
+        return response.json();
+    }
 
-button1.addEventListener('click', function() {
-    inputElements.value = '';
-    window.location.href = 'sign-up.html';
-    
 });
-
-// Loop through the input elements and clear each one
-button2.addEventListener('click', function() {
-for (let i = 0; i < inputElements.length; i++) {
-    inputElements[i].value = "";
-    };
-});
-
-
-//Sign-up Page
-
-var form = document.getElementById('sign-up-form');
-var button4 = document.getElementById('sign-up-page-btn');
-var button5 = document.getElementById('submit-button');
-
-
-
-button4.addEventListener('click', function() {
-    for (let i = 0; i < inputElements.length; i++) {
-        inputElements[i].value = "";
-        };
-    });
-
-
-
-// Editor Page
-
-var saveBtn = document.getElementsById('save-note');
-var newNote = document.getElementsById('new-note');
-var clearBtn = document.getElementById('clear-btn');
-var emptyForm = document.getElementById('writing-form');
-var logout = document.getElementById('log-out');
-
-clearBtn.addEventListener('click', function () {
-    for (let i = 0; i < emptyForm.length; i++) {
-        emptyForm[i].value = "";
-        };
-    });
-
-logout.addEventListener('click', function () {
-    sessionStorage.clear(username, password);
-    window.location.href = '../Public/index.html';
-});
-
-
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var quill = new Quill('#editor', {
-    //         theme: 'snow'
-    //     });
-
-    //     document.getElementById('save-button').addEventListener(click, function() {
-    //         var editorContent = quill.root.innerHTML;
-    //         console.log('saving text',editorContent);
-    //     });
-    //     document.getElementById('delete-button').addEventListener(click, function() {
-           
-    //         console.log('deleting text',editorContent);
-    //     });
-    // });

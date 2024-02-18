@@ -21,6 +21,9 @@ router.use('/signup', (req, res) => {
 router.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
+router.get('/editor', (req, res) => {
+  res.render('editor');
+});
 router.get('/notes/new', (req, res) => {
   res.render('newNote');
 });
