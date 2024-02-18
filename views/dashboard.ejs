@@ -24,6 +24,16 @@
         <span>New Note</span>
     </button>
 
+    <input type="text" id="searchInput" placeholder="Search notes">
+    <button onclick="fetchAndDisplayNoteswithSearch()">Search</button>
+    <select id="filter-dropdown">
+        <option value="Filter">Filter</option>
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
+        <option value="createdAt">Created At</option>
+        <option value="updatedAt">Updated At</option>
+      </select>
+
     <header class="header-dashboard">
         
     </header>
