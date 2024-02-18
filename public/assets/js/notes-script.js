@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     contentContainer.innerHTML = `<h3>${note.title}</h3><p>${note.content}</p>`;
                 });
 
+                // add tittle element to check if selected
                 titlesContainer.appendChild(titleElement);
 
                 // change to editor page when click on a note

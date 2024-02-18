@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Server-side logout route
 router.post('/logout', (req, res) => {
-    // Remove the session
+    // session is destroyed for current user who made logout request
     req.session.destroy(err => {
         if (err) {
         console.error('Session destruction error:', err);
