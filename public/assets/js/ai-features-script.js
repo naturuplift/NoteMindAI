@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Default data for a new note
             const newNoteData = {
                 title: 'New Note Title',
-                content: 'New note content...',
+                // format content to remove html tags
+                content: stripHtml('New note content...'),
                 categoryId: 1
             };
             
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // returns the newly created note's ID
                 const noteId = data.id;
                 const newNoteAIFeatures = {
-                    summary: 'New content ...',
+                    summary: stripHtml('New content...'),
                     noteId: noteId
                 };
 
@@ -69,6 +70,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // function to remove HTML tags 
+    function stripHtml(html) {
+        // Create a new div element
+        var temporalDivElement = document.createElement("div");
+        // Set the HTML content with the provided
+        temporalDivElement.innerHTML = html;
+        // Retrieve the text property of the element (cross-browser support)
+        return temporalDivElement.textContent || temporalDivElement.innerText || "";
+    }
+
+    // function to handle response
     function handleResponse(response) {
         if (!response.ok) {
             throw new Error('Network response was not ok.');

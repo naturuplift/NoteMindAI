@@ -41,7 +41,17 @@ router.get('/notes', authenticateToken, async (req, res) => {
         // Add order condition if 'filter' query parameter is provided
         order: filter ? [['createdAt', filter]] : undefined
       });
-      res.json(noteData);
+
+      // Function to strip HTML tags
+      const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+      // Apply stripHtml to each note's content
+      const strippedNoteData = noteData.map(note => ({
+          ...note.toJSON(),
+          content: stripHtml(note.content),
+      }));
+
+      res.json(strippedNoteData);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -81,6 +91,12 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
               // If no note found
               return res.status(404).json({ message: 'No note found with this id' });
           }
+
+          // Function to strip HTML tags
+          const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+          // Strip HTML from note content before sending the response
+          noteData.content = stripHtml(noteData.content);
 
           // return note data
           res.json(noteData);

@@ -13,48 +13,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('log-out');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            // save the note by getting note content
-            const editedTitle = document.getElementById('editable-note-title').innerText;
-            // Get HTML content from Quill editor
-            const noteContent = quill.root.innerHTML;
-            // Get HTML content from Quill AI-Features editor
-            const aiFeaturesContent = quillAIFeatures.root.innerHTML;
-    
-            // Use noteId from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const noteId = urlParams.get('noteId');
-            
-            //call function to save note before logout
-            saveNoteAndAIFeatures(noteId, editedTitle, noteContent, aiFeaturesContent)
-            .then(() => {
-                displayStatusMessage('Note saved successfully. Logging out...', true);
-    
-                // Proceed with logout after a short delay
-                setTimeout(() => {
-                    fetch('/api/logout', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data.message);
-                        // Remove token from sessionStorage
-                        sessionStorage.removeItem('token');
-                        // Redirect to home page
-                        window.location.href = '/';
-                    })
-                    .catch(error => {
-                        console.error('Logout Error:', error);
-                    });
-                }, 1000); // allow to read status message
-            })
-            .catch(error => {
-                console.error('Error saving note during logout:', error);
-                alert('Failed to save note before logging out.');
-            });
+
+            // Proceed with logout after a short delay
+            setTimeout(() => {
+                fetch('/api/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    displayStatusMessage('Logging out...', true);
+                    // Remove token from sessionStorage
+                    sessionStorage.removeItem('token');
+                    // Redirect to home page
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error('Logout Error:', error);
+                });
+            }, 300); // allow to read status message
         });
     }
 
@@ -273,25 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dashboard button
     const dashboardButton = document.getElementById('dashboard-btn');
     dashboardButton.addEventListener('click', function() {
-        const urlParamsDash = new URLSearchParams(window.location.search);
-        const noteIdDash = urlParamsDash.get('noteId');
-        // Get edited title from content editable element
-        const editedTitle = document.getElementById('editable-note-title').innerText;
-        // Get HTML content from Quill editor
-        const noteContentDash = quill.root.innerHTML;
-        // Get HTML content from Quill ai-features-editor
-        const aiFeaturesContentDash = quillAIFeatures.root.innerHTML;
-        // function to save note title and content, save ai feature content
-        saveNoteAndAIFeatures(noteIdDash, editedTitle, noteContentDash, aiFeaturesContentDash).then(() => {
-            displayStatusMessage('Saving Note and navigating to dashboard...', true);
-            setTimeout(() => {
-                // Redirect after displaying message
-                window.location.href = '/dashboard';
-            }, 500); // Adjust time
-        }).catch(() => {
-            // Even if saving fails, redirect to dashboard
-            window.location.href = '/dashboard';
-        });
+        window.location.href = '/dashboard';
     });
 
     // Function to display status messages
