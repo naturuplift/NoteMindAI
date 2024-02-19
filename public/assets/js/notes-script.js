@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Default data for a new note
         const newNoteData = {
             title: 'New Note Title',
-            content: 'New note content...',
+            // format content to remove html tags
+            content: stripHtml('<p>New note content...</p>'),
             categoryId: 1
         };
         
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // returns the newly created note's ID
             const noteId = data.id;
             const newNoteAIFeatures = {
-                summary: 'New content ...',
+                summary: stripHtml('<p>New content...</p>'),
                 noteId: noteId
             };
 
@@ -132,6 +133,16 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error creating new note or AI features:', error);
         });
+    }
+
+    // function to remove HTML tags 
+    function stripHtml(html) {
+        // Create a new div element
+        var temporalDivElement = document.createElement("div");
+        // Set the HTML content with the provided
+        temporalDivElement.innerHTML = html;
+        // Retrieve the text property of the element (cross-browser support)
+        return temporalDivElement.textContent || temporalDivElement.innerText || "";
     }
 
     // function to display notes to user
