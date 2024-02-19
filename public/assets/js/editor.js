@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-
     // Handle click on logout button
     const logoutButton = document.getElementById('log-out');
     if (logoutButton) {
@@ -36,11 +35,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-    // function to add content of note to Quill editor
+    // function to add content of note and ai feature to Quill editor
     const urlParams = new URLSearchParams(window.location.search);
     const noteId = urlParams.get('noteId');
+    console.log(noteId)
+    let currentNoteCategoryId = '';
+    // const quill = new Quill('#editor', {theme: 'snow'});
+    // const quillAIFeatures = new Quill('#ai-features-editor', {theme: 'snow'});
     if (noteId) {
+        // Fetch and display note
+        fetchNoteContent(noteId);
+        // Fetch and display ai features
+        fetchAIFeaturesForNote(noteId);
+    }
+
+    // Fetch the note's content
+    function fetchNoteContent(noteId) {
         fetch(`/api/notes/${noteId}`, {
             method: 'GET',
             headers: {
@@ -50,26 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(handleResponse)
         .then(async note => {
-            // Assuming the note's content is in `note.content`
+             // Set the note's content in the main Quill editor
             quill.setContents(quill.clipboard.convert(note.content));
-
             // Update the note title
             const noteTitleElement = document.querySelector('.note-title-editor');
             if (note.title && noteTitleElement) {
                 // Set the note's title to display in editor
                 noteTitleElement.textContent = note.title;
             }
-
-            // Display the note's category at the end of the content, in a new line
-            // if (note.categoryId) {
-            //     const categoryName = await fetchCategoryName(note.categoryId);
-            //     console.log(categoryName)
-            //     const categoryLine = `\nCategory: ${categoryName}`;
-            //     // Append category line to content
-            //     let delta = quill.clipboard.convert(categoryLine);
-            //     // update note in editor
-            //     quill.updateContents(delta, 'silent');
-            // }
         })
         .catch(error => {
             console.error('Error fetching note:', error);
@@ -77,10 +75,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-    // Function to fetch category name by ID
-    function fetchCategoryName(categoryId) {
-        return fetch(`/api/categories/${categoryId}`, {
+    // Function to fetch and display summary
+    function fetchAIFeaturesForNote(noteId) {
+        // Fetch the summary's content
+        fetch(`/api/summaries/${noteId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,50 +87,155 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Failed to fetch category');
+                throw new Error('Failed to fetch summary');
             }
             return response.json();
         })
-        .then(categoryData => categoryData.name)
-        .catch(error => console.error('Error fetching category:', error));
+        .then(summaryData => {
+            if (summaryData && summaryData.summary) {
+                quillAIFeatures.setContents(quillAIFeatures.clipboard.convert(summaryData.summary));
+            }
+        })
+        .catch(error => console.error('Error fetching summary:', error));
     }
 
+    // get category button elements
+    const showCategoriesBtn = document.getElementById('show-categories');
+    const categoryButtonsContainer = document.getElementById('category-buttons');
+    // when 'show categories' button is pressed
+    showCategoriesBtn.addEventListener('click', function() {
+        // Fetch categories
+        fetchCategoriesAndDisplayButtons();
+        // Set timeout to hide categories after 5 seconds
+        setTimeout(() => {
+            categoryButtonsContainer.style.display = 'none';
+        }, 5000);
+    });
 
-    // Function to save note
-    function saveNote() {
-        return new Promise((resolve, reject) => {
-            // Get HTML content from Quill editor
-            const noteContent = quill.root.innerHTML;
-            if (noteContent && noteId) {
-                fetch(`/api/notes/${noteId}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-                    },
-                    // save note contents
-                    body: JSON.stringify({ content: noteContent })
-                })
-                .then(handleResponse)
-                .then(updatedNote => {
-                    console.log('Note updated successfully', updatedNote);
-                    resolve();
-                })
-                .catch(error => {
-                    console.error('Error saving note:', error);
-                    reject();
-                });
-            } else {
-                resolve();
+    // Function to fetch categories for note
+    function fetchCategoriesAndDisplayButtons() {
+        fetch('/api/categories', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
             }
+        })
+        .then(response => response.json())
+        .then(async categories => {
+            categoryButtonsContainer.innerHTML = ''; // Clear previous buttons
+            categories.forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-outline-primary btn-sm category-btn';
+                btn.textContent = category.name;
+
+                if(category.name === currentNoteCategoryId) {
+                    // Add class for styling
+                    btn.classList.add('current-category');
+                    // directly apply style
+                    btn.style.backgroundColor = '#4CAF50';
+                }
+                // Set onclick event
+                btn.onclick = function() {
+                    // Handle category selection here
+                    console.log(`Category ${category.name} selected`);
+                    // Save the category ID
+                    updateNoteCategory(noteId, category.id);
+                    currentNoteCategoryId = category.name;
+                };
+                categoryButtonsContainer.appendChild(btn);
+            });
+            categoryButtonsContainer.style.display = 'flex'; // Show the buttons
+        })
+        .catch(error => console.error('Error fetching categories:', error));
+    }
+
+    // Function to update note's category
+    function updateNoteCategory(noteId, categoryId) {
+        console.log(noteId, categoryId)
+        fetch(`/api/notes/${noteId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ categoryId: categoryId })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update note category');
+            }
+            return response.json();
+        })
+        .then(updatedNote => {
+            console.log('Note category updated successfully', updatedNote);
+        })
+        .catch(error => {
+            console.error('Error updating note category:', error);
         });
     }
 
+    // function to clear note content
+    const clearBtn = document.getElementById('clear-btn');
+    clearBtn.addEventListener('click', function() {
+        // Clears content of main Quill editor
+        quill.setContents([]);
+    });
+
+    // Function to save note and ai features
+    function saveNoteAndAIFeatures(noteId, noteTitle, noteContent, aiFeaturesContent) {
+        // save note title fetch request
+        const saveNoteTitlePromise = fetch(`/api/notes/${noteId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ title: noteTitle })
+        }).then(handleResponse);
+        // save note content fetch request
+        const saveNoteContentPromise = fetch(`/api/notes/${noteId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content: noteContent })
+        }).then(handleResponse);
+        // save ai features fetch request
+        const saveAIFeaturesPromise = fetch(`/api/summaries/${noteId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ summary: aiFeaturesContent })
+        }).then(handleResponse);
+        // promise to save editors
+        return Promise.all([saveNoteTitlePromise, saveNoteContentPromise, saveAIFeaturesPromise])
+            .then(results => {
+                console.log('Note and AI features updated successfully');
+            })
+            .catch(error => {
+                console.error('Error saving note or AI features:', error);
+                throw error; // Re-throw error to be caught by the caller
+            });
+    }
 
     // Save Note button event listener
     const saveNoteButton = document.getElementById('save-note');
     saveNoteButton.addEventListener('click', function() {
-        saveNote().then(() => {
+        const urlParamsSave = new URLSearchParams(window.location.search);
+        const noteIdSave = urlParamsSave.get('noteId');
+        // Get edited title from content editable element
+        const editedTitle = document.getElementById('editable-note-title').innerText;
+        // Get HTML content from Quill editor
+        const noteContentSave = quill.root.innerHTML;
+        // Get HTML content from Quill ai-features-editor
+        const aiFeaturesContentSave = quillAIFeatures.root.innerHTML;
+        console.log(noteIdSave, editedTitle, noteContentSave, aiFeaturesContentSave)
+        // function to save note title and content, save ai feature content
+        saveNoteAndAIFeatures(noteIdSave, editedTitle, noteContentSave, aiFeaturesContentSave).then(() => {
             displayStatusMessage('Note saved successfully.', true);
             setTimeout(() => {
                 // Redirect after displaying message
@@ -143,6 +246,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Dashboard button
+    const dashboardButton = document.getElementById('dashboard-btn');
+    dashboardButton.addEventListener('click', function() {
+        const urlParamsDash = new URLSearchParams(window.location.search);
+        const noteIdDash = urlParamsDash.get('noteId');
+        // Get edited title from content editable element
+        const editedTitle = document.getElementById('editable-note-title').innerText;
+        // Get HTML content from Quill editor
+        const noteContentDash = quill.root.innerHTML;
+        // Get HTML content from Quill ai-features-editor
+        const aiFeaturesContentDash = quillAIFeatures.root.innerHTML;
+        // function to save note title and content, save ai feature content
+        saveNoteAndAIFeatures(noteIdDash, editedTitle, noteContentDash, aiFeaturesContentDash).then(() => {
+            displayStatusMessage('Saving Note and navigating to dashboard...', true);
+            setTimeout(() => {
+                // Redirect after displaying message
+                window.location.href = '/dashboard';
+            }, 500); // Adjust time
+        }).catch(() => {
+            // Even if saving fails, redirect to dashboard
+            window.location.href = '/dashboard';
+        });
+    });
 
     // Function to display status messages
     function displayStatusMessage(message, isSuccess) {
@@ -158,23 +284,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000); // Adjust time message is displayed
     }
 
-
-    // Dashboard button
-    const dashboardButton = document.getElementById('dashboard-btn');
-    dashboardButton.addEventListener('click', function() {
-        saveNote().then(() => {
-            displayStatusMessage('Saving Note and navigating to dashboard...', true);
-            setTimeout(() => {
-                // Redirect after displaying message
-                window.location.href = '/dashboard';
-            }, 500); // Adjust time
-        }).catch(() => {
-            // Even if saving fails, redirect to dashboard
-            window.location.href = '/dashboard';
-        });
-    });
-
-
     // function to handle expired token response
     function handleResponse(response) {
         if (!response.ok && response.status === 401) {
@@ -188,5 +297,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return response.json();
     }
-
 });

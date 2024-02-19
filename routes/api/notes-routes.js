@@ -80,7 +80,7 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
 // POST route to create a new note
 router.post('/notes', authenticateToken, async (req, res) => {
-
+  
   // Extract user_id from JWT token
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -88,9 +88,10 @@ router.post('/notes', authenticateToken, async (req, res) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-          return res.sendStatus(403); // Return forbidden if token is invalid
+        // Return forbidden if token is invalid
+        return res.sendStatus(403);
       }
-      userId = decoded.userId; // Assuming your JWT token stores user ID as 'userId'
+      userId = decoded.userId;
   });
 
   try {
