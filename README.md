@@ -44,7 +44,7 @@
 ## Description
 SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
 
-Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda
+Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda, https://www.joshwcomeau.com/css/custom-css-reset/
 
 ## Features
 - **User Authentication:** Secure signup, login, and profile management.
@@ -56,8 +56,8 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 - **Search and Filter:** Easily find notes with robust search and filter capabilities.
 
 ## Technologies Used
-- **Backend:** Node.js, Express.js
-- **Frontend:** Handlebars.js, AJAX for smooth interactions
+- **Backend:** Node.js, Express.js, EJS
+- **Frontend:** AJAX for smooth interactions
 - **Database:** MySQL, Sequelize ORM
 - **Authentication:** express-session, cookies
 - **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
