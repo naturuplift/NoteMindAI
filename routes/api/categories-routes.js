@@ -17,6 +17,7 @@ router.get('/categories', authenticateToken, async (req, res) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    
     if (err) {
       // Forbidden if token is invalid
       return res.sendStatus(403);

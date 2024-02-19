@@ -31,7 +31,7 @@
     </button>
     <button type="button" class="btn btn-sm btn-outline-danger clear-btn" id="clear-btn">
       <span class="fas fa-times"></span>
-      <span>Clear Form</span>
+      <span>Clear Note</span>
     </button>
     <button type="button" class="btn btn-sm btn-outline-danger dashboard-btn" id="dashboard-btn">
       <span class="fas fa-times"></span>
@@ -41,17 +41,43 @@
       <span class="fas fa-save"></span>
       <span>Log-out</span>
     </button>
+    <button type="button" class="btn btn-outline-light btn-sm" id="show-categories">
+      <span>Show Categories</span>
+    </button>
   </div><br>
+
+  <div id="category-buttons" style="display: none; margin-top: 10px;">
+    <!-- Category buttons will be appended here -->
+  </div>
 
   <div id="status-message" style="display: none;"></div>
 
   <div id="note-title">
-    <h2 class="note-title-editor">Note Title</h2>
-  </div>
+    <!-- Make the title editable by adding contenteditable attribute -->
+    <h2 class="note-title-editor" contenteditable="true" id="editable-note-title">Note Title</h2>
+</div>
 
     <!-- Create the editor container -->
     <div id="editor">
       <p id="writing-form"></p>
+    </div>
+
+    <div id="note-title">
+      <h2 class="note-title-editor">AI Features</h2>
+      <div class="ai-features-buttons">
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 1</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 2</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 3</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 4</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 5</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Feature 6</button>
+        <button type="button" class="btn btn-primary ai-feature-btn" id="clear-ai-features-btn">Clear</button>
+    </div>
+    </div>
+
+    <!-- New editor container for AI-Features -->
+    <div id="ai-features-editor">
+      <p id="ai-features-form"></p>
     </div>
 
     <!-- Include the Quill library -->
@@ -62,9 +88,15 @@
       var quill = new Quill('#editor', {
         theme: 'snow',
       });
+
+      // Initialize second Quill editor for AI Features
+      var quillAIFeatures = new Quill('#ai-features-editor', {
+        theme: 'snow',
+      });
     </script>
 
     <script src="/assets/js/editor.js"></script>
+    <script src="/assets/js/ai-features-script.js"></script>
 </body>
 
 </html>
