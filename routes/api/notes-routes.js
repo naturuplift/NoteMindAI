@@ -5,34 +5,54 @@ const { Notes } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
 const jwt = require('jsonwebtoken');
+// import Sequelize Op
+const { Op } = require('sequelize');
+
 
 
 // GET route to retrieve all Notes for logged-in user
 router.get('/notes', authenticateToken, async (req, res) => {
 
+  // Extract query parameters
+  const { search, filter } = req.query;
+  const conditions = {};
+  const order = [];
+
+  // Add search condition if 'search' query parameter is provided
+  if (search) {
+    conditions.where = {
+        [Op.or]: [
+            { title: { [Op.like]: `%${search}%` } },
+            { content: { [Op.like]: `%${search}%` } }
+        ]
+    };
+  }
+
+  // Add order condition if 'filter' query parameter is provided
+  if (filter) {
+    order.push(['createdAt', filter]);
+  }
+
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        // Forbidden if token is invalid
-        return res.sendStatus(403);
-      }
-      // Extract user ID from token
-      const userId = decoded.userId;
 
-      try {
-          // Fetch notes where user_id matches logged-in user's ID
-          const noteData = await Notes.findAll({
-              where: {
-                  userId: userId // Filter by user ID
-              },
-              order: [['createdAt', 'DESC']]
-          });
-          res.json(noteData);
-      } catch (err) {
-          res.status(500).json(err);
-      }
+    if (err) {
+        return res.sendStatus(403);
+    }
+    const userId = decoded.userId;
+    
+    try {
+        const noteData = await Notes.findAll({
+          where: conditions.where,
+          order: order.length > 0 ? order : undefined
+        });
+        // console.log(noteData)
+        res.json(noteData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
   });
 });
 

@@ -284,6 +284,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000); // Adjust time message is displayed
     }
 
+    // function to delete note
+    const deleteBtn = document.getElementById('delete-btn');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', function() {
+            // get the noteId from the URL parameters
+            const noteId = urlParams.get('noteId');
+
+            if (confirm('Are you sure you want to delete this note?')) {
+                fetch(`/api/notes/${noteId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to delete the note.');
+                    }
+                    return response.json();
+                })
+                .then(() => {
+                    displayStatusMessage('Note deleted successfully and navigating to dashboard...', true);
+                    setTimeout(() => {
+                        // Redirect after displaying message
+                        window.location.href = '/dashboard';
+                    }, 500); // Adjust time
+                    // alert('Note deleted successfully.');
+                    window.location.href = '/dashboard'; // Redirect to dashboard after successful deletion
+                })
+                .catch(error => {
+                    console.error('Error deleting the note:', error);
+                    alert('Failed to delete the note.');
+                });
+            }
+        });
+    }
+
     // function to handle expired token response
     function handleResponse(response) {
         if (!response.ok && response.status === 401) {

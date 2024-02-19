@@ -19,13 +19,14 @@
         <span class="fas fa-save"></span>
         <span>Log-out</span>
     </button>
-    <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note">
+    <!-- <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note"> -->
+    <button type="button" class="btn btn-outline-light btn-sm" id="new-note" >
         <span class="fas fa-save"></span>
         <span>New Note</span>
     </button>
 
     <input type="text" id="searchInput" placeholder="Search notes">
-    <button onclick="fetchAndDisplayNoteswithSearch()">Search</button>
+    <button id="searchButton">Search</button>
     <select id="filter-dropdown">
         <option value="Filter">Filter</option>
         <option value="ASC">Ascending</option>
@@ -38,16 +39,13 @@
         
     </header>
     <div>
-            <h1 class="Dashboard-title">Dashboard</h1><br><br><br>
+            <h1 class="Dashboard-title">Dashboard</h1><br><br>
     </div>
 
-    
-    
     <div class="notes-box">
         
-        
         <div id="save-notes-box">
-            <h2 class="saved-title">Saved Notes</h2>
+            <!-- <h2 class="saved-title">Saved Notes</h2> -->
             
             <div class="notes-layout">
                 <div id="note-titles" class="note-titles"></div>
