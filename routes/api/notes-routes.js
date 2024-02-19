@@ -96,14 +96,16 @@ router.post('/notes', authenticateToken, async (req, res) => {
 
   try {
     const noteData = await Notes.create({
-      title: req.body.title,
-      content: req.body.content,
       // set userId extracted from token
       userId: userId,
+      title: req.body.title,
+      content: req.body.content,
       // Default category ID
-      categoryId: 1
+      categoryId: req.body.categoryId
     });
-    res.json(noteData); // Return the created note as JSON
+    console.log(noteData)
+    // Return the created note as JSON
+    res.status(200).json(noteData);
   } catch (err) {
     res.status(400).json(err);
   }
