@@ -11,34 +11,12 @@ require("dotenv").config();
 // Use OpenAI Create Completion:
 // https://platform.openai.com/docs/api-reference/completions/create
 
-// includes openAIService.js file
-const openAIService = require('./services/openAIService');
-
-
-// Call OpenAI summarizeText function in openAIService.js file
-async function summarizeNoteController(req, res) {
-    try {
-      // Assuming note content comes in the request body
-      const noteContent = req.body.noteContent;
-      // Call summarizeText function from openaiService
-      const summary = await openAIService.summarizeText(noteContent);
-      // return summary response to content
-      res.json({ summary });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-  
-  // Define an endpoint '/summarize' that uses summarizeNoteController
-  app.post('/summarize', summarizeNoteController); // TODO: uncomment when need to use
-
-
-
-
 // directly use OpenAI from the openai package and initializing it with the API key.
 const openai = new OpenAIApi({
-    apiKey: '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',
+    apiKey: process.env.apiKey,
 });
+
+// console.log(openai)
 
 // function to summary text using OpenAI API functionality
 async function summarizeText(text) {
@@ -69,9 +47,13 @@ async function summarizeText(text) {
             // The maximum number of tokens that can be generated in the chat completion.
             max_tokens: 50
         });
-        // console.log(response); // Log the response to understand its structure
+        console.log(response); // Log the response to understand its structure
         // Extract the content of the last message from the completion
         const lastMessageContent = response.choices[0].message.content.trim();
+
+        console.log("lastMessageContent")
+        console.log(lastMessageContent)
+
         return lastMessageContent;
     // show message if openai call have an error
     } catch (error) {
@@ -81,6 +63,4 @@ async function summarizeText(text) {
 }
   
 // export function summarizeText that call OpenAI
-module.exports = {
-summarizeText
-};
+module.exports = summarizeText;

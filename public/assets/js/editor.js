@@ -13,24 +13,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('log-out');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            fetch('/api/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Include the token in the request if needed for server-side validation
-                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-                // Remove token from sessionStorage
-                sessionStorage.removeItem('token');
-                // Redirect to home page
-                window.location.href = '/';
+            // save the note by getting note content
+            const editedTitle = document.getElementById('editable-note-title').innerText;
+            // Get HTML content from Quill editor
+            const noteContent = quill.root.innerHTML;
+            // Get HTML content from Quill AI-Features editor
+            const aiFeaturesContent = quillAIFeatures.root.innerHTML;
+    
+            // Use noteId from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const noteId = urlParams.get('noteId');
+            
+            //call function to save note before logout
+            saveNoteAndAIFeatures(noteId, editedTitle, noteContent, aiFeaturesContent)
+            .then(() => {
+                displayStatusMessage('Note saved successfully. Logging out...', true);
+    
+                // Proceed with logout after a short delay
+                setTimeout(() => {
+                    fetch('/api/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        // Remove token from sessionStorage
+                        sessionStorage.removeItem('token');
+                        // Redirect to home page
+                        window.location.href = '/';
+                    })
+                    .catch(error => {
+                        console.error('Logout Error:', error);
+                    });
+                }, 1000); // allow to read status message
             })
             .catch(error => {
-                console.error('Logout Error:', error);
+                console.error('Error saving note during logout:', error);
+                alert('Failed to save note before logging out.');
             });
         });
     }
@@ -38,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // function to add content of note and ai feature to Quill editor
     const urlParams = new URLSearchParams(window.location.search);
     const noteId = urlParams.get('noteId');
-    console.log(noteId)
+    // console.log(noteId)
     let currentNoteCategoryId = '';
     // const quill = new Quill('#editor', {theme: 'snow'});
     // const quillAIFeatures = new Quill('#ai-features-editor', {theme: 'snow'});
@@ -184,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to save note and ai features
     function saveNoteAndAIFeatures(noteId, noteTitle, noteContent, aiFeaturesContent) {
+        console.log(`NoteId: ${noteId}, noteTitle: ${noteTitle}, noteContent: ${noteContent}, aiFeaturesContent: ${aiFeaturesContent}`)
         // save note title fetch request
         const saveNoteTitlePromise = fetch(`/api/notes/${noteId}`, {
             method: 'PUT',

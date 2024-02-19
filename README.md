@@ -100,7 +100,7 @@ Ensure you have the following installed before proceeding:
 
 ## State Flow Diagram
 
-For a visual representation of the sequence of actions involved in the [Collaborative Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
+For a visual representation of the sequence of actions involved in the [AI-Powered Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
 
 
 ## Contributing
@@ -116,7 +116,7 @@ Distributed under the MIT License. See [LICENSE][MIT] for more information.
 
 [project-app]: <>
 [project-code]: <>
-[note-taking-app]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Collaborative%20Note-Taking%20App%20v1.png>
+[note-taking-app]: <https://github.com/naturuplift/NoteMindAI/blob/main/public/assets/img/AI_Powered%20Note-Taking%20App%20v2.png>
 [project-setup]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
 [state-flow]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
 [MIT]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/LICENSE>
