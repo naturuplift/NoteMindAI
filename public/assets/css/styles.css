@@ -5,6 +5,8 @@
 body {
     background-color: black;
     font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .header-landing-page {
@@ -135,11 +137,10 @@ body {
     position:absolute;
 	top:50%;
 	left:45%;
-	-webkit-transform:translate(-50%,-50%);
-	        transform:translate(-50%,-50%);
 	text-align:center;
     display: flex;
     gap: 5rem;
+    flex-wrap: wrap;
 }
 
 .header-dashboard {
