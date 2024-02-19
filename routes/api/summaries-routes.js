@@ -39,6 +39,20 @@ try {
 
 // POST route to create a new summary
 router.post('/summaries', authenticateToken, async (req, res) => {
+
+  // Extract user_id from JWT token
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  let userId;
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        // Return forbidden if token is invalid
+        return res.sendStatus(403);
+      }
+      userId = decoded.userId;
+  });
+  
   try {
     const summaryData = await Summaries.create({
       noteId: req.body.noteId,
@@ -61,6 +75,7 @@ router.put('/summaries/:noteId', authenticateToken, async (req, res) => {
       res.status(404).json({ message: 'No summary found with this note id!' });
       return;
     }
+    console.log(summaryData)
     res.status(200).json({ message: 'Summary updated successfully!' });
   } catch (err) {
     res.status(500).json(err);

@@ -19,32 +19,45 @@
         <span class="fas fa-save"></span>
         <span>Log-out</span>
     </button>
-    <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note">
+    <!-- <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note"> -->
+    <button type="button" class="btn btn-outline-light btn-sm" id="new-note" >
         <span class="fas fa-save"></span>
         <span>New Note</span>
     </button>
+
+    <input type="text" id="searchInput" placeholder="Search notes">
+    <button id="searchButton">Search</button>
+    <select id="filter-dropdown">
+        <option value="Filter">Filter</option>
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
+        <option value="createdAt">Created At</option>
+        <option value="updatedAt">Updated At</option>
+      </select>
 
     <header class="header-dashboard">
         
     </header>
     <div>
-            <h1 class="Dashboard-title">Dashboard</h1><br><br><br>
+            <h1 class="Dashboard-title">Dashboard</h1><br><br>
     </div>
 
-    
-    
     <div class="notes-box">
         
-        
         <div id="save-notes-box">
-            <h2 class="saved-title">Saved Notes</h2>
-
+            <!-- <h2 class="saved-title">Saved Notes</h2> -->
             
             <div class="notes-layout">
                 <div id="note-titles" class="note-titles"></div>
-                <div id="note-content" class="note-content"></div>
             </div>
 
+        </div>
+
+        <div id="preview-box">
+            <h2 class="preview-title">Preview</h2>
+            <div class="preview-layout">
+                <div id="note-content" class="note-content"></div>
+            </div>
         </div>
     </div>
     <footer class="Dashboard-footer">
