@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const filterDropdown = document.getElementById('filter-dropdown');
 
-    // add event listeners for search and fileter
+    // add event listeners for search and filter
     searchButton.addEventListener('click', function() {
         const searchQuery = searchInput.value.trim();
         const filterOption = filterDropdown.value;
@@ -163,7 +163,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Hover effect to display note content
             titleElement.addEventListener('mouseenter', () => {
-                contentContainer.innerHTML = `<h3>${note.title}</h3><p>${note.content}</p>`;
+                const previewText = note.content.length > 100 ? note.content.substring(0, 100) + '...' : note.content;
+                contentContainer.innerHTML = `<h3>${note.title}</h3><p>${previewText}</p>`;
             });
 
             // change to editor page when click on a note
@@ -176,16 +177,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // function to handle async response
+    // Function to handle response and check for token expiration
     function handleResponse(response) {
-        if (!response.ok) {
-            if (response.status === 401) {
-                alert('Session expired. Please login again.');
-                sessionStorage.removeItem('token');
-                window.location.href = '/';
-            }
-            throw new Error('Network response was not ok.');
+        // Check if response status code is 401 (expired token or unauthorized access)
+        if (response.status === 401) {
+            // Alert user session has expired
+            alert('Your session has expired. Please log in again.');
+            // Remove the token from sessionStorage to clean up
+            sessionStorage.removeItem('token');
+            // Redirect the user to the login page
+            window.location.href = '/';
+            return Promise.reject('Session expired. Redirecting to login page.');
         }
+
+        // For other responses, check if response is not OK
+        if (!response.ok) {
+            // Throw an error with response status text
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // If response is OK, return response parsed as JSON
         return response.json();
     }
 

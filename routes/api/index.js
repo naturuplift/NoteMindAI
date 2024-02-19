@@ -14,6 +14,7 @@ const transcriptionRoutes = require('./transcriptions-routes');
 const loginRoutes = require('./login-routes');
 const logoutRoutes = require('./logout-routes');
 const signupRoutes = require('./signup-routes');
+const aiFeaturesRoutes = require('./ai-features-routes');
 
 // Register routes to be served under own paths
 router.use('/', userRoutes);
@@ -28,6 +29,7 @@ router.use('/', transcriptionRoutes);
 router.use('/', loginRoutes);
 router.use('/', logoutRoutes);
 router.use('/', signupRoutes);
+router.use('/ai-features', aiFeaturesRoutes);
 
 // Export the configured router to be used by the main application
 module.exports = router;
