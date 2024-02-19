@@ -21,18 +21,6 @@
 <body>
   
   <div class="icons">
-    <button type="button" class="btn btn-outline-light btn-sm save-note" id="save-note">
-      <span class="fas fa-save"></span>
-      <span>Save Note</span>
-    </button>
-    <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note">
-      <span class="fas fa-edit"></span>
-      <span>New Note</span>
-    </button>
-    <button type="button" class="btn btn-sm btn-outline-danger clear-btn" id="clear-btn">
-      <span class="fas fa-times"></span>
-      <span>Clear Note</span>
-    </button>
     <button type="button" class="btn btn-sm btn-outline-danger dashboard-btn" id="dashboard-btn">
       <span class="fas fa-times"></span>
       <span>Dashboard</span>
@@ -41,8 +29,24 @@
       <span class="fas fa-save"></span>
       <span>Log-out</span>
     </button>
+    <button type="button" class="btn btn-outline-light btn-sm new-note" id="new-note">
+      <span class="fas fa-edit"></span>
+      <span>New Note</span>
+    </button>
+    <button type="button" class="btn btn-outline-light btn-sm save-note" id="save-note">
+      <span class="fas fa-save"></span>
+      <span>Save Note</span>
+    </button>
     <button type="button" class="btn btn-outline-light btn-sm" id="show-categories">
       <span>Show Categories</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-danger clear-btn" id="clear-btn">
+      <span class="fas fa-times"></span>
+      <span>Clear Note</span>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-danger delete-btn" id="delete-btn">
+      <span class="fas fa-times"></span>
+      <span>Delete Note</span>
     </button>
   </div><br>
 
@@ -65,12 +69,12 @@
     <div id="note-title">
       <h2 class="note-title-editor">AI Features</h2>
       <div class="ai-features-buttons">
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 1</button>
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 2</button>
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 3</button>
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 4</button>
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 5</button>
-        <button type="button" class="btn btn-primary ai-feature-btn">Feature 6</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Summary</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Explanation</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Sentiment</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Writing</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Action Item</button>
+        <button type="button" class="btn btn-primary ai-feature-btn">Classification</button>
         <button type="button" class="btn btn-primary ai-feature-btn" id="clear-ai-features-btn">Clear</button>
     </div>
     </div>

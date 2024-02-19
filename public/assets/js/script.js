@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // or show an error message to user
             });
         });
     }
@@ -116,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // or show an error message to user
             });
         });
     }
