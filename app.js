@@ -67,5 +67,3 @@ sequelize.sync({ force: false }) // Consider using 'force: true' only in develop
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch(err => console.error('Sequelize sync error:', err));
-
-
