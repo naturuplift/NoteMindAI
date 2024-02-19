@@ -1,5 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(){ 
+            const searchQuery = searchInput.value.trim().toLowerCase();
+            fetchAndDisplayNotesWithSearch(searchQuery);
+            console.log
+        });
+
+    }
+    function fetchAndDisplayNotesWithSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        fetchAndDisplayNotesWithSearch(searchQuery);
+    }
+
+    //Event listener for filter dropdown
+    const filterDropdown = document.getElementById('filter-dropdown');
+    if (filterDropdown) {
+        filterDropdown.addEventListener('change', function(){
+            const filterOption = filterDropdown.value;
+            fetchAndDisplayNotesWithFilter(filterOption);
+    });
+}
+
     // Check token at start if user is logged in
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -135,6 +158,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching notes:', error));
     }
+
+function fetchAndDisplayNoteswithSearch(searchQuery = '') {
+const url = `/api/notes?search=${encodeURIComponent(searchQuery)}`;
+fetchAndDisplayNotes(url);
+if (searchQuery.trim() === '') {
+    return;
+}
+}
+
+function fetchAndDisplayNotesWithFilter(filterOption = '') {
+    const url = '/api/notes?filter=${filterOption}';
+    fetchAndDisplayNotes(url);
+
+}
 
     // function to handle expired token response
     function handleResponse(response) {
