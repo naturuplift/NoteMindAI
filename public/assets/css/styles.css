@@ -5,8 +5,6 @@
 body {
     background-color: black;
     font-size: 25px;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .header-landing-page {
@@ -137,10 +135,11 @@ body {
     position:absolute;
 	top:50%;
 	left:45%;
+	-webkit-transform:translate(-50%,-50%);
+	        transform:translate(-50%,-50%);
 	text-align:center;
     display: flex;
     gap: 5rem;
-    flex-wrap: wrap;
 }
 
 .header-dashboard {
@@ -190,10 +189,6 @@ body {
     text-align: center;
 }
 
-/*Editor*/
-
-
-
 /* Media Query */
 
 @media (max-width: 900px) {
@@ -237,6 +232,32 @@ body {
         text-align:center;
     }
 
+    #save-notes-box {
+        display: block;
+        background-color: rgba(211,211,211, 0.2);
+        height: auto;
+        width: auto;
+    }
+
+    .saved-title {
+        display: block;
+        text-decoration: underline;
+        text-align:center;
+        font-size: 25px;
+    }
+
+    .Dashboard-title {
+        position: absolute;
+        text-align:center;
+        font-size: 40px;
+    }
+
+    #preview-box {
+        background-color: rgba(211,211,211, 0.2);
+        display: block;
+        height: auto;
+        width: 100px;
+    }
     
 }
 
@@ -249,7 +270,7 @@ body {
     .header-landing-page {
         background-image: -webkit-linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../img/mobilePage.jpg);
         background-image:linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../img/mobilePage.jpg);
-        height: 100vh;
+        height: auto;
         background-size: cover;
         background-position: center;
     }
@@ -281,27 +302,69 @@ body {
         text-align:center;
     }
 
-    @media (min-width: 480px) {
+    .Dashboard-title {
+        position: absolute;
+        text-align:center;
+        font-size: 40px;
+    }
+    
+    #save-notes-box {
+        background-color: rgba(211,211,211, 0.2);
+        height: auto;
+        width: 500px;
+        
+    }
+    
+    .saved-title {
+        text-decoration: underline;
+        text-align:center;
+        font-size: 25px;
+    }
+    
+    #preview-box {
+        background-color: rgba(211,211,211, 0.2);
+        height: auto;
+        width: 500px;
+    }
+    
+    .preview-title {
+        text-decoration: underline;
+        text-align:center;
+        font-size: 25px;
+    }
+    
+    .Dashboard-footer {
+        font-size: 15px;
+        text-align: center;
+    }
+    
+
+    @media (max-width: 480px) {
         .Dashboard-body {
             color: antiquewhite;
         }
-        
-        .notes-box {
-            display:flex;
-            text-align:center;
-        }
-        
-        .header-dashboard {
-            margin-bottom: 0;
-            background-image: -webkit-linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/aaron-burden-AXqMy8MSSdk-unsplash.jpg);
-            background-image:linear-gradient(rgba(211,211,211,.3),rgb(0,0,0,.7)), url(../img/aaron-burden-AXqMy8MSSdk-unsplash.jpg);
-            height: 100vh;
+
+        .header-landing-page {
+            background-image: -webkit-linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../../../public/assets/img/mobilePage.jpg);
+            background-image:linear-gradient(rgba(0,0,0,.3),rgb(0,0,0,.7)), url(../../../public/assets/img/mobilePage.jpg);
+            height: auto;
             background-size: cover;
             background-position: center;
         }
         
-        .Dashboard-title {
+        .notes-box {
+            display:flex;
+            justify-content: center;
             text-align:center;
+            flex-wrap: wrap;
+            top: 600px;
+        }
+        
+        .Dashboard-title {
+            justify-content: center;
+            display: block;
+            top: 15%;
+            font-size: 30px;
         }
         
         #save-notes-box {
@@ -309,15 +372,16 @@ body {
             justify-content: flex-start;
             background-color: rgba(211,211,211, 0.2);
             height: auto;
-            
+            width: 280px;
+            top: 25%;
         }
         
-        #Preview-box {
+        #preview-box {
             border: 2px solid antiquewhite;
             background-color: rgba(211,211,211, 0.2);
             height: auto;
-            width: 300px;
-             
+            width: 280px;
+            
         }
         
         .saved-title {
@@ -341,6 +405,8 @@ body {
             border: 2px solid antiquewhite;
             background-color: rgba(211,211,211, 0.2);
             margin-bottom: 15px;
+            display: block;
+            top: 40%;
         }
         
         #Preview-box {

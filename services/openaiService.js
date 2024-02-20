@@ -13,15 +13,12 @@ require("dotenv").config();
 
 // directly use OpenAI from the openai package and initializing it with the API key.
 const openai = new OpenAIApi({
-    apiKey: process.env.apiKey,
+    apiKey: process.env.OPENAI_API_KEY,
 });
-
-// console.log(openai)
 
 // function to summary text using OpenAI API functionality
 async function summarizeText(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -47,12 +44,10 @@ async function summarizeText(text) {
             // The maximum number of tokens that can be generated in the chat completion.
             max_tokens: 50
         });
-        console.log(response); // Log the response to understand its structure
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
         const lastMessageContent = response.choices[0].message.content.trim();
 
-        console.log("lastMessageContent")
-        console.log(lastMessageContent)
 
         return lastMessageContent;
     // show message if openai call have an error
@@ -61,6 +56,213 @@ async function summarizeText(text) {
         throw new Error('Failed to summarize text');
     }
 }
-  
+
+// function to summary text using OpenAI API functionality
+async function explainText(text) {
+    try {
+        // https://platform.openai.com/docs/api-reference/chat/create
+        const response = await openai.chat.completions.create({
+            // define openai model API Endpoint https://api.openai.com/v1/completions
+            // ID of the model to use. See the model endpoint compatibility table
+            // for details on which models work with the Chat API.
+            model: "gpt-3.5-turbo",
+            // define the system message which helps set the behavior of the assistant
+            messages: [
+                {
+                    // The role of the messages author, in this case system
+                    role: "system",
+                    // The contents of the system message.
+                    content: "You are a knowledgeable assistant."
+                },
+                {
+                    // The role of the messages author, in this case system
+                    role: "user",
+                    // The contents of the system message.
+                    content: `Explain the following text: ${text}`
+                }
+            ],
+            // Set tokens limit for the request
+            // The maximum number of tokens that can be generated in the chat completion.
+            max_tokens: 100
+        });
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
+        // Extract the content of the last message from the completion
+        const lastMessageContent = response.choices[0].message.content.trim();
+
+        return lastMessageContent;
+    // show message if openai call have an error
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to summarize text');
+    }
+}
+
+// function to summary text using OpenAI API functionality
+async function analyzeSentiment(text) {
+    try {
+        // https://platform.openai.com/docs/api-reference/chat/create
+        const response = await openai.chat.completions.create({
+            // define openai model API Endpoint https://api.openai.com/v1/completions
+            // ID of the model to use. See the model endpoint compatibility table
+            // for details on which models work with the Chat API.
+            model: "gpt-3.5-turbo",
+            // define the system message which helps set the behavior of the assistant
+            messages: [
+                {
+                    // The role of the messages author, in this case system
+                    role: "system",
+                    // The contents of the system message.
+                    content: "You are an assistant trained to analyze sentiment."
+                },
+                {
+                    // The role of the messages author, in this case system
+                    role: "user",
+                    // The contents of the system message.
+                    content: `Analyze the sentiment of the following text: ${text}`
+                }
+            ],
+            // Set tokens limit for the request
+            // The maximum number of tokens that can be generated in the chat completion.
+            max_tokens: 60 
+        });
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
+        // Extract the content of the last message from the completion
+        const lastMessageContent = response.choices[0].message.content.trim();
+
+        return lastMessageContent;
+    // show message if openai call have an error
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to summarize text');
+    }
+}
+
+// function to summary text using OpenAI API functionality
+async function continueWriting(text) {
+    try {
+        // https://platform.openai.com/docs/api-reference/chat/create
+        const response = await openai.chat.completions.create({
+            // define openai model API Endpoint https://api.openai.com/v1/completions
+            // ID of the model to use. See the model endpoint compatibility table
+            // for details on which models work with the Chat API.
+            model: "gpt-3.5-turbo",
+            // define the system message which helps set the behavior of the assistant
+            messages: [
+                {
+                    // The role of the messages author, in this case system
+                    role: "system",
+                    // The contents of the system message.
+                    content: "You are a creative assistant that continues the story."
+                },
+                {
+                    // The role of the messages author, in this case system
+                    role: "user",
+                    // The contents of the system message.
+                    content: `Continue writing the following text: ${text}`
+                }
+            ],
+            // Set tokens limit for the request
+            // The maximum number of tokens that can be generated in the chat completion.
+            max_tokens: 100
+        });
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
+        // Extract the content of the last message from the completion
+        const lastMessageContent = response.choices[0].message.content.trim();
+
+        return lastMessageContent;
+    // show message if openai call have an error
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to summarize text');
+    }
+}
+
+// function to summary text using OpenAI API functionality
+async function extractActionItem(text) {
+    try {
+        // https://platform.openai.com/docs/api-reference/chat/create
+        const response = await openai.chat.completions.create({
+            // define openai model API Endpoint https://api.openai.com/v1/completions
+            // ID of the model to use. See the model endpoint compatibility table
+            // for details on which models work with the Chat API.
+            model: "gpt-3.5-turbo",
+            // define the system message which helps set the behavior of the assistant
+            messages: [
+                {
+                    // The role of the messages author, in this case system
+                    role: "system",
+                    // The contents of the system message.
+                    content: "You are an assistant that identifies action items in the text."
+                },
+                {
+                    // The role of the messages author, in this case system
+                    role: "user",
+                    // The contents of the system message.
+                    content: `Extract action items from the following text: ${text}`
+                }
+            ],
+            // Set tokens limit for the request
+            // The maximum number of tokens that can be generated in the chat completion.
+            max_tokens: 100
+        });
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
+        // Extract the content of the last message from the completion
+        const lastMessageContent = response.choices[0].message.content.trim();
+
+        return lastMessageContent;
+    // show message if openai call have an error
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to summarize text');
+    }
+}
+
+// function to summary text using OpenAI API functionality
+async function classifyContent(text) {
+    try {
+        // https://platform.openai.com/docs/api-reference/chat/create
+        const response = await openai.chat.completions.create({
+            // define openai model API Endpoint https://api.openai.com/v1/completions
+            // ID of the model to use. See the model endpoint compatibility table
+            // for details on which models work with the Chat API.
+            model: "gpt-3.5-turbo",
+            // define the system message which helps set the behavior of the assistant
+            messages: [
+                {
+                    // The role of the messages author, in this case system
+                    role: "system",
+                    // The contents of the system message.
+                    content: `You are a smart classifier. Categorize the text into the following categories: ${categoriesList}.`
+                },
+                {
+                    // The role of the messages author, in this case system
+                    role: "user",
+                    // The contents of the system message.
+                    content: `Classify the following text: ${text}`
+                }
+            ],
+            // Set tokens limit for the request
+            // The maximum number of tokens that can be generated in the chat completion.
+            max_tokens: 60
+        });
+        console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
+        // Extract the content of the last message from the completion
+        const lastMessageContent = response.choices[0].message.content.trim();
+
+        return lastMessageContent;
+    // show message if openai call have an error
+    } catch (error) {
+        console.error(error);
+        throw new Error('Failed to summarize text');
+    }
+}
+
 // export function summarizeText that call OpenAI
-module.exports = summarizeText;
+module.exports = {
+    summarizeText,
+    explainText,
+    analyzeSentiment,
+    continueWriting,
+    extractActionItem,
+    classifyContent
+};
