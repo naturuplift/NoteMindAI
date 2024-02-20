@@ -13,32 +13,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('log-out');
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
-            fetch('/api/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Include the token in the request if needed for server-side validation
-                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-                // Remove token from sessionStorage
-                sessionStorage.removeItem('token');
-                // Redirect to home page
-                window.location.href = '/';
-            })
-            .catch(error => {
-                console.error('Logout Error:', error);
-            });
+
+            // Proceed with logout after a short delay
+            setTimeout(() => {
+                fetch('/api/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    displayStatusMessage('Logging out...', true);
+                    // Remove token from sessionStorage
+                    sessionStorage.removeItem('token');
+                    // Redirect to home page
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error('Logout Error:', error);
+                });
+            }, 300); // allow to read status message
         });
     }
 
     // function to add content of note and ai feature to Quill editor
     const urlParams = new URLSearchParams(window.location.search);
     const noteId = urlParams.get('noteId');
-    console.log(noteId)
+    // console.log(noteId)
     let currentNoteCategoryId = '';
     // const quill = new Quill('#editor', {theme: 'snow'});
     // const quillAIFeatures = new Quill('#ai-features-editor', {theme: 'snow'});
@@ -184,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to save note and ai features
     function saveNoteAndAIFeatures(noteId, noteTitle, noteContent, aiFeaturesContent) {
+        console.log(`NoteId: ${noteId}, noteTitle: ${noteTitle}, noteContent: ${noteContent}, aiFeaturesContent: ${aiFeaturesContent}`)
         // save note title fetch request
         const saveNoteTitlePromise = fetch(`/api/notes/${noteId}`, {
             method: 'PUT',
@@ -249,25 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dashboard button
     const dashboardButton = document.getElementById('dashboard-btn');
     dashboardButton.addEventListener('click', function() {
-        const urlParamsDash = new URLSearchParams(window.location.search);
-        const noteIdDash = urlParamsDash.get('noteId');
-        // Get edited title from content editable element
-        const editedTitle = document.getElementById('editable-note-title').innerText;
-        // Get HTML content from Quill editor
-        const noteContentDash = quill.root.innerHTML;
-        // Get HTML content from Quill ai-features-editor
-        const aiFeaturesContentDash = quillAIFeatures.root.innerHTML;
-        // function to save note title and content, save ai feature content
-        saveNoteAndAIFeatures(noteIdDash, editedTitle, noteContentDash, aiFeaturesContentDash).then(() => {
-            displayStatusMessage('Saving Note and navigating to dashboard...', true);
-            setTimeout(() => {
-                // Redirect after displaying message
-                window.location.href = '/dashboard';
-            }, 500); // Adjust time
-        }).catch(() => {
-            // Even if saving fails, redirect to dashboard
-            window.location.href = '/dashboard';
-        });
+        window.location.href = '/dashboard';
     });
 
     // Function to display status messages

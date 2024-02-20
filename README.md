@@ -4,14 +4,12 @@
 <p align="center">
     <a href="https://www.openai.com/" >
         <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
-    <a href="https://handlebarsjs.com/" >
-        <img alt="Handlebars.js - A minimal templating engine that allows you to use semantic templates with your server-side Node.js and Express.js applications." src="https://img.shields.io/static/v1.svg?label=Handlebars.js&message=templating engine&color=orange" /></a>
     <a href="https://sequelize.org/">
         <img alt="Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more" src="https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet" /></a>
     <a href="https://www.mysql.com/">
         <img alt="MySQL - An open-source relational database management system" src="https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen" /></a>
-    <a href="https://www.heroku.com/">
-        <img alt="Heroku (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Heroku&message=deployment&color=red" /></a>
+    <a href="https://www.render.com/">
+        <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
         <img alt="express-session - A session middleware for Express.js, used for handling user sessions" src="https://img.shields.io/static/v1.svg?label=express-session&message=middleware&color=green" /></a>
     <a href="https://socket.io/">
@@ -44,20 +42,20 @@
 ## Description
 SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
 
-Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda
+Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda, https://www.joshwcomeau.com/css/custom-css-reset/
 
 ## Features
 - **User Authentication:** Secure signup, login, and profile management.
 - **Note Management:** Create, edit, delete, and categorize notes with rich text formatting.
-- **Collaborative Editing:** Share and collaborate on notes in real-time with other users.
+- **Collaborative Editing:** Share and collaborate on notes in real time with other users.
 - **AI-Powered Summarization:** Get concise, accurate summaries of lengthy notes.
 - **Actionable Item Extraction:** Automatically convert action points in notes into tasks or reminders.
 - **Contextual Recommendations:** Receive suggestions for related notes and external references based on the content.
 - **Search and Filter:** Easily find notes with robust search and filter capabilities.
 
 ## Technologies Used
-- **Backend:** Node.js, Express.js
-- **Frontend:** Handlebars.js, AJAX for smooth interactions
+- **Backend:** Node.js, Express.js, EJS
+- **Frontend:** AJAX for smooth interactions
 - **Database:** MySQL, Sequelize ORM
 - **Authentication:** express-session, cookies
 - **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
@@ -97,12 +95,12 @@ Ensure you have the following installed before proceeding:
 ## Usage
 - Create an Account: Sign up to start creating and collaborating on notes.
 - Create/Edit Notes: Use the rich text editor to jot down your thoughts or meeting minutes.
-- Collaborate: Share notes with your peers and work on them together in real-time.
+- Collaborate: Share notes with your peers and work on them together in real time.
 - Summarize: Use the AI-powered summarization feature to condense long notes into digestible summaries.
 
 ## State Flow Diagram
 
-For a visual representation of the sequence of actions involved in the [Collaborative Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
+For a visual representation of the sequence of actions involved in the [AI-Powered Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
 
 
 ## Contributing
@@ -118,7 +116,7 @@ Distributed under the MIT License. See [LICENSE][MIT] for more information.
 
 [project-app]: <>
 [project-code]: <>
-[note-taking-app]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Collaborative%20Note-Taking%20App%20v1.png>
+[note-taking-app]: <https://github.com/naturuplift/NoteMindAI/blob/main/public/assets/img/AI_Powered%20Note-Taking%20App%20v2.png>
 [project-setup]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
 [state-flow]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
 [MIT]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/LICENSE>

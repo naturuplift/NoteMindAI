@@ -9,31 +9,50 @@ const jwt = require('jsonwebtoken');
 
 // GET route to retrieve all summaries
 router.get('/summaries', authenticateToken, async (req, res) => {
-try {
-  const summaryData = await Summaries.findAll({
-    include: [{ model: Notes }],
-  });
-  res.status(200).json(summaryData);
-} catch (err) {
-  res.status(500).json(err);
-}
+  try {
+    const summaryData = await Summaries.findAll({
+      include: [{ model: Notes }],
+    });
+
+    // Function to strip HTML tags
+    const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+    // Apply stripHtml to each summary's content
+    const strippedSummaryData = summaryData.map(summary => ({
+        ...summary.toJSON(),
+        summary: stripHtml(summary.summary),
+    }));
+
+    res.status(200).json(strippedSummaryData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
 // GET route to find a single summary by its noteId
 router.get('/summaries/:noteId', authenticateToken, async (req, res) => {
-try {
-  const summaryData = await Summaries.findByPk(req.params.noteId, {
-    include: [{ model: Notes }],
-  });
-  if (!summaryData) {
-    res.status(404).json({ message: 'No summary found for this note id!' });
-    return;
+
+  try {
+    const summaryData = await Summaries.findByPk(req.params.noteId, {
+      include: [{ model: Notes }],
+    });
+
+    if (!summaryData) {
+      res.status(404).json({ message: 'No summary found for this note id!' });
+      return;
+    }
+
+    // Function to strip HTML tags
+    const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+    // Strip HTML from summary content before sending the response
+    summaryData.summary = stripHtml(summaryData.summary);
+
+    res.status(200).json(summaryData);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.status(200).json(summaryData);
-} catch (err) {
-  res.status(500).json(err);
-}
 });
 
 

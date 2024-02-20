@@ -15,43 +15,45 @@ router.get('/notes', authenticateToken, async (req, res) => {
 
   // Extract query parameters
   const { search, filter } = req.query;
-  const conditions = {};
-  const order = [];
-
-  // Add search condition if 'search' query parameter is provided
-  if (search) {
-    conditions.where = {
-        [Op.or]: [
-            { title: { [Op.like]: `%${search}%` } },
-            { content: { [Op.like]: `%${search}%` } }
-        ]
-    };
-  }
-
-  // Add order condition if 'filter' query parameter is provided
-  if (filter) {
-    order.push(['createdAt', filter]);
-  }
-
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-
     if (err) {
-        return res.sendStatus(403);
+      // send error status
+      return res.sendStatus(403);
     }
     const userId = decoded.userId;
-    
+    // Include userId in conditions
+    const conditions = { userId: userId };
+
+    // Add search condition if 'search' query parameter is provided
+    if (search) {
+      conditions[Op.or] = [
+        { title: { [Op.like]: `%${search}%` } },
+        { content: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
     try {
-        const noteData = await Notes.findAll({
-          where: conditions.where,
-          order: order.length > 0 ? order : undefined
-        });
-        // console.log(noteData)
-        res.json(noteData);
+      const noteData = await Notes.findAll({
+        where: conditions,
+        // Add order condition if 'filter' query parameter is provided
+        order: filter ? [['createdAt', filter]] : undefined
+      });
+
+      // Function to strip HTML tags
+      const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+      // Apply stripHtml to each note's content
+      const strippedNoteData = noteData.map(note => ({
+          ...note.toJSON(),
+          content: stripHtml(note.content),
+      }));
+
+      res.json(strippedNoteData);
     } catch (err) {
-        res.status(500).json(err);
+      res.status(500).json(err);
     }
   });
 });
@@ -68,8 +70,9 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
-          // Forbidden if token is invalid
-          return res.sendStatus(403);
+        console.log("Token verification failed", err);
+        // Forbidden if token is invalid
+        return res.sendStatus(403);
       }
 
       // Extract user ID from token
@@ -88,6 +91,12 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
               // If no note found
               return res.status(404).json({ message: 'No note found with this id' });
           }
+
+          // Function to strip HTML tags
+          const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+
+          // Strip HTML from note content before sending the response
+          noteData.content = stripHtml(noteData.content);
 
           // return note data
           res.json(noteData);
