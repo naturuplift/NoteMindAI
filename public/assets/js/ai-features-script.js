@@ -89,27 +89,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // function to call OpenAI summary
-    const summaryBtn = document.querySelector('.ai-feature-btn');
+    const summaryBtn = document.querySelector('.ai-feature-summary-btn');
     summaryBtn.addEventListener('click', async function() {
+
         // Gets text content from Quill editor
         const noteContent = quill.getText();
+
+        console.log(`Note content from Quill editor: ${noteContent}`)
 
         fetch('/api/ai-features/summarize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Include this only if your route is protected
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
             },
             body: JSON.stringify({ content: noteContent })
         })
         .then(response => {
+
             if (!response.ok) {
                 throw new Error('Network response was not OK');
             }
             return response.json();
         })
         .then(data => {
-            quillAIFeatures.setText(data.summary); // Assuming quillAIFeatures is your Quill instance for AI features
+            quill.setContents([]);
+            // quillAIFeatures.setText(data.summary);
+            const range = quillAIFeatures.getSelection(true);
+            quillAIFeatures.insertText(range.index, data.summary);
         })
         .catch(error => {
             console.error('Error:', error);
