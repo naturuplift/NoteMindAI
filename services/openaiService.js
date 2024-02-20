@@ -19,7 +19,6 @@ const openai = new OpenAIApi({
 // function to summary text using OpenAI API functionality
 async function summarizeText(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -61,7 +60,6 @@ async function summarizeText(text) {
 // function to summary text using OpenAI API functionality
 async function explainText(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -102,7 +100,6 @@ async function explainText(text) {
 // function to summary text using OpenAI API functionality
 async function analyzeSentiment(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -143,7 +140,6 @@ async function analyzeSentiment(text) {
 // function to summary text using OpenAI API functionality
 async function continueWriting(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -184,7 +180,6 @@ async function continueWriting(text) {
 // function to summary text using OpenAI API functionality
 async function extractActionItem(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
@@ -225,7 +220,6 @@ async function extractActionItem(text) {
 // function to summary text using OpenAI API functionality
 async function classifyContent(text) {
     try {
-        //
         // https://platform.openai.com/docs/api-reference/chat/create
         const response = await openai.chat.completions.create({
             // define openai model API Endpoint https://api.openai.com/v1/completions
