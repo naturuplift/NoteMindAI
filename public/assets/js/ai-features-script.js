@@ -113,8 +113,143 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            quill.setContents([]);
-            // quillAIFeatures.setText(data.summary);
+            quillAIFeatures.setContents([]);
+            const range = quillAIFeatures.getSelection(true);
+            quillAIFeatures.insertText(range.index, data.summary);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // function to call OpenAI explain
+    const explainBtn = document.querySelector('.ai-feature-explain-btn');
+    explainBtn.addEventListener('click', async function() {
+
+        // Gets text content from Quill editor
+        const noteContent = quill.getText();
+
+        console.log(`Note content from Quill editor: ${noteContent}`)
+
+        fetch('/api/ai-features/explain', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content: noteContent })
+        })
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not OK');
+            }
+            return response.json();
+        })
+        .then(data => {
+            quillAIFeatures.setContents([]);
+            const range = quillAIFeatures.getSelection(true);
+            quillAIFeatures.insertText(range.index, data.summary);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // function to call OpenAI sentiment
+    const sentimentBtn = document.querySelector('.ai-feature-sentiment-btn');
+    sentimentBtn.addEventListener('click', async function() {
+
+        // Gets text content from Quill editor
+        const noteContent = quill.getText();
+
+        console.log(`Note content from Quill editor: ${noteContent}`)
+
+        fetch('/api/ai-features/sentiment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content: noteContent })
+        })
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not OK');
+            }
+            return response.json();
+        })
+        .then(data => {
+            quillAIFeatures.setContents([]);
+            const range = quillAIFeatures.getSelection(true);
+            quillAIFeatures.insertText(range.index, data.summary);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // function to call OpenAI writing
+    const writingBtn = document.querySelector('.ai-feature-writing-btn');
+    writingBtn.addEventListener('click', async function() {
+
+        // Gets text content from Quill editor
+        const noteContent = quill.getText();
+
+        console.log(`Note content from Quill editor: ${noteContent}`)
+
+        fetch('/api/ai-features/writing', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content: noteContent })
+        })
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not OK');
+            }
+            return response.json();
+        })
+        .then(data => {
+            quillAIFeatures.setContents([]);
+            const range = quillAIFeatures.getSelection(true);
+            quillAIFeatures.insertText(range.index, data.summary);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    // function to call OpenAI writing
+    const actionitemBtn = document.querySelector('.ai-feature-action-item-btn');
+    actionitemBtn.addEventListener('click', async function() {
+
+        // Gets text content from Quill editor
+        const noteContent = quill.getText();
+
+        console.log(`Note content from Quill editor: ${noteContent}`)
+
+        fetch('/api/ai-features/action-item', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content: noteContent })
+        })
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error('Network response was not OK');
+            }
+            return response.json();
+        })
+        .then(data => {
+            quillAIFeatures.setContents([]);
             const range = quillAIFeatures.getSelection(true);
             quillAIFeatures.insertText(range.index, data.summary);
         })
