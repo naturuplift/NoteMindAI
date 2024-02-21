@@ -1,4 +1,4 @@
-# Collaborative Note-Taking App
+# NoteMind AI Note-Taking App
 
 <br/>
 <p align="center">
@@ -40,26 +40,29 @@
 <br/>-
 
 ## Description
-SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
+**NoteMind AI** is a state-of-the-art note-taking application that integrates the power of AI to transform how individuals capture, organize, and innovate through their notes. Designed for professionals, students, and anyone in between, NoteMind AI combines rich text editing, and advanced AI functionalities to offer a unique note-taking solution.
 
-Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda, https://www.joshwcomeau.com/css/custom-css-reset/
+Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda.
 
-## Features
-- **User Authentication:** Secure signup, login, and profile management.
-- **Note Management:** Create, edit, delete, and categorize notes with rich text formatting.
-- **Collaborative Editing:** Share and collaborate on notes in real time with other users.
-- **AI-Powered Summarization:** Get concise, accurate summaries of lengthy notes.
-- **Actionable Item Extraction:** Automatically convert action points in notes into tasks or reminders.
-- **Contextual Recommendations:** Receive suggestions for related notes and external references based on the content.
-- **Search and Filter:** Easily find notes with robust search and filter capabilities.
+### **Key Features of NoteMindAI:**
+- **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
+- **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
+- **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
+- **Continue Write with AI:** Eliminate writer's block with the continue writing feature powered by AI. SynthNote offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas, fostering a fluid and natural writing experience.
+- **Explain Content with AI:** Deepen your understanding of complex topics with AI-powered explanations. SynthNote can elucidate difficult concepts within your notes, offering clear and concise explanations and enhancing your learning process.
+- **Sentiment Analysis with AI:** Gauge the tone and mood of your notes with AI-driven sentiment analysis. SynthNote evaluates the sentiment of your text, providing insights into the emotional undertone, which is invaluable for personal reflections or analyzing feedback.
+- **Note Management:** SynthNote offers a comprehensive solution for creating, editing, deleting, and categorizing notes with rich text formatting. Whether you're jotting down a quick idea or drafting a detailed report, our platform adapts to your needs.
+- **Search and Filter:** Find the information you need, when you need it. With robust search and filter capabilities, SynthNote makes navigating through your notes effortless, saving you time and enhancing your productivity.
+
+These features collectively make NoteMindAI a powerful tool for anyone looking to enhance their productivity, learning, and collaboration through note-taking. By leveraging AI, NoteMindAI not only simplifies note management but also adds layers of intelligence that augment the user's capability to create, analyze, and share knowledge.
 
 ## Technologies Used
-- **Backend:** Node.js, Express.js, EJS
-- **Frontend:** AJAX for smooth interactions
-- **Database:** MySQL, Sequelize ORM
-- **Authentication:** express-session, cookies
-- **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
-- **Deployment:** Render
+- **Backend:** Node.js, Express.js
+- **Frontend:** Fetch for smooth interactions
+- **Database:** MySQL, Sequelize ORM, bcrypt
+- **Authentication:** express-session, cookies, tokens
+- **AI Services:** OpenAI's GPT-3-turbo for AI-driven features
+- **Deployment:** Heroku
 
 ## Getting Started
 
@@ -67,12 +70,13 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 Ensure you have the following installed before proceeding:
 - Node.js and npm
 - Git (for version control)
+- MySQL or access to a MySQL database service
 
-### Installation
+### Setup & Installation
 1. **Clone the repository:**
 ```shell
-   git clone https://github.com/naturuplift/CollaborativeNoteTakingApp.git
-   cd CollaborativeNoteTakingApp
+git clone https://github.com/naturuplift/NoteMindAI.git
+cd NoteMindAI
 ```
 
 2. **Install dependencies:**
@@ -81,22 +85,22 @@ Ensure you have the following installed before proceeding:
 ```
 
 3. **Set up environment variables:**
-- Rename the .env.example file to .env.
+- Create the .env file.
 - Fill in the necessary environment variables.
 
 4. **Start the application:**
 ```shell
-    npm run devStart
+    npm start
 ```
 
 5. **Visit the application in your browser:**
 - Open http://localhost:3000 to access your application.
 
 ## Usage
-- Create an Account: Sign up to start creating and collaborating on notes.
+- Create an Account: Sign up to start creating notes.
 - Create/Edit Notes: Use the rich text editor to jot down your thoughts or meeting minutes.
-- Collaborate: Share notes with your peers and work on them together in real time.
-- Summarize: Use the AI-powered summarization feature to condense long notes into digestible summaries.
+- Search and Filter: Find the information you need by navigating through your notes.
+- AI features: Use the AI features to summarization feature to condense long notes into digestible summaries.
 
 ## State Flow Diagram
 
@@ -104,7 +108,7 @@ For a visual representation of the sequence of actions involved in the [AI-Power
 
 
 ## Contributing
-Contributions to the SynthNotes project are welcome!
+Contributions to the NoteMind project are welcome!
 - Fork the project.
 - Create your feature branch (git checkout -b feature/AmazingFeature).
 - Commit your changes (git commit -m 'Add some AmazingFeature').
