@@ -108,7 +108,7 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
 
 // POST route to create a new note
-router.post('/notes', authenticateToken, async (req, res) => {
+router.post('/notes', async (req, res) => {
   
   // Extract user_id from JWT token
   const authHeader = req.headers['authorization'];
