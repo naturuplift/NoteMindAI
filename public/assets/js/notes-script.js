@@ -82,8 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Default data for a new note
         const newNoteData = {
             title: 'New Note Title',
-            // format content to remove html tags
-            content: stripHtml('<p>New note content...</p>'),
+            content: 'New note content',
             categoryId: 1
         };
         
