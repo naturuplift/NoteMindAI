@@ -121,14 +121,14 @@ router.post('/notes', async (req, res) => {
         // Forbidden if token is invalid
         return res.sendStatus(403);
       }
-
+    });
   // Extract user ID from token
-  const userId = decoded.userId;
+  const user_Id = decoded.userId;
 
   try {
     const noteData = await Notes.create({
       // set userId extracted from token
-      userId: userId,
+      userId: user_Id,
       title: req.body.title,
       content: req.body.content,
       // Default category ID
