@@ -70,7 +70,7 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
-        console.log("Token verification failed", err);
+        // console.log("Token verification failed", err);
         // Forbidden if token is invalid
         return res.sendStatus(403);
       }
@@ -115,13 +115,15 @@ router.post('/notes', async (req, res) => {
   const token = authHeader && authHeader.split(' ')[1];
   let userId;
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) {
-        // Return forbidden if token is invalid
+        // console.log("Token verification failed", err);
+        // Forbidden if token is invalid
         return res.sendStatus(403);
       }
-      userId = decoded.userId;
-  });
+
+  // Extract user ID from token
+  const userId = decoded.userId;
 
   try {
     const noteData = await Notes.create({
@@ -132,7 +134,7 @@ router.post('/notes', async (req, res) => {
       // Default category ID
       categoryId: req.body.categoryId
     });
-    console.log(noteData)
+    // console.log(noteData)
     // Return the created note as JSON
     res.status(200).json(noteData);
   } catch (err) {
