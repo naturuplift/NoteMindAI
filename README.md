@@ -97,10 +97,24 @@ cd NoteMindAI
 - Open http://localhost:3000 to access your application.
 
 ## Usage
-- Create an Account: Sign up to start creating notes.
+- Create an Account: Sign up to have access to application.
+![NoteMindAI sign-up](https://github.com/naturuplift/NoteMindAI/assets/23546356/c9f78e70-e9ed-4b59-8aff-35c09525030b)
+
+- Login into Account: Login to start creating notes.
+![NoteMindAI login](https://github.com/naturuplift/NoteMindAI/assets/23546356/d896632a-6689-486e-b662-2514133577ec)
+
+- View Dashboard: Use the dashboard to view your notes and select them.
+![NoteMindAI dashboard](https://github.com/naturuplift/NoteMindAI/assets/23546356/2fa503f5-45bb-448e-a085-76f388da89df)
+
 - Create/Edit Notes: Use the rich text editor to jot down your thoughts or meeting minutes.
+![NoteMindAI editor](https://github.com/naturuplift/NoteMindAI/assets/23546356/fb47fa41-efa8-4c68-a5cc-b48eeeb84c67)
+
 - Search and Filter: Find the information you need by navigating through your notes.
+![NoteMindAI search](https://github.com/naturuplift/NoteMindAI/assets/23546356/0fc31b1f-312f-4ad9-ab7d-756c3c31713b)
+
 - AI features: Use the AI features to summarization feature to condense long notes into digestible summaries.
+![NoteMindAI summary](https://github.com/naturuplift/NoteMindAI/assets/23546356/cf483175-1ee1-498f-bf34-45f5520f7725)
+
 
 ## State Flow Diagram
 
