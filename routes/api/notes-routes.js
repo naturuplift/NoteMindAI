@@ -1,7 +1,7 @@
 // Import Router from express and models from the database
 const router = require('express').Router();
 // Import Notes model from the models directory
-const { Notes } = require('../../models');
+const { Notes, Categories } = require('../../models');
 // Import Authentication Middleware
 const authenticateToken = require('../../middleware/authMiddleware');
 const jwt = require('jsonwebtoken');
@@ -9,25 +9,19 @@ const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 
 
-
 // GET route to retrieve all Notes for logged-in user
 router.get('/notes', authenticateToken, async (req, res) => {
-
-  // Extract query parameters
   const { search, filter } = req.query;
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
-      // send error status
       return res.sendStatus(403);
     }
     const userId = decoded.userId;
-    // Include userId in conditions
     const conditions = { userId: userId };
 
-    // Add search condition if 'search' query parameter is provided
     if (search) {
       conditions[Op.or] = [
         { title: { [Op.like]: `%${search}%` } },
@@ -35,24 +29,27 @@ router.get('/notes', authenticateToken, async (req, res) => {
       ];
     }
 
+    console.log('Query Conditions:', conditions);
+    
     try {
+      let order = [];
+      // Ensure filter parameter is being processed correctly
+      if (filter === 'createdAt' || filter === 'updatedAt') {
+        // Map 'createdAt' and 'updatedAt' to your actual database columns
+        const column = filter === 'createdAt' ? 'created_at' : 'updated_at';
+        order = [[column, 'DESC']]; // or 'ASC' based on your requirements
+      }
+
       const noteData = await Notes.findAll({
         where: conditions,
-        // Add order condition if 'filter' query parameter is provided
-        order: filter ? [['createdAt', filter]] : undefined
+        order: order
       });
 
-      // Function to strip HTML tags
-      const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
+      console.log('Notes Data:', noteData);
 
-      // Apply stripHtml to each note's content
-      const strippedNoteData = noteData.map(note => ({
-          ...note.toJSON(),
-          content: stripHtml(note.content),
-      }));
-
-      res.json(strippedNoteData);
+      res.json(noteData);
     } catch (err) {
+      console.error('Database Query Error:', err);
       res.status(500).json(err);
     }
   });
@@ -78,6 +75,8 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
       // Extract user ID from token
       const userId = decoded.userId;
 
+      console.log('UserId:', userId);
+
       try {
           // Fetch notes where user_id matches logged-in user's ID
           const noteData = await Notes.findOne({
@@ -87,20 +86,17 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
               }
           });
 
+          console.log('Notes Data:', noteData);
+
           if (!noteData) {
               // If no note found
               return res.status(404).json({ message: 'No note found with this id' });
           }
 
-          // Function to strip HTML tags
-          const stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');
-
-          // Strip HTML from note content before sending the response
-          noteData.content = stripHtml(noteData.content);
-
           // return note data
           res.json(noteData);
       } catch (err) {
+        console.error('Database Query Error:', err);
           res.status(500).json(err);
       }
   });
@@ -108,38 +104,49 @@ router.get('/notes/:id', authenticateToken, async (req, res) => {
 
 
 // POST route to create a new note
-router.post('/notes', async (req, res) => {
+router.post('/notes', authenticateToken, async (req, res) => {
   
   // Extract user_id from JWT token
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  let userId;
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        // console.log("Token verification failed", err);
-        // Forbidden if token is invalid
-        return res.sendStatus(403);
-      }
-    });
-  // Extract user ID from token
-  const user_Id = decoded.userId;
+    if (err) {
+      // Forbidden if token is invalid
+      return res.sendStatus(403);
+    }
+  
+    // Extract user ID from token
+    const userId = decoded.userId;
+    console.log('UserId:', userId);
 
-  try {
-    const noteData = await Notes.create({
-      // set userId extracted from token
-      userId: user_Id,
+    const noteCreationData = {
+      userId: userId,
       title: req.body.title,
       content: req.body.content,
-      // Default category ID
-      categoryId: req.body.categoryId
-    });
-    // console.log(noteData)
-    // Return the created note as JSON
-    res.status(200).json(noteData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+    };
+
+    // Inside your route, before creating the note
+    if (req.body.categoryId) {
+      const categoryExists = await Categories.findByPk(req.body.categoryId);
+      if (!categoryExists) {
+        return res.status(400).json({ error: "Category does not exist." });
+      }
+      noteCreationData.categoryId = req.body.categoryId;
+    }
+
+    try {
+      const noteData = await Notes.create(noteCreationData);
+
+      console.log('Notes Data:', noteData);
+
+      // Return the created note as JSON
+      res.status(200).json(noteData);
+    } catch (err) {
+      console.error('Database Query Error:', err);
+      res.status(400).json(err);
+    }
+  });
 });
 
 
@@ -215,6 +222,7 @@ router.delete('/notes/:id', authenticateToken, async (req, res) => {
       }
       res.status(200).json({ message: 'Note deleted successfully!' });
     } catch (err) {
+      console.error('Database Query Error:', err);
       res.status(500).json(err);
     }
   });
