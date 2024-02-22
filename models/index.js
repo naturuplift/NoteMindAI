@@ -101,7 +101,6 @@ Transcriptions.belongsTo(AudioFiles, {
   foreignKey: 'audioId',
 });
 
-// TODO: comment when done troubleshooting
 
 // Export the models and their associations
 module.exports = {

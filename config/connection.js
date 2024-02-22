@@ -4,7 +4,7 @@ require('dotenv').config();
 // const { Sequelize } = require('sequelize');
 const Sequelize = require('sequelize');
 
-// connection setup supports both local and JawsDB
+
 // (a MySQL add-on for Heroku) connections
 const sequelize = process.env.JAWSDB_URL
 ? new Sequelize(process.env.JAWSDB_URL)
@@ -16,6 +16,5 @@ const sequelize = process.env.JAWSDB_URL
   },
 });
 
-// configured Sequelize instance exported
 // making it available for use in app
 module.exports = sequelize;
