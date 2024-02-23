@@ -44,6 +44,9 @@
 
 Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda.
 
+## Demo
+You can simply visit the link [https://notemindai.onrender.com/][project-app].
+
 ### **Key Features of NoteMindAI:**
 - **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
 - **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
@@ -96,7 +99,7 @@ cd NoteMindAI
 5. **Visit the application in your browser:**
 - Open http://localhost:3000 to access your application.
 
-## Usage
+## Application Usage
 - **Create an Account:** Sign up to have access to application.
 ![NoteMindAI sign-up](https://github.com/naturuplift/NoteMindAI/assets/23546356/c9f78e70-e9ed-4b59-8aff-35c09525030b)
 
@@ -146,9 +149,8 @@ Contributions to the NoteMind project are welcome!
 ## License
 Distributed under the MIT License. See [LICENSE][MIT] for more information.
 
-[project-app]: <>
-[project-code]: <>
+[project-app]: <https://notemindai.onrender.com/>
 [note-taking-app]: <https://github.com/naturuplift/NoteMindAI/blob/main/public/assets/img/AI_Powered%20Note-Taking%20App%20v2.png>
-[project-setup]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
-[state-flow]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
+[project-setup]: <https://github.com/naturuplift/NoteMindAI/blob/feature-merge-dashboard/public/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
+[state-flow]: <https://github.com/naturuplift/NoteMindAI/blob/feature-merge-dashboard/public/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
 [MIT]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/LICENSE>
