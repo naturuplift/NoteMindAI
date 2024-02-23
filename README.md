@@ -48,7 +48,7 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 - **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
 - **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
 - **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
-- **Continue Write with AI:** Eliminate writer's block with the continue writing feature powered by AI. SynthNote offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas, fostering a fluid and natural writing experience.
+- **Continue Writing with AI:** Eliminate writer's block with the continue writing feature powered by AI. SynthNote offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas, fostering a fluid and natural writing experience.
 - **Explain Content with AI:** Deepen your understanding of complex topics with AI-powered explanations. SynthNote can elucidate difficult concepts within your notes, offering clear and concise explanations and enhancing your learning process.
 - **Sentiment Analysis with AI:** Gauge the tone and mood of your notes with AI-driven sentiment analysis. SynthNote evaluates the sentiment of your text, providing insights into the emotional undertone, which is invaluable for personal reflections or analyzing feedback.
 - **Note Management:** SynthNote offers a comprehensive solution for creating, editing, deleting, and categorizing notes with rich text formatting. Whether you're jotting down a quick idea or drafting a detailed report, our platform adapts to your needs.
@@ -122,11 +122,13 @@ cd NoteMindAI
 ![NoteMindAI explain](https://github.com/naturuplift/NoteMindAI/assets/23546356/f79c5140-ba5a-46e8-85b2-61c298bbe464)
 
 - **AI features:**: Use the *Sentiment* button to gauge the tone and mood of your notes.
-![NoteMindAI sentiment](https://github.com/naturuplift/NoteMindAI/assets/23546356/c0eb3977-5a1f-4efa-9405-f8854afc3eea)
+![NoteMindAI sentiment](https://github.com/naturuplift/NoteMindAI/assets/23546356/3a950451-d219-42f3-ba60-d31f6266532d)
 
-- **AI features:**:
+- **AI features:**: Use the *Writing* button to continue writing which offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas.
+![NoteMindAI writing](https://github.com/naturuplift/NoteMindAI/assets/23546356/1f6a7d0f-c793-4dba-bae6-2d4bc7c8fe32)
 
-- **AI features:**: 
+- **AI features:**: Use the *Action Item* button to automatically identifies and converts action points in your notes.
+![NoteMindAI action item](https://github.com/naturuplift/NoteMindAI/assets/23546356/c7a253b9-98f1-429e-909b-bd6cf6f522f8)
 
 ## State Flow Diagram
 
