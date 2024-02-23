@@ -6,18 +6,24 @@
         <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
     <a href="https://sequelize.org/">
         <img alt="Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more" src="https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet" /></a>
+    <a href="https://www.postgresql.org/">
+        <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
     <a href="https://www.mysql.com/">
         <img alt="MySQL - An open-source relational database management system" src="https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen" /></a>
+    <a href="https://www.postgresql.org/">
+        <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
+    <a href="https://www.npmjs.com/package/bcrypt">
+        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=yellowgreen" /></a>
     <a href="https://www.render.com/">
         <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
         <img alt="express-session - A session middleware for Express.js, used for handling user sessions" src="https://img.shields.io/static/v1.svg?label=express-session&message=middleware&color=green" /></a>
-    <a href="https://socket.io/">
-        <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a>
+<!--     <a href="https://socket.io/">
+        <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a> -->
     <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">
         <img alt="MVC Architecture - A software design pattern for developing web applications. MVC is an acronym for Model, View, and Controller. The pattern isolates the application logic from the user interface, allowing for efficient code organization and separation of concerns" src="https://img.shields.io/static/v1.svg?label=MVC Architecture&message=design pattern&color=lightcyan" /></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" >
-        <img alt="AJAX (Asynchronous JavaScript and XML) - A set of web development techniques that allows a web page to communicate with a server without reloading the page, enhancing the user experience by making it smoother and more interactive" src="https://img.shields.io/static/v1.svg?label=AJAX&message=web dev techniques&color=yellow" /></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data" >
+        <img alt="Fetch - Another very common task in modern websites and applications is retrieving individual data items from the server to update sections of a webpage without having to load an entire new page." src="https://img.shields.io/static/v1.svg?label=Fetch&message=retrieve data&color=yellow" /></a>
     <a href="https://quilljs.com/">
         <img alt="Quill - A powerful, rich text editor built for compatibility and extensibility" src="https://img.shields.io/static/v1.svg?label=Quill&message=text editor&color=darkgreen" /></a>
     <a href="https://nodejs.org/" >
@@ -62,10 +68,10 @@ These features collectively make NoteMindAI a powerful tool for anyone looking t
 ## Technologies Used
 - **Backend:** Node.js, Express.js
 - **Frontend:** Fetch for smooth interactions
-- **Database:** MySQL, Sequelize ORM, bcrypt
+- **Database:** MySQL, PostgreSQL, Sequelize ORM, bcrypt
 - **Authentication:** express-session, cookies, tokens
 - **AI Services:** OpenAI's GPT-3-turbo for AI-driven features
-- **Deployment:** Heroku
+- **Deployment:** Render with PostgreSQL
 
 ## Getting Started
 
