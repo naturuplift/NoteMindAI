@@ -97,24 +97,36 @@ cd NoteMindAI
 - Open http://localhost:3000 to access your application.
 
 ## Usage
-- Create an Account: Sign up to have access to application.
+- **Create an Account:** Sign up to have access to application.
 ![NoteMindAI sign-up](https://github.com/naturuplift/NoteMindAI/assets/23546356/c9f78e70-e9ed-4b59-8aff-35c09525030b)
 
-- Login into Account: Login to start creating notes.
+- **Login into Account:** Login to start creating notes.
 ![NoteMindAI login](https://github.com/naturuplift/NoteMindAI/assets/23546356/d896632a-6689-486e-b662-2514133577ec)
 
-- View Dashboard: Use the dashboard to view your notes and select them.
+- **View Dashboard:** Use the dashboard to view your notes and select them by moving cursor then click over note title.
 ![NoteMindAI dashboard](https://github.com/naturuplift/NoteMindAI/assets/23546356/2fa503f5-45bb-448e-a085-76f388da89df)
 
-- Create/Edit Notes: Use the rich text editor to jot down your thoughts or meeting minutes.
-![NoteMindAI editor](https://github.com/naturuplift/NoteMindAI/assets/23546356/fb47fa41-efa8-4c68-a5cc-b48eeeb84c67)
-
-- Search and Filter: Find the information you need by navigating through your notes.
+- **Search and Filter:** Find the information you need by navigating through your notes.
 ![NoteMindAI search](https://github.com/naturuplift/NoteMindAI/assets/23546356/0fc31b1f-312f-4ad9-ab7d-756c3c31713b)
 
-- AI features: Use the AI features to summarization feature to condense long notes into digestible summaries.
+- **Create a New Note:** To start working on a note click on button 'New Note' button.
+![NoteMindAI create a new note](https://github.com/naturuplift/NoteMindAI/assets/23546356/c8c2eab6-9f2b-4c8a-a140-76a2d10a3ed5)
+
+- **Create/Edit Notes:** Use the rich text editor to jot down your thoughts or meeting minutes.
+![NoteMindAI editor](https://github.com/naturuplift/NoteMindAI/assets/23546356/fb47fa41-efa8-4c68-a5cc-b48eeeb84c67)
+
+- **AI features:**: Use the *Summary* button to summarize note which condense long notes into digestible summaries.
 ![NoteMindAI summary](https://github.com/naturuplift/NoteMindAI/assets/23546356/cf483175-1ee1-498f-bf34-45f5520f7725)
 
+- **AI features:**: Use the *Explanation* button to Explain note which deepen your understanding of complex topics with clear and concise explanations.
+![NoteMindAI explain](https://github.com/naturuplift/NoteMindAI/assets/23546356/f79c5140-ba5a-46e8-85b2-61c298bbe464)
+
+- **AI features:**: Use the *Sentiment* button to gauge the tone and mood of your notes.
+![NoteMindAI sentiment](https://github.com/naturuplift/NoteMindAI/assets/23546356/c0eb3977-5a1f-4efa-9405-f8854afc3eea)
+
+- **AI features:**:
+
+- **AI features:**: 
 
 ## State Flow Diagram
 
