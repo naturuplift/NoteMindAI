@@ -6,8 +6,6 @@
         <img alt="OpenAI's GPT-3 (for AI-powered features) - An autoregressive language model that uses deep learning to produce human-like text" src="https://img.shields.io/static/v1.svg?label=OpenAI&message=GPT-3-turbo&color=brightgreen" /></a>
     <a href="https://sequelize.org/">
         <img alt="Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more" src="https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet" /></a>
-    <a href="https://www.postgresql.org/">
-        <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
     <a href="https://www.mysql.com/">
         <img alt="MySQL - An open-source relational database management system" src="https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen" /></a>
     <a href="https://www.postgresql.org/">
