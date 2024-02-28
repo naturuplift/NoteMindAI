@@ -1,4 +1,4 @@
-# Collaborative Note-Taking App
+# NoteMind AI Note-Taking App
 
 <br/>
 <p align="center">
@@ -8,16 +8,20 @@
         <img alt="Sequelize ORM - A promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication, and more" src="https://img.shields.io/static/v1.svg?label=Sequelize ORM&message=Node.js ORM&color=blueviolet" /></a>
     <a href="https://www.mysql.com/">
         <img alt="MySQL - An open-source relational database management system" src="https://img.shields.io/static/v1.svg?label=MySQL&message=database&color=yellowgreen" /></a>
+    <a href="https://www.postgresql.org/">
+        <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
+    <a href="https://www.npmjs.com/package/bcrypt">
+        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=yellowgreen" /></a>
     <a href="https://www.render.com/">
         <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
         <img alt="express-session - A session middleware for Express.js, used for handling user sessions" src="https://img.shields.io/static/v1.svg?label=express-session&message=middleware&color=green" /></a>
-    <a href="https://socket.io/">
-        <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a>
+<!--     <a href="https://socket.io/">
+        <img alt="Socket.IO (for real-time collaboration) - Enables real-time, bidirectional, and event-based communication between web clients and servers" src="https://img.shields.io/static/v1.svg?label=Socket.IO&message=real-time collaboration&color=yellow" /></a> -->
     <a href="https://developer.mozilla.org/en-US/docs/Glossary/MVC">
         <img alt="MVC Architecture - A software design pattern for developing web applications. MVC is an acronym for Model, View, and Controller. The pattern isolates the application logic from the user interface, allowing for efficient code organization and separation of concerns" src="https://img.shields.io/static/v1.svg?label=MVC Architecture&message=design pattern&color=lightcyan" /></a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX" >
-        <img alt="AJAX (Asynchronous JavaScript and XML) - A set of web development techniques that allows a web page to communicate with a server without reloading the page, enhancing the user experience by making it smoother and more interactive" src="https://img.shields.io/static/v1.svg?label=AJAX&message=web dev techniques&color=yellow" /></a>
+    <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data" >
+        <img alt="Fetch - Another very common task in modern websites and applications is retrieving individual data items from the server to update sections of a webpage without having to load an entire new page." src="https://img.shields.io/static/v1.svg?label=Fetch&message=retrieve data&color=yellow" /></a>
     <a href="https://quilljs.com/">
         <img alt="Quill - A powerful, rich text editor built for compatibility and extensibility" src="https://img.shields.io/static/v1.svg?label=Quill&message=text editor&color=darkgreen" /></a>
     <a href="https://nodejs.org/" >
@@ -40,26 +44,32 @@
 <br/>-
 
 ## Description
-SynthNotes is a cutting-edge, Collaborative Note-Taking App designed to improve productivity and collaboration among users. With AI-powered summarization, real-time collaboration, and an array of other advanced features, SynthNotes stands out as the go-to solution for students, professionals, and teams who aspire to manage their notes efficiently and collaborate seamlessly.
+**NoteMind AI** is a state-of-the-art note-taking application that integrates the power of AI to transform how individuals capture, organize, and innovate through their notes. Designed for professionals, students, and anyone in between, NoteMind AI combines rich text editing, and advanced AI functionalities to offer a unique note-taking solution.
 
-Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda, https://www.joshwcomeau.com/css/custom-css-reset/
+Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda.
 
-## Features
-- **User Authentication:** Secure signup, login, and profile management.
-- **Note Management:** Create, edit, delete, and categorize notes with rich text formatting.
-- **Collaborative Editing:** Share and collaborate on notes in real time with other users.
-- **AI-Powered Summarization:** Get concise, accurate summaries of lengthy notes.
-- **Actionable Item Extraction:** Automatically convert action points in notes into tasks or reminders.
-- **Contextual Recommendations:** Receive suggestions for related notes and external references based on the content.
-- **Search and Filter:** Easily find notes with robust search and filter capabilities.
+## Demo
+You can simply visit the link [https://notemindai.onrender.com/][project-app].
+
+### **Key Features of NoteMindAI:**
+- **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
+- **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
+- **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
+- **Continue Writing with AI:** Eliminate writer's block with the continue writing feature powered by AI. SynthNote offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas, fostering a fluid and natural writing experience.
+- **Explain Content with AI:** Deepen your understanding of complex topics with AI-powered explanations. SynthNote can elucidate difficult concepts within your notes, offering clear and concise explanations and enhancing your learning process.
+- **Sentiment Analysis with AI:** Gauge the tone and mood of your notes with AI-driven sentiment analysis. SynthNote evaluates the sentiment of your text, providing insights into the emotional undertone, which is invaluable for personal reflections or analyzing feedback.
+- **Note Management:** SynthNote offers a comprehensive solution for creating, editing, deleting, and categorizing notes with rich text formatting. Whether you're jotting down a quick idea or drafting a detailed report, our platform adapts to your needs.
+- **Search and Filter:** Find the information you need, when you need it. With robust search and filter capabilities, SynthNote makes navigating through your notes effortless, saving you time and enhancing your productivity.
+
+These features collectively make NoteMindAI a powerful tool for anyone looking to enhance their productivity, learning, and collaboration through note-taking. By leveraging AI, NoteMindAI not only simplifies note management but also adds layers of intelligence that augment the user's capability to create, analyze, and share knowledge.
 
 ## Technologies Used
-- **Backend:** Node.js, Express.js, EJS
-- **Frontend:** AJAX for smooth interactions
-- **Database:** MySQL, Sequelize ORM
-- **Authentication:** express-session, cookies
-- **AI Services:** OpenAI's GPT-3 for summarization and other AI-driven features
-- **Deployment:** Render
+- **Backend:** Node.js, Express.js
+- **Frontend:** Fetch for smooth interactions
+- **Database:** MySQL, PostgreSQL, Sequelize ORM, bcrypt
+- **Authentication:** express-session, cookies, tokens
+- **AI Services:** OpenAI's GPT-3-turbo for AI-driven features
+- **Deployment:** Render with PostgreSQL
 
 ## Getting Started
 
@@ -67,12 +77,13 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 Ensure you have the following installed before proceeding:
 - Node.js and npm
 - Git (for version control)
+- MySQL or access to a MySQL database service
 
-### Installation
+### Setup & Installation
 1. **Clone the repository:**
 ```shell
-   git clone https://github.com/naturuplift/CollaborativeNoteTakingApp.git
-   cd CollaborativeNoteTakingApp
+git clone https://github.com/naturuplift/NoteMindAI.git
+cd NoteMindAI
 ```
 
 2. **Install dependencies:**
@@ -81,22 +92,50 @@ Ensure you have the following installed before proceeding:
 ```
 
 3. **Set up environment variables:**
-- Rename the .env.example file to .env.
+- Create the .env file.
 - Fill in the necessary environment variables.
 
 4. **Start the application:**
 ```shell
-    npm run devStart
+    npm start
 ```
 
 5. **Visit the application in your browser:**
 - Open http://localhost:3000 to access your application.
 
-## Usage
-- Create an Account: Sign up to start creating and collaborating on notes.
-- Create/Edit Notes: Use the rich text editor to jot down your thoughts or meeting minutes.
-- Collaborate: Share notes with your peers and work on them together in real time.
-- Summarize: Use the AI-powered summarization feature to condense long notes into digestible summaries.
+## Application Usage
+- **Create an Account:** Sign up to have access to application.
+![NoteMindAI sign-up](https://github.com/naturuplift/NoteMindAI/assets/23546356/c9f78e70-e9ed-4b59-8aff-35c09525030b)
+
+- **Login into Account:** Login to start creating notes.
+![NoteMindAI login](https://github.com/naturuplift/NoteMindAI/assets/23546356/d896632a-6689-486e-b662-2514133577ec)
+
+- **View Dashboard:** Use the dashboard to view your notes and select them by moving cursor then click over note title.
+![NoteMindAI dashboard](https://github.com/naturuplift/NoteMindAI/assets/23546356/2fa503f5-45bb-448e-a085-76f388da89df)
+
+- **Search and Filter:** Find the information you need by navigating through your notes.
+![NoteMindAI search](https://github.com/naturuplift/NoteMindAI/assets/23546356/0fc31b1f-312f-4ad9-ab7d-756c3c31713b)
+
+- **Create a New Note:** To start working on a note click on button 'New Note' button.
+![NoteMindAI create a new note](https://github.com/naturuplift/NoteMindAI/assets/23546356/c8c2eab6-9f2b-4c8a-a140-76a2d10a3ed5)
+
+- **Create/Edit Notes:** Use the rich text editor to jot down your thoughts or meeting minutes.
+![NoteMindAI editor](https://github.com/naturuplift/NoteMindAI/assets/23546356/fb47fa41-efa8-4c68-a5cc-b48eeeb84c67)
+
+- **AI features:**: Use the *Summary* button to summarize note which condense long notes into digestible summaries.
+![NoteMindAI summary](https://github.com/naturuplift/NoteMindAI/assets/23546356/cf483175-1ee1-498f-bf34-45f5520f7725)
+
+- **AI features:**: Use the *Explanation* button to Explain note which deepen your understanding of complex topics with clear and concise explanations.
+![NoteMindAI explain](https://github.com/naturuplift/NoteMindAI/assets/23546356/f79c5140-ba5a-46e8-85b2-61c298bbe464)
+
+- **AI features:**: Use the *Sentiment* button to gauge the tone and mood of your notes.
+![NoteMindAI sentiment](https://github.com/naturuplift/NoteMindAI/assets/23546356/3a950451-d219-42f3-ba60-d31f6266532d)
+
+- **AI features:**: Use the *Writing* button to continue writing which offers intelligent writing suggestions, helping you to seamlessly continue your thoughts and ideas.
+![NoteMindAI writing](https://github.com/naturuplift/NoteMindAI/assets/23546356/1f6a7d0f-c793-4dba-bae6-2d4bc7c8fe32)
+
+- **AI features:**: Use the *Action Item* button to automatically identifies and converts action points in your notes.
+![NoteMindAI action item](https://github.com/naturuplift/NoteMindAI/assets/23546356/c7a253b9-98f1-429e-909b-bd6cf6f522f8)
 
 ## State Flow Diagram
 
@@ -104,7 +143,7 @@ For a visual representation of the sequence of actions involved in the [AI-Power
 
 
 ## Contributing
-Contributions to the SynthNotes project are welcome!
+Contributions to the NoteMind project are welcome!
 - Fork the project.
 - Create your feature branch (git checkout -b feature/AmazingFeature).
 - Commit your changes (git commit -m 'Add some AmazingFeature').
@@ -114,9 +153,8 @@ Contributions to the SynthNotes project are welcome!
 ## License
 Distributed under the MIT License. See [LICENSE][MIT] for more information.
 
-[project-app]: <>
-[project-code]: <>
+[project-app]: <https://notemindai.onrender.com/>
 [note-taking-app]: <https://github.com/naturuplift/NoteMindAI/blob/main/public/assets/img/AI_Powered%20Note-Taking%20App%20v2.png>
-[project-setup]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
-[state-flow]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
+[project-setup]: <https://github.com/naturuplift/NoteMindAI/blob/feature-merge-dashboard/public/assets/img/Project%20Setup%20and%20Functionality%20v1.png>
+[state-flow]: <https://github.com/naturuplift/NoteMindAI/blob/feature-merge-dashboard/public/assets/img/State%20Diagram%20Collaborative%20Note-Taking%20App%20v1.png>
 [MIT]: <https://github.com/naturuplift/CollaborativeNoteTakingApp/blob/main/LICENSE>
