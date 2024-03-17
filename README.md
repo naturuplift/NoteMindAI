@@ -41,7 +41,7 @@
     <a href="https://opensource.org/license/mit/">
         <img alt="The MIT License" src="https://img.shields.io/static/v1.svg?label=License&message=MIT&color=lightgreen" /></a>
 </p>
-<br/>-
+<br/>
 
 ## Description
 **NoteMind AI** is a state-of-the-art note-taking application that integrates the power of AI to transform how individuals capture, organize, and innovate through their notes. Designed for professionals, students, and anyone in between, NoteMind AI combines rich text editing, and advanced AI functionalities to offer a unique note-taking solution.
