@@ -25,6 +25,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.9.1",
     "openai": "^4.28.0",
+    "postgresql": "^0.0.1",
     "readline-sync": "^1.4.10",
     "sequelize": "^6.36.0",
     "swagger-jsdoc": "^6.2.8",
