@@ -11,7 +11,7 @@
     <a href="https://www.postgresql.org/">
         <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
     <a href="https://www.npmjs.com/package/bcrypt">
-        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=yellowgreen" /></a>
+        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=orange" /></a>
     <a href="https://www.render.com/">
         <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
@@ -55,7 +55,6 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
 - [Application Usage](#application-usage)
-- [Database Models](#database-models)
 - [State Flow Diagram](#state-flow-diagram)
 - [Contributing](#contributing)
 - [License](#license)
@@ -149,49 +148,9 @@ cd NoteMindAI
 - **AI features:**: Use the *Action Item* button to automatically identifies and converts action points in your notes.
 ![NoteMindAI action item](https://github.com/naturuplift/NoteMindAI/assets/23546356/c7a253b9-98f1-429e-909b-bd6cf6f522f8)
 
-## Database Models
-
-Your directory may have the following structure:
-
-```javascript
-NoteMindAI/
-├── ai/
-│   ├── models/
-│   │   └── model.js          # AI models for processing or generating notes
-│   └── utils/
-│       └── aiHelpers.js      # Helper functions for AI operations
-├── api/
-│   ├── controllers/
-│   │   ├── notesController.js # Controllers for note operations
-│   │   └── usersController.js # Controllers for user operations
-│   ├── middleware/
-│   │   └── authMiddleware.js  # Middleware for authentication
-│   ├── routes/
-│   │   ├── noteRoutes.js      # Routes for note-related endpoints
-│   │   └── userRoutes.js      # Routes for user-related endpoints
-│   └── index.js               # Entry point for API routes
-├── config/
-│   └── config.js              # Configuration files (e.g., database config)
-├── db/
-│   ├── migrations/            # Database migration files
-│   ├── seeds/                 # Seed data for the database
-│   └── index.js               # Database connection and model imports
-├── public/                    # Static files (HTML, CSS, JS for frontend)
-│   ├── css/
-│   ├── js/
-│   └── index.html
-├── views/                     # If using a template engine for server-side rendering
-├── .env                       # Environment variables (API keys, database URI)
-├── .gitignore                 # Specifies intentionally untracked files to ignore
-├── package.json               # Project metadata and dependencies
-├── server.js                  # Main application file to start the server
-└── README.md                  # Project documentation
-```
-
 ## State Flow Diagram
 
 For a visual representation of the sequence of actions involved in the [AI-Powered Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
-
 
 ## Contributing
 Contributions to the NoteMind project are welcome!
