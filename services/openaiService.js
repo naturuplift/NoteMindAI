@@ -42,7 +42,7 @@ async function summarizeText(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 50
+            max_tokens: 100
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
@@ -83,7 +83,7 @@ async function explainText(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 100
+            max_tokens: 200
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
@@ -123,7 +123,7 @@ async function analyzeSentiment(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 60 
+            max_tokens: 120
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
@@ -163,7 +163,7 @@ async function continueWriting(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 100
+            max_tokens: 200
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
@@ -203,7 +203,7 @@ async function extractActionItem(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 100
+            max_tokens: 200
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion
@@ -243,7 +243,7 @@ async function classifyContent(text) {
             ],
             // Set tokens limit for the request
             // The maximum number of tokens that can be generated in the chat completion.
-            max_tokens: 60
+            max_tokens: 120
         });
         console.log(`Response from OpenAI: ${response}`); // Log the response to understand its structure
         // Extract the content of the last message from the completion

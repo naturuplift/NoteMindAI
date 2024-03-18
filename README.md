@@ -11,7 +11,7 @@
     <a href="https://www.postgresql.org/">
         <img alt="PostgreSQL - PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance. " src="https://img.shields.io/static/v1.svg?label=PostgreSQL&message=database&color=yellowgreen" /></a>
     <a href="https://www.npmjs.com/package/bcrypt">
-        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=yellowgreen" /></a>
+        <img alt="bcrypt is a password-hashing function " src="https://img.shields.io/static/v1.svg?label=bcrypt&message=password-hashing&color=orange" /></a>
     <a href="https://www.render.com/">
         <img alt="Render (for deployment) - A platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud" src="https://img.shields.io/static/v1.svg?label=Render&message=deployment&color=red" /></a>
     <a href="https://www.npmjs.com/package/express-session">
@@ -48,10 +48,22 @@
 
 Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda.
 
-## Demo
+## Table of Contents
+
+- [Demo Video](#demo-video)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Application Usage](#application-usage)
+- [State Flow Diagram](#state-flow-diagram)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Demo Video
 You can simply visit the link [https://notemindai.onrender.com/][project-app].
 
-### **Key Features of NoteMindAI:**
+## Features
+
 - **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
 - **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
 - **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
@@ -140,7 +152,6 @@ cd NoteMindAI
 ## State Flow Diagram
 
 For a visual representation of the sequence of actions involved in the [AI-Powered Note-Taking App][note-taking-app], refer to the [Project Setup and Functionality][project-setup] and the [State Diagram Collaborative Note-Taking App][state-flow] provided in the project documentation.
-
 
 ## Contributing
 Contributions to the NoteMind project are welcome!
