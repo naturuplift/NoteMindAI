@@ -48,10 +48,22 @@
 
 Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sepulveda.
 
-## Demo
+## Table of Contents
+
+- [Demo Video](#demo-video)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Application Usage](#application-usage)
+- [Database Models](#database-models)
+- [State Flow Diagram](#state-flow-diagram)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Demo Video
 You can simply visit the link [https://notemindai.onrender.com/][project-app].
 
-### **Key Features of NoteMindAI:**
+## Features
 - **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
 - **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
 - **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
@@ -136,6 +148,45 @@ cd NoteMindAI
 
 - **AI features:**: Use the *Action Item* button to automatically identifies and converts action points in your notes.
 ![NoteMindAI action item](https://github.com/naturuplift/NoteMindAI/assets/23546356/c7a253b9-98f1-429e-909b-bd6cf6f522f8)
+
+## Database Models
+
+Your directory may have the following structure:
+
+```javascript
+NoteMindAI/
+├── ai/
+│   ├── models/
+│   │   └── model.js          # AI models for processing or generating notes
+│   └── utils/
+│       └── aiHelpers.js      # Helper functions for AI operations
+├── api/
+│   ├── controllers/
+│   │   ├── notesController.js # Controllers for note operations
+│   │   └── usersController.js # Controllers for user operations
+│   ├── middleware/
+│   │   └── authMiddleware.js  # Middleware for authentication
+│   ├── routes/
+│   │   ├── noteRoutes.js      # Routes for note-related endpoints
+│   │   └── userRoutes.js      # Routes for user-related endpoints
+│   └── index.js               # Entry point for API routes
+├── config/
+│   └── config.js              # Configuration files (e.g., database config)
+├── db/
+│   ├── migrations/            # Database migration files
+│   ├── seeds/                 # Seed data for the database
+│   └── index.js               # Database connection and model imports
+├── public/                    # Static files (HTML, CSS, JS for frontend)
+│   ├── css/
+│   ├── js/
+│   └── index.html
+├── views/                     # If using a template engine for server-side rendering
+├── .env                       # Environment variables (API keys, database URI)
+├── .gitignore                 # Specifies intentionally untracked files to ignore
+├── package.json               # Project metadata and dependencies
+├── server.js                  # Main application file to start the server
+└── README.md                  # Project documentation
+```
 
 ## State Flow Diagram
 
