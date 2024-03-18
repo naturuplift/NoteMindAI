@@ -41,7 +41,7 @@
     <a href="https://opensource.org/license/mit/">
         <img alt="The MIT License" src="https://img.shields.io/static/v1.svg?label=License&message=MIT&color=lightgreen" /></a>
 </p>
-<br/>-
+<br/>
 
 ## Description
 **NoteMind AI** is a state-of-the-art note-taking application that integrates the power of AI to transform how individuals capture, organize, and innovate through their notes. Designed for professionals, students, and anyone in between, NoteMind AI combines rich text editing, and advanced AI functionalities to offer a unique note-taking solution.
@@ -63,6 +63,7 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 You can simply visit the link [https://notemindai.onrender.com/][project-app].
 
 ## Features
+
 - **User Authentication:** SynthNote ensures the security of your information with robust user authentication processes. Secure signup, login, and controlled API request for the user are the bedrock of our commitment to data privacy and security.
 - **Summarize Content with AI:** Cut through the noise with AI-driven summarization capabilities. SynthNote analyzes lengthy notes and presents concise, accurate summaries, enabling you to grasp key points quickly and efficiently.
 - **Item Extraction with AI:** Transform your notes into action with our intelligent item extraction feature. SynthNote automatically identifies and converts action points in your notes into tasks or reminders, streamlining your workflow and ensuring nothing gets missed.
