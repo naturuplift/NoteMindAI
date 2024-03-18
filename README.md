@@ -50,7 +50,7 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 
 ## Table of Contents
 
-- [Demo Video](#demo-video)
+- [Demo](#demo)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
@@ -59,7 +59,7 @@ Collaborators of the project: Karen Bourgeois, Ikechukwu Mbanugo and Arnaldo Sep
 - [Contributing](#contributing)
 - [License](#license)
 
-## Demo Video
+## Demo
 You can simply visit the link [https://notemindai.onrender.com/][project-app].
 
 ## Features
