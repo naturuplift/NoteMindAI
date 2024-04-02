@@ -37,10 +37,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naturuplift/CollaborativeNoteTakingApp.git"
+    "url": "git+https://github.com/naturuplift/NoteMindAI.git"
   },
   "bugs": {
-    "url": "https://github.com/naturuplift/CollaborativeNoteTakingApp/issues"
+    "url": "https://github.com/naturuplift/NoteMindAI/issues"
   },
-  "homepage": "https://github.com/naturuplift/CollaborativeNoteTakingApp#readme"
+  "homepage": "https://github.com/naturuplift/NoteMindAI#readme"
 }
